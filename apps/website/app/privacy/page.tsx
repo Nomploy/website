@@ -47,11 +47,20 @@ export default function PrivacyPage() {
 				<div className="flex flex-col gap-2">
 					<h3 className="text-xl font-medium">Application analytics</h3>
 					<p>
-						Our hosted platform (app.nomploy.com) may use privacy‑friendly
-						product analytics to understand how users navigate the app and
-						improve the experience. These tools collect usage metrics and device
-						information. We do not combine this data with information that
-						directly identifies you.
+						Our hosted platform (app.nomploy.com) uses{" "}
+						<a
+							href="https://openpanel.dev"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-blue-500 hover:underline"
+						>
+							OpenPanel
+						</a>
+						, a privacy‑friendly, open‑source product analytics tool that we
+						self‑host on our own infrastructure (openpanel.nomploy.com), to
+						understand how users navigate the app and improve the experience.
+						OpenPanel collects usage metrics and device information. We do not
+						combine this data with information that directly identifies you.
 					</p>
 				</div>
 
