@@ -43,3 +43,7 @@ yarn-error.log*
 *.pem
 
 # Generated files
+
+# Next.js dev auto-generates these agent instruction files in each app
+apps/*/AGENTS.md
+apps/*/CLAUDE.md
