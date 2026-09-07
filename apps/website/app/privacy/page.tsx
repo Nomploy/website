@@ -34,24 +34,13 @@ export default function PrivacyPage() {
 						Website and documentation analytics
 					</h3>
 					<p>
-						We use Google Analytics and{" "}
-						<a
-							href="https://plausible.io"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-blue-500 hover:underline"
-						>
-							Plausible Analytics
-						</a>{" "}
-						to measure traffic and usage on nomploy.com and docs.nomploy.com.
-						Google Analytics collects cookies, IP addresses, device and browser
-						information and usage statistics (for example, page views and session
-						duration) to generate anonymised reports. Plausible is a
-						privacy‑friendly, cookieless analytics tool that collects aggregated
-						usage statistics without using cookies or tracking individuals across
-						sites. This data helps us understand how users interact with the site
-						and improve the user experience. We do not combine this data with
-						information that directly identifies you.
+						We use Google Analytics to measure traffic and usage on nomploy.com
+						and docs.nomploy.com. Google Analytics collects cookies, IP
+						addresses, device and browser information and usage statistics (for
+						example, page views and session duration) to generate anonymised
+						reports. This data helps us understand how users interact with the
+						site and improve the user experience. We do not combine this data
+						with information that directly identifies you.
 					</p>
 				</div>
 
@@ -167,10 +156,6 @@ export default function PrivacyPage() {
 					<li>
 						<strong>Google Analytics</strong> – provides anonymised website and
 						documentation analytics.
-					</li>
-					<li>
-						<strong>Plausible Analytics</strong> – provides privacy‑friendly,
-						cookieless website and documentation analytics.
 					</li>
 					<li>
 						<strong>Stripe</strong> – processes payments for our cloud service; we
