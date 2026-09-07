@@ -13,7 +13,7 @@ export default function TermsOfServicePage() {
 				Terms of Service
 			</h1>
 			<p className="text-center text-sm text-muted-foreground">
-				Nomploy.com · Last Updated: January 2026
+				Nomploy.com · Last Updated: September 2026
 			</p>
 
 			<section className="flex flex-col gap-2">
