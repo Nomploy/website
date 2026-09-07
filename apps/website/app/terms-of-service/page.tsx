@@ -19,7 +19,7 @@ export default function TermsOfServicePage() {
 			<section className="flex flex-col gap-2">
 				<h2 className="mb-2 text-2xl font-semibold">Overview</h2>
 				<p>
-					This website and platform are operated by Nomploy Technologies, Inc.
+					This website and platform are operated by Pipoline s.r.o.
 					(&quot;Nomploy&quot;, &quot;we&quot;, &quot;us&quot;, or
 					&quot;our&quot;). Nomploy provides a deployment and hosting platform
 					available as both a cloud-hosted service (&quot;Cloud Services&quot;)
@@ -737,8 +737,8 @@ export default function TermsOfServicePage() {
 				<h3 className="text-xl font-medium">17.1 Governing Law</h3>
 				<p>
 					These Terms shall be governed by and construed in accordance with
-					the laws of the State of Delaware, United States, without regard to
-					its conflict of law principles.
+					the laws of the Slovak Republic, without regard to its conflict of
+					law principles.
 				</p>
 				<h3 className="text-xl font-medium">17.2 Dispute Resolution</h3>
 				<p>
@@ -845,7 +845,7 @@ export default function TermsOfServicePage() {
 					If you have questions about these Terms of Service, please contact us
 					at:
 				</p>
-				<p className="font-medium">Nomploy Technologies, Inc.</p>
+				<p className="font-medium">Pipoline s.r.o.</p>
 				<p>2912 Steiner St Unit 4
 				San Francisco, CA 94123</p>
 				<p>
