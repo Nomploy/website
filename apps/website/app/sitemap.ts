@@ -46,7 +46,7 @@ const industryPages = [
 	"/industries/higher-education",
 ];
 
-const legalPages = ["/terms-of-service", "/terms", "/privacy"];
+const legalPages = ["/terms-of-service", "/privacy"];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const posts = await getPosts();
