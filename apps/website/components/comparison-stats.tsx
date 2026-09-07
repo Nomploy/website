@@ -9,7 +9,6 @@ const statsValues = {
 	githubStars: 26000,
 	dockerDownloads: 6500000,
 	contributors: 200,
-	sponsors: 50,
 };
 
 export function ComparisonStats() {
@@ -61,7 +60,7 @@ export function ComparisonStats() {
 					</p>
 				</div>
 
-				<div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+				<div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
 					<div className="relative overflow-hidden rounded-xl border border-border/50 bg-gradient-to-b from-neutral-900 to-neutral-950 p-6 text-center">
 						<Grid size={20} />
 						<p className="relative z-20 text-sm font-medium text-muted-foreground">
@@ -96,18 +95,6 @@ export function ComparisonStats() {
 						</p>
 						<p className="relative z-20 mt-2 text-sm text-muted-foreground">
 							Thriving open source community
-						</p>
-					</div>
-					<div className="relative overflow-hidden rounded-xl border border-border/50 bg-gradient-to-b from-neutral-900 to-neutral-950 p-6 text-center">
-						<Grid size={20} />
-						<p className="relative z-20 text-sm font-medium text-muted-foreground">
-							Sponsors
-						</p>
-						<p className="relative z-20 mt-2 text-3xl font-bold">
-							<NumberTicker value={statsValues.sponsors} />+
-						</p>
-						<p className="relative z-20 mt-2 text-sm text-muted-foreground">
-							Supporting the project
 						</p>
 					</div>
 				</div>

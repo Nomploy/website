@@ -1,6 +1,6 @@
 "use client";
 
-import { HandCoins, Users } from "lucide-react";
+import { Users } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useId } from "react";
 import NumberTicker from "./ui/number-ticker";
@@ -9,7 +9,6 @@ const defaultStats = {
 	githubStars: 26000,
 	dockerDownloads: 6500000,
 	contributors: 200,
-	sponsors: 50,
 };
 
 export function StatsSection() {
@@ -59,7 +58,7 @@ export function StatsSection() {
 					Turns out, Nomploy has actually helped a few people—who knew?
 				</p>
 			</div>
-			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-2 lg:grid-cols-4">
+			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-2 lg:grid-cols-3">
 				{getGrid({ githubStars, dockerDownloads, contributors }).map(
 					(feature, index) => (
 						<div
@@ -136,16 +135,6 @@ function getGrid({
 			component: (
 				<p className="mt-4 whitespace-pre-wrap text-2xl !font-semibold  tracking-tighter">
 					<NumberTicker value={contributors} />+
-				</p>
-			),
-		},
-		{
-			title: "Sponsors",
-			description: `More than ${defaultStats.sponsors} companies/individuals have sponsored Nomploy, ensuring a steady flow of support and resources. Join our community!`,
-			icon: <HandCoins className="h-6 w-6 stroke-white" />,
-			component: (
-				<p className="mt-4 whitespace-pre-wrap text-2xl  !font-semibold tracking-tighter">
-					<NumberTicker value={defaultStats.sponsors} />+
 				</p>
 			),
 		},
