@@ -1,5 +1,7 @@
 interface ContactFormData {
 	inquiryType: "support" | "sales";
+	teamSize?: string;
+	serverCount?: string;
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -81,6 +83,18 @@ function formatContactDataForSlack(
 						type: "mrkdwn",
 						text: `*Type:*\n${inquiryTypeLabel}`,
 					},
+					...(contactData.inquiryType === "sales"
+						? [
+								{
+									type: "mrkdwn",
+									text: `*Employees:*\n${contactData.teamSize || "N/A"}`,
+								},
+								{
+									type: "mrkdwn",
+									text: `*Servers:*\n${contactData.serverCount || "N/A"}`,
+								},
+							]
+						: []),
 				],
 			},
 			{
