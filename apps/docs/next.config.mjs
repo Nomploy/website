@@ -20,6 +20,16 @@ const config = {
 	async redirects() {
 		return [
 			{
+				source: "/",
+				destination: "/docs/core",
+				permanent: false,
+			},
+			{
+				source: "/docs",
+				destination: "/docs/core",
+				permanent: false,
+			},
+			{
 				source: "/docs/templates",
 				destination: "https://nomploy.com/templates",
 				permanent: true,

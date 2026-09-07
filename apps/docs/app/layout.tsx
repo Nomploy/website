@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://docs.nomploy.com"),
 	title: {
 		default: "Nomploy Documentation",
 		template: "%s | Nomploy",
