@@ -12,6 +12,9 @@ export default function PrivacyPage() {
 			<h1 className="mb-6 text-center text-3xl font-bold">
 				 Nomploy Privacy Policy
 			</h1>
+			<p className="text-center text-sm text-muted-foreground">
+				Nomploy.com · Last Updated: September 2026
+			</p>
 
 			<section className="flex flex-col gap-4">
 				<h2 className="text-2xl font-semibold">Introduction</h2>
