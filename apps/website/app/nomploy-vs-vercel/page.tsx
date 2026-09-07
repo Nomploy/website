@@ -279,7 +279,7 @@ export default function NomployVsVercelPage() {
 									{index === 0 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-compose-editor.png"
+												src="/images/nomploy-compose-editor.png"
 												alt="Nomploy Docker Compose editor with multi-service configuration"
 												fill
 												className="object-cover object-top"
@@ -289,7 +289,7 @@ export default function NomployVsVercelPage() {
 									) : index === 1 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-deployment-log.png"
+												src="/images/nomploy-deployment-log.png"
 												alt="Nomploy application logs streaming from long-running services"
 												fill
 												className="object-cover object-top"
@@ -299,7 +299,7 @@ export default function NomployVsVercelPage() {
 									) : index === 2 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-create-backup.png"
+												src="/images/nomploy-create-backup.png"
 												alt="Nomploy Create Backup modal for database and volume backups"
 												fill
 												className="object-cover object-top"
@@ -309,7 +309,7 @@ export default function NomployVsVercelPage() {
 									) : index === 3 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-monitoring-dashboard.png"
+												src="/images/nomploy-monitoring-dashboard.png"
 												alt="Nomploy monitoring dashboard showing CPU, memory and disk metrics"
 												fill
 												className="object-cover object-top"
@@ -319,7 +319,7 @@ export default function NomployVsVercelPage() {
 									) : (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-audit-logs.png"
+												src="/images/nomploy-audit-logs.png"
 												alt="Nomploy audit logs tracking deployments in governed environments"
 												fill
 												className="object-cover object-top"

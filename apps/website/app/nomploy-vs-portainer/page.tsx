@@ -68,7 +68,7 @@ const whyChooseItems = [
 		description:
 			"Nomploy is a full deployment platform. Connect your git repos, and it handles the rest: building code, running it in containers, routing traffic through its built-in reverse proxy, and issuing SSL certificates automatically. Whether you're deploying web apps with Docker Compose files or spinning up databases on a cheap VPS, there's no bash script to maintain and no separate proxy to configure.",
 		image: {
-			src: "/images/dokploy-build-logs.png",
+			src: "/images/nomploy-build-logs.png",
 			alt: "Nomploy deployment panel showing build and deployment logs",
 		},
 	},
@@ -78,7 +78,7 @@ const whyChooseItems = [
 		description:
 			"Nomploy offers SSL, built-in reverse proxy, and managed domains and cert issuance encryption. It ships with Traefik integrated, so assigning a domain to a service and getting a valid HTTPS certificate is a few clicks in the UI. You can also manage Traefik config directly via the file editor if you need more control.",
 		image: {
-			src: "/images/dokploy-domains.png",
+			src: "/images/nomploy-domains.png",
 			alt: "Nomploy domains configuration with automatic HTTPS certificates",
 		},
 	},
@@ -88,7 +88,7 @@ const whyChooseItems = [
 		description:
 			"Nomploy has real-time CPU, memory, and disk metrics enabled by default, automated alerts, and scheduled S3-compatible database and volume backups built in. There's less to install, less to maintain, and less to go wrong. Troubleshooting is also simpler: logs, metrics, and alerts all live in the same UI.",
 		image: {
-			src: "/images/dokploy-monitoring-dashboard.png",
+			src: "/images/nomploy-monitoring-dashboard.png",
 			alt: "Nomploy monitoring dashboard showing CPU, memory and disk metrics",
 		},
 	},
@@ -98,7 +98,7 @@ const whyChooseItems = [
 		description:
 			"Nomploy's open source version is genuinely full-featured for solo developers, startups, teams, and large enterprises alike. You can manage multi-server deployments, organize services into projects, control user permissions, and deploy across multiple environments—only upgrading as you grow. Whether you're a student running a side project or an agency managing client instances, the same tool scales with you.",
 		image: {
-			src: "/images/dokploy-projects-dashboard.png",
+			src: "/images/nomploy-projects-dashboard.png",
 			alt: "Nomploy projects dashboard with services grid and environment selector",
 		},
 	},
@@ -296,7 +296,7 @@ export default function NomployVsPortainerPage() {
 					</div>
 					<div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-xl border border-border/50 shadow-2xl">
 						<Image
-							src="/images/dokploy-audit-logs.png"
+							src="/images/nomploy-audit-logs.png"
 							alt="Nomploy audit logs tracking every deployment and user action"
 							width={1200}
 							height={750}

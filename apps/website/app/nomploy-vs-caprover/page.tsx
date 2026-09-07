@@ -67,7 +67,7 @@ const whyChooseItems = [
 		description:
 			"CapRover is great for getting a single app online fast, but Nomploy handles the full deployment lifecycle. From git-connected builds with Nixpacks and Buildpacks to Docker Compose orchestration, preview deployments, and multi-server scaling—Nomploy grows with your project instead of hitting a ceiling.",
 		image: {
-			src: "/images/dokploy-build-logs.png",
+			src: "/images/nomploy-build-logs.png",
 			alt: "Nomploy deployment panel showing build and deployment logs",
 		},
 	},
@@ -77,7 +77,7 @@ const whyChooseItems = [
 		description:
 			"CapRover doesn't include built-in monitoring or backup tools—you'd need to bolt on Prometheus, Grafana, or custom scripts. Nomploy ships with real-time CPU, memory, and disk metrics, automated alerting, and scheduled S3-compatible backups for databases and volumes, all in one dashboard.",
 		image: {
-			src: "/images/dokploy-monitoring-dashboard.png",
+			src: "/images/nomploy-monitoring-dashboard.png",
 			alt: "Nomploy monitoring dashboard showing CPU, memory and disk metrics",
 		},
 	},
@@ -87,7 +87,7 @@ const whyChooseItems = [
 		description:
 			"CapRover is designed for single-user setups with no built-in team management, RBAC, or project organization. Nomploy supports multiple users, role-based permissions, and project grouping out of the box—making it ready for teams and agencies, not just solo side projects.",
 		image: {
-			src: "/images/dokploy-users.png",
+			src: "/images/nomploy-users.png",
 			alt: "Nomploy team members with role-based access permissions",
 		},
 	},
@@ -97,7 +97,7 @@ const whyChooseItems = [
 		description:
 			"Nomploy's UI is built with Next.js and TypeScript, offering a fast, consistent experience with predictable workflows. CapRover's captain dashboard is functional but dated, and many operations require CLI commands or manual configuration. Nomploy keeps everything accessible in the browser.",
 		image: {
-			src: "/images/dokploy-projects-dashboard.png",
+			src: "/images/nomploy-projects-dashboard.png",
 			alt: "Nomploy dashboard with projects and services grid",
 		},
 	},

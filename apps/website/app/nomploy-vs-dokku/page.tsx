@@ -67,7 +67,7 @@ const whyChooseItems = [
 		description:
 			"Dokku requires SSH access and CLI commands for every operation—deploying, scaling, configuring domains, managing databases. Nomploy puts all of that in a visual dashboard. Connect your repo, configure your service, and deploy—all without touching a terminal. You still get full Docker access when you need it.",
 		image: {
-			src: "/images/dokploy-build-logs.png",
+			src: "/images/nomploy-build-logs.png",
 			alt: "Nomploy deployment panel showing build and deployment logs",
 		},
 	},
@@ -77,7 +77,7 @@ const whyChooseItems = [
 		description:
 			"Dokku has no built-in monitoring or backup system—you'd need to set up separate tools and cron jobs. Nomploy includes real-time CPU, memory, and disk metrics, automated alerts, and scheduled S3-compatible backups for both databases and Docker volumes from day one.",
 		image: {
-			src: "/images/dokploy-monitoring-dashboard.png",
+			src: "/images/nomploy-monitoring-dashboard.png",
 			alt: "Nomploy monitoring dashboard showing CPU, memory and disk metrics",
 		},
 	},
@@ -87,7 +87,7 @@ const whyChooseItems = [
 		description:
 			"Dokku is fundamentally a single-server, single-user tool. Nomploy supports multi-user access with role-based permissions, project organization, and multi-server deployments. When your project grows from a solo effort to a team operation, Nomploy scales with you.",
 		image: {
-			src: "/images/dokploy-environments.png",
+			src: "/images/nomploy-environments.png",
 			alt: "Nomploy project organization with production and staging environments",
 		},
 	},
@@ -97,7 +97,7 @@ const whyChooseItems = [
 		description:
 			"With Dokku, databases, SSL, and domains each require separate plugins and CLI commands. Nomploy integrates database management, domain configuration, SSL certificates, Docker Compose, and deployment pipelines into a single, cohesive interface—reducing context-switching and operational overhead.",
 		image: {
-			src: "/images/dokploy-domains.png",
+			src: "/images/nomploy-domains.png",
 			alt: "Nomploy domains configuration with automatic HTTPS certificates",
 		},
 	},
@@ -107,7 +107,7 @@ const whyChooseItems = [
 		description:
 			"Nomploy gives teams built-in role-based access and project organization in the UI, so you can manage services, databases, and infrastructure as you grow across multiple servers—with the right level of oversight for developers seeking control without handing out broad server access. Dokku user access starts at the SSH key level. More granular control for users with specific needs depends on extra plugins or tooling.",
 		image: {
-			src: "/images/dokploy-users.png",
+			src: "/images/nomploy-users.png",
 			alt: "Nomploy team access and role-based permissions dashboard",
 		},
 	},

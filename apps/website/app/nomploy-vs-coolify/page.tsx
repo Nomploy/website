@@ -240,7 +240,7 @@ export default function NomployVsCoolifyPage() {
 									{index === 0 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-build-logs.png"
+												src="/images/nomploy-build-logs.png"
 												alt="Nomploy deployment panel showing build and deployment logs"
 												fill
 												className="object-cover object-top"
@@ -250,7 +250,7 @@ export default function NomployVsCoolifyPage() {
 									) : index === 1 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-monitoring-dashboard.png"
+												src="/images/nomploy-monitoring-dashboard.png"
 												alt="Nomploy monitoring dashboard showing CPU, memory and disk metrics"
 												fill
 												className="object-cover object-top"
@@ -260,7 +260,7 @@ export default function NomployVsCoolifyPage() {
 									) : index === 2 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-provider-settings.png"
+												src="/images/nomploy-provider-settings.png"
 												alt="Nomploy deploy settings with GitHub, GitLab, Bitbucket and other providers"
 												fill
 												className="object-cover object-top"
@@ -270,7 +270,7 @@ export default function NomployVsCoolifyPage() {
 									) : index === 3 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-projects-dashboard.png"
+												src="/images/nomploy-projects-dashboard.png"
 												alt="Nomploy projects dashboard with services grid and environment selector"
 												fill
 												className="object-cover object-top"
@@ -280,7 +280,7 @@ export default function NomployVsCoolifyPage() {
 									) : index === 4 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-backups.png"
+												src="/images/nomploy-backups.png"
 												alt="Nomploy scheduled database backups with S3 destination"
 												fill
 												className="object-cover object-top"
@@ -290,7 +290,7 @@ export default function NomployVsCoolifyPage() {
 									) : index === 5 ? (
 										<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
 											<Image
-												src="/images/dokploy-audit-logs.png"
+												src="/images/nomploy-audit-logs.png"
 												alt="Nomploy audit logs tracking deployments in governed environments"
 												fill
 												className="object-cover object-top"
