@@ -47,20 +47,11 @@ export default function PrivacyPage() {
 				<div className="flex flex-col gap-2">
 					<h3 className="text-xl font-medium">Application analytics</h3>
 					<p>
-						Our hosted platform (app.nomploy.com) uses{" "}
-						<a
-							href="https://legal.hubspot.com/privacy-policy"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-blue-500 hover:underline"
-						>
-							HubSpot analytics
-						</a>{" "}
-						and marketing tools to understand how users navigate the app and to
-						send product updates and marketing communications. HubSpot may
-						collect usage metrics, device information, contact details you
-						voluntarily provide (such as name and email) and marketing
-						preferences.
+						Our hosted platform (app.nomploy.com) may use privacy‑friendly
+						product analytics to understand how users navigate the app and
+						improve the experience. These tools collect usage metrics and device
+						information. We do not combine this data with information that
+						directly identifies you.
 					</p>
 				</div>
 
@@ -137,15 +128,12 @@ export default function PrivacyPage() {
 				<p>
 					Nomploy uses cookies and similar technologies for two purposes: (1) to
 					manage user sessions (authentication cookies) and (2) to run analytics
-					and marketing tools. Google Analytics sets cookies to distinguish
-					individual browsers and report usage statistics. HubSpot sets cookies
-					to track visits, remember preferences and send marketing messages. You
-					can opt out of Google Analytics by installing the Google Analytics
-					opt‑out browser add‑on or by adjusting your browser settings to block
-					cookies. HubSpot's tracking can be limited by adjusting cookie
-					preferences in the cookie banner (when available) or by sending a "Do
-					Not Track" signal through your browser. If you disable cookies
-					entirely, some features of the site or app may not function properly.
+					tools. Google Analytics sets cookies to distinguish
+					individual browsers and report usage statistics. You can opt out of
+					Google Analytics by installing the Google Analytics opt‑out browser
+					add‑on or by adjusting your browser settings to block cookies. If you
+					disable cookies entirely, some features of the site or app may not
+					function properly.
 				</p>
 			</section>
 
@@ -159,10 +147,6 @@ export default function PrivacyPage() {
 					<li>
 						<strong>Google Analytics</strong> – provides anonymised website and
 						documentation analytics.
-					</li>
-					<li>
-						<strong>HubSpot</strong> – provides analytics and marketing services
-						for our website and app.
 					</li>
 					<li>
 						<strong>Stripe</strong> – processes payments for our cloud service; we
@@ -191,8 +175,8 @@ export default function PrivacyPage() {
 				<h2 className="text-2xl font-semibold">5. Data Retention</h2>
 				<ul className="list-inside list-disc space-y-2">
 					<li>
-						Analytics data is stored by Google and HubSpot according to their
-						retention policies. We review aggregated analytics data periodically
+						Analytics data is stored by Google Analytics according to its
+						retention policy. We review aggregated analytics data periodically
 						and delete or anonymise it when no longer needed.
 					</li>
 					<li>
