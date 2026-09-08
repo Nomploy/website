@@ -1,7 +1,6 @@
 import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
 import { Testimonials } from "@/components/Testimonials";
-import { ComparisonStats } from "@/components/comparison-stats";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import {
 	Check,
@@ -417,7 +416,6 @@ export default function NomployVsVercelPage() {
 			</section>
 
 			{/* Thousands have chosen Nomploy - Stats */}
-			<ComparisonStats />
 
 			{/* Testimonials */}
 			<Testimonials />

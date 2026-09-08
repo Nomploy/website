@@ -4,7 +4,6 @@ import { Hero } from "@/components/Hero";
 import { Testimonials } from "@/components/Testimonials";
 import { FirstFeaturesSection } from "@/components/first-features";
 import { SecondaryFeaturesSections } from "@/components/secondary-features";
-import { StatsSection } from "@/components/stats";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -22,7 +21,6 @@ export default function Home() {
 				<Hero />
 				<FirstFeaturesSection />
 				<SecondaryFeaturesSections />
-				<StatsSection />
 				<Testimonials />
 				<Faqs />
 				<CallToAction />

@@ -291,7 +291,7 @@ export function ContactForm({
 									<li>
 										Open a discussion on{" "}
 										<a
-											href="https://github.com/Nomploy/nomploy/discussions"
+											href="https://github.com/nomploy/nomploy/discussions"
 											target="_blank"
 											rel="noopener noreferrer"
 											className="text-primary underline hover:text-primary/80"
