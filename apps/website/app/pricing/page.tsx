@@ -2,9 +2,9 @@ import { Pricing } from "@/components/pricing";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Nomploy Pricing—Simple, Affordable Pricing. For Your Team",
+	title: "Nomploy Pricing — Free & Open Source",
 	description:
-		"Deploy and manage apps with Nomploy. Compare Nomploy's Hobby, Startup, and Enterprise plans to find the right fit for your team.",
+		"Nomploy is free and open source to self-host, with no limits on servers or deployments. Enterprise support with SSO, RBAC and SLA when you need it.",
 };
 
 export default function PricingPage() {

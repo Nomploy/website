@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { ContactFormModal } from "./ContactFormModal";
 import { Container } from "./Container";
-import { PricingFeatureTable } from "./pricing/PricingFeatureTable";
 import {
 	Accordion,
 	AccordionContent,
@@ -17,50 +16,40 @@ import {
 import AnimatedGridPattern from "./ui/animated-grid-pattern";
 import { Badge } from "./ui/badge";
 import { Button, buttonVariants } from "./ui/button";
-import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 
-const CLOUD_APP_URL = "https://app.nomploy.com";
+const GITHUB_URL = "https://github.com/nomploy/nomploy";
+const INSTALL_DOCS_URL = "https://docs.nomploy.com/docs/core/installation";
 
 const pricingFaqs = [
 	{
-		question: "What happens if I need more than one server?",
+		question: "Is Nomploy really free?",
 		answer:
-			"You can add as many servers as you need. Each additional server costs $4.50/month on the Hobby plan. On the Startup plan, 3 servers are included in the base price, and you can add more at $4.50/month each.",
+			"Yes. Nomploy is open source and free to self-host, with no limits on servers, deployments, applications or databases. You only pay for the infrastructure you choose to run it on.",
 	},
 	{
-		question: "How does the annual billing discount work?",
+		question: "Do I need my own server?",
 		answer:
-			"When you choose annual billing, you get a 20% discount on all plans. For example, the Hobby plan goes from $4.50/month to $3.60/month per server, billed annually.",
-	},
-	{
-		question: "Can I switch between plans?",
-		answer:
-			"Yes, you can upgrade or downgrade your plan at any time. When upgrading, you'll be prorated for the remainder of your billing cycle. When downgrading, the change takes effect at the start of your next billing cycle.",
+			"Yes. You self-host Nomploy on your own server (e.g. Hetzner, Hostinger, AWS, DigitalOcean) or on-premise. Installation takes a single command — see the installation guide.",
 	},
 	{
 		question: "Is there a limit on the number of deployments?",
 		answer:
-			"No, there is no limit on the number of deployments in any of the plans. You can deploy unlimited applications and databases.",
+			"No. You can deploy unlimited applications and databases across as many servers as you like.",
 	},
 	{
 		question: "What's included in the Enterprise plan?",
 		answer:
-			"The Enterprise plan includes unlimited servers and organizations, fine-grained RBAC, SSO/SAML integration (Azure, OKTA, etc.), SCIM user provisioning, audit logs, MSA/SLA, white labeling, and priority support. It's available as both Cloud and Self-Hosted.",
+			"Enterprise adds fine-grained RBAC, SSO/SAML (Azure, OKTA, etc.), SCIM user provisioning, audit logs, white labeling, and an MSA/SLA with priority support — all self-hosted on your own infrastructure. Contact us to learn more.",
 	},
 	{
-		question: "Do you offer refunds?",
+		question: "What kind of support is available?",
 		answer:
-			"We do not offer refunds. However, you can cancel your subscription at any time. Feel free to try our open-source version for free before making a purchase.",
+			"The open-source version is supported by our community on Discord. Enterprise includes priority support and dedicated services.",
 	},
 	{
-		question: "What kind of support do I get with each plan?",
+		question: "Do you offer a managed cloud?",
 		answer:
-			"The Hobby plan includes community support via Discord. The Startup plan adds email and chat support. The Enterprise plan includes priority support and dedicated services.",
-	},
-	{
-		question: "Do I need to provide my own server?",
-		answer:
-			"Yes, you provide your own server (e.g., Hetzner, Hostinger, AWS, etc.) VPS, and we manage the Nomploy UI infrastructure for you.",
+			"Not yet — Nomploy is self-hosted for now. A managed cloud is on our roadmap; in the meantime you can run Nomploy on any server in minutes.",
 	},
 ];
 
@@ -81,58 +70,31 @@ function SwirlyDoodle(props: React.ComponentPropsWithoutRef<"svg">) {
 	);
 }
 
-const hobbyFeatures = [
+const selfHostedFeatures = [
+	"Unlimited Servers",
 	"Unlimited Deployments",
-	"Unlimited Databases",
-	"Unlimited Applications",
-	"1 Server Included",
-	"1 Organization",
-	"1 User",
-	"2 Environments",
-	"1 Volume Backup per Application",
-	"1 Backup per Database",
-	"1 Scheduled Job per Application",
+	"Unlimited Applications & Databases",
+	"Unlimited Environments",
+	"Volume & Database Backups",
+	"Scheduled Jobs",
+	"Docker Compose & Multi-server",
+	"Basic RBAC & 2FA",
 	"Community Support (Discord)",
 ];
 
-const startupFeatures = [
-	"All the features of Hobby, plus…",
-	"3 Servers Included",
-	"3 Organizations",
-	"Unlimited Users",
-	"Unlimited Environments",
-	"Unlimited Volume Backups",
-	"Unlimited Database Backups",
-	"Unlimited Scheduled Jobs",
-	"Basic RBAC (Admin, Developer)",
-	"2FA",
-	"Email and Chat Support",
-];
-
 const enterpriseFeatures = [
-	"All the features of Startup, plus…",
-	"Up to Unlimited Servers",
-	"Up to Unlimited Organizations",
+	"Everything in Self-Hosted, plus…",
 	"Fine-grained RBAC",
-	"Complete Hosting Flexibility",
 	"SSO / SAML (Azure, OKTA, etc)",
 	"SCIM User Provisioning",
 	"Audit Logs",
-	"MSA/SLA",
 	"White Labeling",
+	"MSA / SLA",
 	"Priority Support and Services",
 ];
 
 export function Pricing() {
-	const [isAnnual, setIsAnnual] = useState(false);
 	const [openContactModal, setOpenContactModal] = useState(false);
-	const [openPartnerModal, setOpenPartnerModal] = useState(false);
-
-	const hobbyMonthlyPrice = 4.5;
-	const hobbyAnnualTotal = hobbyMonthlyPrice * 12 * 0.8; // 20% discount, total per year
-	const hobbyAnnualPerMonth = hobbyAnnualTotal / 12;
-	const startupBaseMonthly = 15;
-	const startupBaseAnnual = startupBaseMonthly * 12 * 0.8;
 
 	return (
 		<section
@@ -155,9 +117,10 @@ export function Pricing() {
 						)}
 					/>
 					<Link
-						href={`${CLOUD_APP_URL}/register`}
+						href={GITHUB_URL}
 						target="_blank"
-						aria-label="Start your 14-day free trial, no credit card required"
+						rel="noopener noreferrer"
+						aria-label="Nomploy is open source on GitHub"
 						className="relative mb-4 inline-flex"
 					>
 						<Badge
@@ -165,219 +128,100 @@ export function Pricing() {
 							className="gap-1.5 border-primary/30 bg-primary/10 px-3 py-1 text-primary transition-colors hover:bg-primary/20"
 						>
 							<Sparkles className="h-3.5 w-3.5" />
-							14-day free trial · No credit card required
+							100% open source · Self-host for free
 						</Badge>
 					</Link>
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
 						<span className="relative whitespace-nowrap">
 							<SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-muted-foreground" />
-							<span className="relative">Simple Affordable</span>
+							<span className="relative">Free &amp; Open</span>
 						</span>{" "}
-						Pricing.
+						Source.
 					</h2>
 					<p className="mt-4 text-lg text-muted-foreground">
-						Infrastructure, we take care of it for you.
+						Self-host Nomploy at no cost. Enterprise support when you need it.
 					</p>
 				</div>
 
-				{/* Billing toggle */}
-				<div className="mx-auto mt-10 flex flex-col items-center gap-6">
-					<Tabs
-						defaultValue="monthly"
-						value={isAnnual ? "annual" : "monthly"}
-						onValueChange={(v) => setIsAnnual(v === "annual")}
+				<div className="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+					{/* Self-Hosted (Open Source) */}
+					<section
+						className={clsx(
+							"relative flex flex-col rounded-3xl border-2 border-primary/50 bg-black/80 px-6 py-8",
+						)}
 					>
-						<TabsList className=" w-full ">
-							<TabsTrigger value="annual">Yearly (20% discount)</TabsTrigger>
-							<TabsTrigger value="monthly">Monthly</TabsTrigger>
-						</TabsList>
-					</Tabs>
-				</div>
+						<Badge className="absolute -top-2.5 left-6">Most popular</Badge>
+						<h3 className="text-lg font-medium text-white">
+							Self-Hosted{" "}
+							<span className="text-muted-foreground">/ Open Source</span>
+						</h3>
+						<p className="mt-1 text-sm text-muted-foreground">
+							Everything you need to deploy on your own infrastructure
+						</p>
+						<div className="mt-4">
+							<span className="text-3xl font-semibold text-primary">Free</span>
+							<span className="ml-2 text-sm text-muted-foreground">
+								forever · open source
+							</span>
+						</div>
+						<ul className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
+							{selfHostedFeatures.map((f) => (
+								<li key={f} className="flex gap-2">
+									<Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+									{f}
+								</li>
+							))}
+						</ul>
+						<div className="mt-auto pt-6">
+							<Link
+								href={INSTALL_DOCS_URL}
+								target="_blank"
+								rel="noopener noreferrer"
+								className={buttonVariants({
+									variant: "default",
+									className: "w-full",
+								})}
+							>
+								Get Started
+							</Link>
+						</div>
+					</section>
 
-				<div className="mx-auto mt-12 flex max-w-6xl flex-col gap-8">
-					{/* Hobby, Startup, Enterprise - 3 column grid */}
-					<div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-						{/* Hobby */}
-						<section
-							className={clsx(
-								"flex flex-col rounded-3xl border-2 border-dashed border-border/50 bg-black/50 px-6 py-8",
-							)}
-						>
-							<h3 className="text-lg font-medium text-white">Hobby</h3>
-							<p className="mt-1 text-sm text-muted-foreground">
-								Everything an individual developer needs
-							</p>
-							<div className="mt-4">
-								<span className="text-2xl font-semibold text-primary">
-									$
-									{isAnnual
-										? hobbyAnnualPerMonth.toFixed(2)
-										: hobbyMonthlyPrice.toFixed(2)}
-									/mo
-								</span>
-								{isAnnual ? (
-									<p className="mt-1 text-sm text-muted-foreground">
-										${hobbyAnnualTotal.toFixed(2)}/year per server
-									</p>
-								) : (
-									<span className="ml-2 text-sm text-muted-foreground">
-										per server (add as many servers as you&apos;d like for
-										$4.50/mo)
-									</span>
-								)}
-							</div>
-							<ul className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
-								{hobbyFeatures.map((f) => (
-									<li key={f} className="flex gap-2">
-										<Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-										{f}
-									</li>
-								))}
-							</ul>
-							<div className="mt-auto pt-6">
-								<Link
-									href={`${CLOUD_APP_URL}/register`}
-									target="_blank"
-									className={buttonVariants({
-										variant: "default",
-										className: "w-full",
-									})}
-								>
-									Get Started
-								</Link>
-							</div>
-						</section>
-
-						{/* Startup */}
-						<section
-							className={clsx(
-								"relative flex flex-col rounded-3xl border-2 border-primary/50 bg-black/80 px-6 py-8",
-							)}
-						>
-							<Badge className="absolute -top-2.5 left-6">Recommended</Badge>
-							<h3 className="text-lg font-medium text-white">Startup</h3>
-							<p className="mt-1 text-sm text-muted-foreground">
-								Perfect for small to mid-size teams
-							</p>
-							<div className="mt-4">
-								<span className="text-2xl font-semibold text-primary">
-									Starting at $
-									{isAnnual
-										? (startupBaseAnnual / 12).toFixed(2)
-										: startupBaseMonthly.toFixed(0)}
-									/mo
-								</span>
-								{isAnnual ? (
-									<p className="mt-1 text-sm text-muted-foreground">
-										${startupBaseAnnual.toFixed(0)}/year
-									</p>
-								) : null}
-								<p className="mt-1 text-xs text-muted-foreground">
-									Add more servers as you&apos;d like for $4.50/mo
-								</p>
-							</div>
-							<ul className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
-								{startupFeatures.map((f) => (
-									<li key={f} className="flex gap-2">
-										<Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-										{f}
-									</li>
-								))}
-							</ul>
-							<div className="mt-auto pt-6">
-								<Link
-									href={`${CLOUD_APP_URL}/register`}
-									target="_blank"
-									className={buttonVariants({
-										variant: "default",
-										className: "w-full",
-									})}
-								>
-									Get Started
-								</Link>
-							</div>
-						</section>
-						{/* Enterprise */}
-						<section
-							className={clsx(
-								"flex flex-col rounded-3xl border-2 border-dashed border-border/50 bg-black/50 px-6 py-8",
-							)}
-						>
-							<h3 className="text-lg font-medium text-white">Enterprise</h3>
-							<p className="mt-1 text-sm text-muted-foreground">
-								For large organizations who want more control
-							</p>
-							{/* Cloud & Self Hosted options */}
-							<div className="mt-4 grid grid-cols-2 gap-3">
-								<div className="rounded-xl border border-border/50 bg-background/50 px-4 py-3">
-									<p className="font-medium text-white text-center">Cloud</p>
-									<p className="mt-0.5 text-xs text-muted-foreground text-center">
-										We host and manage everything for you
-									</p>
-								</div>
-								<div className="rounded-xl border border-border/50 bg-background/50 px-4 py-3">
-									<p className="font-medium text-white text-center">
-										Self Hosted
-									</p>
-									<p className="mt-0.5 text-xs text-muted-foreground text-center">
-										Install on-prem or in your own cloud
-									</p>
-								</div>
-							</div>
-							<ul className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
-								{enterpriseFeatures.map((f) => (
-									<li key={f} className="flex gap-2">
-										<Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-										{f}
-									</li>
-								))}
-							</ul>
-							<div className="mt-auto pt-6">
-								<Button
-									onClick={() => setOpenContactModal(true)}
-									className="w-full"
-								>
-									Contact Sales
-								</Button>
-							</div>
-						</section>
-					</div>
-
-					{/* Agency - below the 3 main plans */}
+					{/* Enterprise */}
 					<section
 						className={clsx(
 							"flex flex-col rounded-3xl border-2 border-dashed border-border/50 bg-black/50 px-6 py-8",
 						)}
 					>
-						<h3 className="text-lg font-medium text-white">Agency</h3>
+						<h3 className="text-lg font-medium text-white">Enterprise</h3>
 						<p className="mt-1 text-sm text-muted-foreground">
-							Our Agency plan is uniquely tailored to the needs of agencies.
-							Please contact us below to learn more about this option, as well
-							as about becoming a certified Nomploy partner.{" "}
-							<Link href="/partners" className="text-primary hover:underline">
-								Learn more here
-							</Link>
+							For organizations that need more control and support
 						</p>
-						<div className="mt-6">
+						<div className="mt-4">
+							<span className="text-3xl font-semibold text-primary">
+								Custom
+							</span>
+							<span className="ml-2 text-sm text-muted-foreground">
+								self-hosted · let&apos;s talk
+							</span>
+						</div>
+						<ul className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
+							{enterpriseFeatures.map((f) => (
+								<li key={f} className="flex gap-2">
+									<Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+									{f}
+								</li>
+							))}
+						</ul>
+						<div className="mt-auto pt-6">
 							<Button
-								onClick={() => setOpenPartnerModal(true)}
-								className="w-full sm:w-auto"
-								variant="outline"
+								onClick={() => setOpenContactModal(true)}
+								className="w-full"
 							>
-								Contact The Partner Team
+								Contact Sales
 							</Button>
 						</div>
 					</section>
-				</div>
-
-				{/* Feature breakdown */}
-				<div className="mx-auto mt-24 max-w-6xl">
-					<h3 className="text-center text-2xl font-semibold text-white">
-						Feature breakdown by plan
-					</h3>
-					<div className="mt-8">
-						<PricingFeatureTable />
-					</div>
 				</div>
 
 				{/* Pricing FAQ */}
@@ -386,7 +230,7 @@ export function Pricing() {
 						Frequently asked questions
 					</h3>
 					<p className="mt-4 text-center text-sm text-muted-foreground">
-						Have a different question? Contact us via Discord or email.
+						Have a different question? Reach out on our community or by email.
 					</p>
 					<Accordion type="single" collapsible className="mt-8 w-full">
 						{pricingFaqs.map((faq, index) => (
@@ -404,11 +248,6 @@ export function Pricing() {
 			<ContactFormModal
 				open={openContactModal}
 				onOpenChange={setOpenContactModal}
-				defaultInquiryType="sales"
-			/>
-			<ContactFormModal
-				open={openPartnerModal}
-				onOpenChange={setOpenPartnerModal}
 				defaultInquiryType="sales"
 			/>
 		</section>
