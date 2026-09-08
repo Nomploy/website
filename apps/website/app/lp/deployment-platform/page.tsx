@@ -343,7 +343,7 @@ export default function DeploymentPlatformLandingPage() {
 							</Button>
 							<Button variant="outline" className="rounded-full" asChild>
 								<Link
-									href="https://app.nomploy.com/register"
+									href="https://docs.nomploy.com/docs/core/installation"
 									target="_blank"
 									rel="noopener noreferrer"
 								>

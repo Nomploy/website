@@ -195,7 +195,7 @@ export default function NomployVsDokkuPage() {
 
 						<Button className="mt-10 rounded-full" asChild>
 							<Link
-								href="https://app.nomploy.com/register"
+								href="https://docs.nomploy.com/docs/core/installation"
 								target="_blank"
 								rel="noopener noreferrer"
 							>

@@ -102,7 +102,7 @@ export default function IndustriesPage() {
 						<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
 							<Button className="rounded-full" asChild>
 								<Link
-									href="https://app.nomploy.com/register"
+									href="https://docs.nomploy.com/docs/core/installation"
 									target="_blank"
 									rel="noopener noreferrer"
 								>

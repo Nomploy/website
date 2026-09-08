@@ -173,16 +173,13 @@ function MobileNavigation() {
 								<hr className="m-2 border-border" />
 								<MobileNavLink href="/jobs">Careers</MobileNavLink>
 								<MobileNavLink href="/contact">Contact</MobileNavLink>
-								<MobileNavLink href="https://app.nomploy.com/" target="_blank">
-									Sign In
-								</MobileNavLink>
 								<MobileNavLink
-									href="https://app.nomploy.com/register"
+									href="https://docs.nomploy.com/docs/core/installation"
 									target="_blank"
 								>
 									<Button className="w-full" asChild>
 										<div className="group relative mx-auto flex w-full max-w-fit flex-row items-center justify-center rounded-2xl text-sm font-medium">
-											<span>Sign Up</span>
+											<span>Get Started</span>
 											<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 										</div>
 									</Button>
@@ -412,20 +409,6 @@ export function Header() {
 						<GithubStars className="max-md:hidden" />
 
 						<Button
-							variant="ghost"
-							className="rounded-full max-md:hidden"
-							asChild
-						>
-							<Link
-								href="https://app.nomploy.com/"
-								aria-label="Sign In Nomploy Cloud"
-								target="_blank"
-							>
-								Sign In
-							</Link>
-						</Button>
-
-						<Button
 							variant="outline"
 							className="rounded-full max-md:hidden"
 							asChild
@@ -446,12 +429,12 @@ export function Header() {
 
 						<Button className="rounded-full max-md:hidden" asChild>
 							<Link
-								href="https://app.nomploy.com/register"
-								aria-label="Sign Up Nomploy Cloud"
+								href="https://docs.nomploy.com/docs/core/installation"
+								aria-label="Get Started with Nomploy"
 								target="_blank"
 							>
 								<div className="group relative mx-auto flex w-full max-w-fit flex-row items-center justify-center rounded-2xl text-sm font-medium">
-									<span>Sign Up</span>
+									<span>Get Started</span>
 									<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 								</div>
 							</Link>

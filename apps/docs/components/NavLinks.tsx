@@ -11,24 +11,12 @@ import {
 	Globe,
 	Heart,
 	LayoutGrid,
-	LogIn,
 	MessagesSquare,
 	Rss,
-	UserPlus,
 } from "lucide-react";
 
 export function NavLinks() {
 	const links = [
-		{
-			text: "Login",
-			url: "https://app.nomploy.com/",
-			icon: LogIn,
-		},
-		{
-			text: "Sign Up",
-			url: "https://app.nomploy.com/register",
-			icon: UserPlus,
-		},
 		{
 			text: "Website",
 			url: "https://nomploy.com",
@@ -75,7 +63,7 @@ export function NavLinks() {
 			<DropdownMenuContent align="end" className="w-56">
 				{links.map((link, index) => {
 					const IconComponent = link.icon;
-					const showSeparator = index === 3;
+					const showSeparator = index === 1;
 
 					return (
 						<div key={link.text}>

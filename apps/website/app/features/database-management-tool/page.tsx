@@ -202,7 +202,7 @@ export default function DatabaseManagementToolPage() {
 						<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
 							<Button className="rounded-full" asChild>
 								<Link
-									href="https://app.nomploy.com/register"
+									href="https://docs.nomploy.com/docs/core/installation"
 									aria-label="Get Started with Nomploy"
 									target="_blank"
 								>
@@ -396,7 +396,7 @@ export default function DatabaseManagementToolPage() {
 						</p>
 						<div className="mt-10">
 							<Button className="rounded-full" asChild>
-								<Link href="https://app.nomploy.com">Create your account</Link>
+								<Link href="https://docs.nomploy.com/docs/core/installation">Get Started</Link>
 							</Button>
 						</div>
 					</div>

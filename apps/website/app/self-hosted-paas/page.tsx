@@ -272,7 +272,7 @@ export default function SelfHostedPaasPage() {
 						<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
 							<Button className="rounded-full" asChild>
 								<Link
-									href="https://app.nomploy.com/register"
+									href="https://docs.nomploy.com/docs/core/installation"
 									aria-label="Get Started with Nomploy"
 									target="_blank"
 								>
@@ -524,18 +524,18 @@ export default function SelfHostedPaasPage() {
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
 							Nomploy is free to self-host and takes just a few commands to
-							install. Create your account, follow the setup guide, and
+							install. Follow the setup guide, and
 							you&apos;ll have a fully functional open source PaaS running on
 							your own infrastructure in minutes.
 						</p>
 						<div className="mt-10">
 							<Button className="rounded-full" asChild>
 								<Link
-									href="https://app.nomploy.com/register"
+									href="https://docs.nomploy.com/docs/core/installation"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									Create your account
+									Get Started
 								</Link>
 							</Button>
 						</div>

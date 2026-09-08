@@ -181,7 +181,7 @@ export default function NomployVsVercelPage() {
 						<div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
 							<Button className="rounded-full" asChild>
 								<Link
-									href="https://app.nomploy.com/register"
+									href="https://docs.nomploy.com/docs/core/installation"
 									target="_blank"
 									rel="noopener noreferrer"
 								>

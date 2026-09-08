@@ -40,7 +40,7 @@ export function CallToAction() {
 
 					<Button className="mt-10 rounded-full" asChild>
 						<Link
-							href={"https://app.nomploy.com/register"}
+							href={"https://docs.nomploy.com/docs/core/installation"}
 							aria-label="Nomploy on GitHub"
 							target="_blank"
 							className="flex flex-row items-center gap-2"

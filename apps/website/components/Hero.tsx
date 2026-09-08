@@ -61,10 +61,10 @@ export function Hero() {
 							transition={{ duration: 0.3 }}
 						>
 							<a
-								href="https://app.nomploy.com/register"
+								href="https://docs.nomploy.com/docs/core/installation"
 								target="_blank"
 								rel="noopener noreferrer"
-								aria-label="Start your 14-day free trial, no credit card required"
+								aria-label="Free and open source — self-host Nomploy in minutes"
 							>
 								<div className="z-10 flex items-center justify-center">
 									<AnimatedGradientText>
@@ -74,7 +74,7 @@ export function Hero() {
 												"inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent",
 											)}
 										>
-											14-day free trial · No credit card required
+											Free &amp; open source · Self-host in minutes
 										</span>
 										<ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
 									</AnimatedGradientText>
@@ -122,7 +122,7 @@ export function Hero() {
 								<div className="mx-auto mt-6 flex w-full max-w-sm flex-wrap items-center justify-center gap-3 md:flex-nowrap">
 									<Button className="w-full rounded-full" asChild>
 										<Link
-											href="https://app.nomploy.com/register"
+											href="https://docs.nomploy.com/docs/core/installation"
 											aria-label="Get Started with Nomploy"
 											target="_blank"
 										>

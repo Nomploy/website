@@ -39,7 +39,7 @@ export function GithubStars({
 	className,
 	repoUrl = "https://github.com/nomploy/nomploy",
 	label = "GitHub Stars",
-	count: defaultCount = "26.4k",
+	count: defaultCount = "–",
 }: GithubStarsProps) {
 	const [starCount, setStarCount] = useState<string>(defaultCount);
 	const [isLoading, setIsLoading] = useState(true);
