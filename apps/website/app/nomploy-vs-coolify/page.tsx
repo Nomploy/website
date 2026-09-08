@@ -1,6 +1,5 @@
 import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
-import { Testimonials } from "@/components/Testimonials";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Check, X, Zap, Cpu, Plug, LayoutDashboard, Bell, Bot } from "lucide-react";
 import Image from "next/image";
@@ -367,8 +366,6 @@ export default function NomployVsCoolifyPage() {
 
 			{/* Thousands have chosen Nomploy - Stats */}
 
-			{/* Testimonials */}
-			<Testimonials />
 
 			{/* Final CTA */}
 			<CallToAction />

@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import AnimatedGradientText from "./ui/animated-gradient-text";
 import AnimatedGridPattern from "./ui/animated-grid-pattern";
 import { Button } from "./ui/button";
-import HeroVideoDialog from "./ui/hero-video-dialog";
 
 // const ProductHunt = () => {
 // 	return (
@@ -168,22 +167,6 @@ export function Hero() {
 							</div>
 						</motion.div>
 					</div>
-					<motion.div
-						className="mx-auto mt-10 max-w-2xl"
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.3, delay: 0.6 }}
-					>
-						<div className="mt-10 flex flex-row justify-center gap-x-8 rounded-lg sm:gap-x-0  sm:gap-y-10 xl:gap-x-12 xl:gap-y-0">
-							<HeroVideoDialog
-								className="block w-full max-w-md rounded-xl"
-								animationStyle="top-in-bottom-out"
-								videoSrc="https://www.youtube.com/embed/x2s_Y5ON-ms?si=i6gntgMmyPDLuPih"
-								thumbnailSrc="https://nomploy.com/banner.png"
-								thumbnailAlt="Hero Video"
-							/>
-						</div>
-					</motion.div>
 				</div>
 				<AnimatedGridPattern
 					numSquares={30}

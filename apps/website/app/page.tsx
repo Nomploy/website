@@ -1,7 +1,6 @@
 import { CallToAction } from "@/components/CallToAction";
 import { Faqs } from "@/components/Faqs";
 import { Hero } from "@/components/Hero";
-import { Testimonials } from "@/components/Testimonials";
 import { FirstFeaturesSection } from "@/components/first-features";
 import { SecondaryFeaturesSections } from "@/components/secondary-features";
 import type { Metadata } from "next";
@@ -21,7 +20,6 @@ export default function Home() {
 				<Hero />
 				<FirstFeaturesSection />
 				<SecondaryFeaturesSections />
-				<Testimonials />
 				<Faqs />
 				<CallToAction />
 			</main>

@@ -1,6 +1,5 @@
 import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
-import { Testimonials } from "@/components/Testimonials";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Check, X, Zap, Globe, Bell, Users } from "lucide-react";
 import Image from "next/image";
@@ -371,8 +370,6 @@ export default function NomployVsPortainerPage() {
 
 			{/* Stats */}
 
-			{/* Testimonials */}
-			<Testimonials />
 
 			{/* Final CTA */}
 			<CallToAction />

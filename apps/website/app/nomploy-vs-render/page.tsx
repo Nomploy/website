@@ -1,6 +1,5 @@
 import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
-import { Testimonials } from "@/components/Testimonials";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import {
 	Check,
@@ -410,8 +409,6 @@ export default function NomployVsRenderPage() {
 
 			{/* Thousands have chosen Nomploy - Stats */}
 
-			{/* Testimonials */}
-			<Testimonials />
 
 			{/* Final CTA */}
 			<CallToAction />

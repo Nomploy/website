@@ -1,6 +1,5 @@
 import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
-import { Testimonials } from "@/components/Testimonials";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, GitBranch, Activity, Users, Gauge } from "lucide-react";
@@ -171,8 +170,6 @@ export default function ComparisonPage() {
 				</Container>
 			</section>
 
-			{/* Testimonials */}
-			<Testimonials />
 
 			{/* Final CTA */}
 			<CallToAction />
