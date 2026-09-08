@@ -276,19 +276,7 @@ export function ContactForm({
 									Please use one of these channels to get assistance:
 								</p>
 								<ul className="ml-4 list-disc space-y-1 text-muted-foreground">
-									<li>
-										Join our{" "}
-										<a
-											href="https://discord.gg/2tBnJ3jDJc"
-											target="_blank"
-											rel="noopener noreferrer"
-											className="text-primary underline hover:text-primary/80"
-										>
-											Discord community
-										</a>{" "}
-										for real-time help
-									</li>
-									<li>
+										<li>
 										Open a discussion on{" "}
 										<a
 											href="https://github.com/nomploy/nomploy/discussions"
