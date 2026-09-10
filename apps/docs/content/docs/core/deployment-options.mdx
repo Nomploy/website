@@ -1,6 +1,6 @@
 ---
 title: Deployment Options
-description: "Nomploy Server vs Remote Servers vs Swarm Nodes: choose where your applications run."
+description: "Nomploy Server vs Remote Servers vs Cluster: choose where your applications run."
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -9,7 +9,7 @@ Nomploy gives you three ways to run your applications. All of them use the same 
 
 1. **Nomploy Server**: everything runs on the same machine where the Nomploy UI is installed.
 2. **Remote Servers**: independent servers connected via SSH, each running its own apps.
-3. **Swarm Nodes (Cluster)**: servers joined to the Nomploy server's Docker Swarm to replicate applications across machines.
+3. **Cluster (Multi-node)**: additional machines joined into the Nomploy cluster (Nomad + Consul over a WireGuard mesh) to run and replicate applications across servers.
 
 ## Nomploy Server
 
@@ -28,24 +28,26 @@ This is the default. When you install Nomploy, the UI, the builds, and your appl
 - **Requirements**: SSH access to each server. A Docker registry is only needed if you use build servers.
 - **Best for**: separating apps per environment, region, or customer; keeping the Nomploy UI on a small server while apps run elsewhere.
 
-## Swarm Nodes (Cluster)
+## Cluster (Multi-node)
 
-The [Cluster](/docs/core/cluster) feature joins additional servers as worker or manager nodes of the Nomploy server's Docker Swarm. Traefik on the manager load-balances traffic to the nodes where your application replicas run.
+The [Cluster](/docs/core/cluster) feature joins additional machines as **server** or **worker** nodes, connected through an encrypted WireGuard mesh. Nomad schedules workloads across the nodes and Traefik (via the Consul Catalog) routes traffic to wherever they run.
 
-- **Replication**: run multiple replicas of the same application across machines, with load balancing handled by Traefik.
-- **Requirements**: a Docker registry (images must be pushed so other nodes can pull them) and servers with the same architecture as the Nomploy server.
+- **Replication & capacity**: run workloads across multiple machines, with routing handled by Traefik.
+- **High availability**: with 3 or more server nodes, the scheduler tolerates node failures.
+- **Requirements**: a container registry so every node can pull your images (registry auth is distributed cluster-wide via Consul), and network reachability for the WireGuard mesh.
 - **Trade-offs**: more setup and operational complexity, and Nomploy does not perform automatic storage cleanup on the extra nodes.
-- **Best for**: horizontally scaling the same application for high availability.
+- **Best for**: horizontally scaling across machines and high availability of the scheduler.
 
 ## Comparison
 
-|                                  | Nomploy Server | Remote Servers            | Swarm Nodes (Cluster)   |
+|                                  | Nomploy Server | Remote Servers            | Cluster (Multi-node)    |
 | -------------------------------- | -------------- | ------------------------- | ----------------------- |
-| **Where apps run**               | Same machine as the UI | Independent servers | Nodes of a shared Swarm |
-| **Connection**                   | —              | SSH                       | Swarm join token        |
+| **Where apps run**               | Same machine as the UI | Independent servers | Across cluster nodes    |
+| **Connection**                   | —              | SSH                       | WireGuard mesh          |
 | **Docker registry required**     | No             | Only for build servers    | Yes                     |
 | **Isolation between servers**    | —              | High (fully independent)  | Low (shared cluster)    |
 | **Replicas across servers**      | No             | No                        | Yes                     |
+| **High availability**            | No             | No                        | Yes (3+ servers)        |
 | **Automatic storage cleanup**    | Yes            | Yes (configurable)        | No                      |
 | **Setup complexity**             | None           | Low                       | High                    |
 
@@ -53,8 +55,8 @@ The [Cluster](/docs/core/cluster) feature joins additional servers as worker or 
 
 - **Start with the Nomploy Server** and scale vertically (more CPU/RAM). It covers the vast majority of use cases with zero extra configuration.
 - **Use Remote Servers** when you want isolation: production apps separated from the Nomploy UI, different servers per project or region, or a dedicated build server.
-- **Use Swarm Nodes** only when you need the *same* application replicated across multiple machines with load balancing.
+- **Use a Cluster** when you need to run or replicate workloads across multiple machines, or want high availability of the scheduler.
 
 <Callout type="info">
-  These options are not mutually exclusive. A common setup is a small server running only the Nomploy UI, with applications deployed to remote servers. You can also add a Swarm node as a remote server to configure storage cleanups on it.
+  These options are not mutually exclusive. A common setup is a small server running only the Nomploy UI, with applications deployed to remote servers. You can also add a cluster node as a remote server to configure storage cleanups on it.
 </Callout>

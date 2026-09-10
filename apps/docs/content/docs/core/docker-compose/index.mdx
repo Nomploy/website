@@ -5,14 +5,11 @@ description: "Learn how to use Docker Compose with Nomploy"
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-Nomploy integrates with Docker Compose and Docker Stack to provide flexible deployment solutions. Whether you are developing locally or deploying at scale, Nomploy facilitates application management through these powerful Docker tools.
+Nomploy integrates with Docker Compose to provide flexible deployment solutions. Whether you are developing locally or deploying at scale, Nomploy manages your applications through a standard `docker-compose.yml`.
 
-### Configuration Methods
+### Configuration
 
-Nomploy provides two methods for creating Docker Compose configurations:
-
-- **Docker Compose**: Ideal for standard Docker Compose configurations.
-- **Stack**: Geared towards orchestrating applications using Docker Swarm. Note that some Docker Compose features, such as `build`, are not available in this mode.
+Write a standard `docker-compose.yml` and Nomploy runs it on your infrastructure. Configure the source of your code, the build, environment, domains, volumes and deployments through the UI.
 
 ### General
 
@@ -66,15 +63,6 @@ We provide a webhook so that you can trigger your own deployments by pushing to 
 This section provides advanced configuration options for experienced users. It includes tools for custom commands within the container and volumes.
 
 - **Command**: Nomploy has a defined command to run the Docker Compose file, ensuring complete control through the UI. However, you can override it with a custom command. Note that the custom command fully replaces the default one (it does not append to it), so if you only need extra flags like `--force-recreate`, you must write the full command based on the default shown in the UI. The command always starts with `docker`, so a custom command like `compose -p <app-name> -f <compose-path> up -d --build --remove-orphans --force-recreate` will run as `docker compose ...`.
-  
-  <Callout type="info" title="Using Private Registries with Docker Stack">
-  If you're deploying with **Docker Stack** (Docker Swarm mode) using **replicas** and a **private registry**, you need to add the `--with-registry-auth` flag to ensure that registry credentials are properly distributed to all nodes in your swarm.
-  
-  Without this flag, worker nodes may fail to pull images from private registries, resulting in authentication errors like "no such image" or "docker authentication failed".
-  
-  This flag ensures that Docker shares the registry credentials with all swarm nodes during deployment, enabling them to authenticate and pull images from your private registry (GitHub Container Registry, Docker Hub private repos, etc.).
-  </Callout>
-
 - **Volumes**: To ensure data persistence across deployments, configure storage volumes for your application.
 
 <ImageZoom

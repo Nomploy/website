@@ -190,10 +190,6 @@ networks:
 
 Now, let's add Traefik labels to route domains to our services. We'll focus on the frontend and backend services:
 
-<Callout type="warn">
-  **Important for Docker Stack**: If you're using **Docker Stack** (Docker Swarm mode), the Traefik labels must be placed in the `deploy.labels` section instead of directly in the `labels` section. See the Docker Stack example below.
-</Callout>
-
 ```yaml
 version: "3.8"
 
@@ -255,60 +251,6 @@ networks:
 4. `traefik.http.services.<UNIQUE-RULE>.loadbalancer.server.port=3000` Specifies the port your service is using internally.
 
 **Note**: Replace `<UNIQUE-RULE>` with a unique identifier for each service (e.g., frontend-app, backend-app, etc.).
-
-#### Docker Stack Configuration
-
-When using **Docker Stack** (Docker Swarm mode), labels must be placed under the `deploy.labels` section. Additionally, Docker Stack does not support the `build` directive, so you must use pre-built images from a registry:
-
-<Callout type="warn">
-  **Important**: Docker Stack does not support the `build` directive. You must build your images separately and push them to a Docker registry, then reference them using the `image:` directive.
-</Callout>
-
-```yaml
-version: "3.8"
-
-services:
-  frontend:
-    image: your-registry.com/frontend:latest  # Pre-built image from registry
-    volumes:
-      - ./frontend:/app
-    expose:
-      - 3000
-    networks:
-      - nomploy-network
-    deploy:
-      labels:
-        - traefik.enable=true
-        - traefik.http.routers.frontend-app.rule=Host(`frontend.nomploy.com`)
-        - traefik.http.routers.frontend-app.entrypoints=web
-        - traefik.http.services.frontend-app.loadbalancer.server.port=3000
-
-  backend:
-    image: your-registry.com/backend:latest  # Pre-built image from registry
-    volumes:
-      - ./backend:/app
-    expose:
-      - 5000
-    networks:
-      - nomploy-network
-    deploy:
-      labels:
-        - traefik.enable=true
-        - traefik.http.routers.backend-app.rule=Host(`backend.nomploy.com`)
-        - traefik.http.routers.backend-app.entrypoints=web
-        - traefik.http.services.backend-app.loadbalancer.server.port=5000
-
-networks:
-  nomploy-network:
-    external: true
-```
-
-<Callout type="info">
-  The key differences for **Docker Stack** are:
-  1. Labels must be nested under `deploy.labels` (not directly under `labels`)
-  2. You must use `image:` with a pre-built image from a registry (Docker Stack does not support `build`)
-  3. Build your images separately and push them to a registry before deploying with Docker Stack
-</Callout>
 
 ### Important Considerations
 
