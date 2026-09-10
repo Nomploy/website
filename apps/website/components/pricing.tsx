@@ -49,7 +49,7 @@ const pricingFaqs = [
 	{
 		question: "Do you offer a managed cloud?",
 		answer:
-			"Not yet — Nomploy is self-hosted for now. A managed cloud is on our roadmap; in the meantime you can run Nomploy on any server in minutes.",
+			"Not yet — Nomploy is self-hosted for now, but a managed Cloud is on the way: we host the control plane while your apps and data stay on your own servers. Join the waitlist above to hear when it launches; in the meantime you can run Nomploy on any server in minutes.",
 	},
 ];
 
@@ -91,6 +91,14 @@ const enterpriseFeatures = [
 	"White Labeling",
 	"MSA / SLA",
 	"Priority Support and Services",
+];
+
+const cloudFeatures = [
+	"We host the control plane for you",
+	"Connect your own servers over SSH",
+	"Your apps & data stay on your servers",
+	"Automatic updates & monitoring",
+	"Any provider (AWS, GCP, Hetzner…)",
 ];
 
 export function Pricing() {
@@ -139,11 +147,11 @@ export function Pricing() {
 						Source.
 					</h2>
 					<p className="mt-4 text-lg text-muted-foreground">
-						Self-host Nomploy at no cost. Enterprise support when you need it.
+						Self-host Nomploy for free today — managed Cloud is on the way.
 					</p>
 				</div>
 
-				<div className="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+				<div className="mx-auto mt-12 grid max-w-6xl gap-8 md:grid-cols-3">
 					{/* Self-Hosted (Open Source) */}
 					<section
 						className={clsx(
@@ -219,6 +227,47 @@ export function Pricing() {
 								className="w-full"
 							>
 								Contact Sales
+							</Button>
+						</div>
+					</section>
+
+					{/* Cloud — coming soon */}
+					<section
+						className={clsx(
+							"relative flex flex-col rounded-3xl border-2 border-dashed border-border/40 bg-black/40 px-6 py-8",
+						)}
+					>
+						<Badge
+							variant="secondary"
+							className="absolute -top-2.5 left-6 border-primary/30 bg-primary/10 text-primary"
+						>
+							Coming soon
+						</Badge>
+						<h3 className="text-lg font-medium text-white">Cloud</h3>
+						<p className="mt-1 text-sm text-muted-foreground">
+							Fully managed — we run Nomploy for you
+						</p>
+						<div className="mt-4">
+							<span className="text-3xl font-semibold text-primary">Soon</span>
+							<span className="ml-2 text-sm text-muted-foreground">
+								managed · on our roadmap
+							</span>
+						</div>
+						<ul className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
+							{cloudFeatures.map((f) => (
+								<li key={f} className="flex gap-2">
+									<Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+									{f}
+								</li>
+							))}
+						</ul>
+						<div className="mt-auto pt-6">
+							<Button
+								variant="outline"
+								onClick={() => setOpenContactModal(true)}
+								className="w-full"
+							>
+								Join the waitlist
 							</Button>
 						</div>
 					</section>
