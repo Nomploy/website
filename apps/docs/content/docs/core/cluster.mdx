@@ -1,94 +1,122 @@
 ---
 title: Cluster
-description: 'Manage server cluster settings.'
+description: 'Add server and worker nodes to scale Nomploy across multiple machines.'
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 
+When you start with Nomploy, everything runs on a single node — the control
+plane. To add capacity or high availability, you can grow into a multi-node
+cluster: Nomploy joins each node into an encrypted WireGuard mesh and schedules
+workloads across them with Nomad.
+
 <Callout type="info">
-  Not sure whether you need Swarm nodes, remote servers, or a single Nomploy server? See [Deployment Options](/docs/core/deployment-options) for a comparison.
+  Not sure whether you need a cluster, remote servers, or a single Nomploy
+  server? See [Deployment Options](/docs/core/deployment-options) for a
+  comparison.
 </Callout>
 
-When you deploy applications in nomploy, all of them run on the same node. If you wish to run an application on a different server, you can use the cluster feature.
+## Cluster structure
 
-The idea of using clusters is to allow each server to host a different application and, using Traefik along with the load balancer, redirect the traffic from the nomploy server to the servers you choose.
+A Nomploy cluster is made of two node types:
 
-<ImageZoom src="/assets/docker-swarm.png" alt="Docker Swarm Diagram" width={1000} height={600} className="rounded-lg"/>
+- **Servers** — run Nomad **and** Consul **servers** that take part in the raft
+  consensus. They provide high availability of the scheduler.
+- **Workers** — run Nomad and Consul **clients** only. They add workload capacity
+  without joining the raft.
 
-## Server Scaling Methods
+The initial node created by `install.sh` is the **control plane** — a server that
+also hosts the dashboard and database. See [Architecture](/docs/core/architecture)
+for the full control-plane / worker model.
 
-There are two primary ways to scale your server:
+## High availability
 
-1. **Vertical Scaling**: This involves adding more resources to the same nomploy server, such as more CPU and RAM.
-2. **Horizontal Scaling**: This method involves adding multiple servers.
+A cluster becomes highly available once it has **3 or more servers**. Fault
+tolerance is computed as `floor((servers − 1) / 2)` — so 3 servers tolerate 1
+failure. Below 3 servers, the dashboard offers a button to provision the servers
+you need.
 
-### Vertical Scaling
+## Adding nodes
 
-We recommend using vertical scaling to increase the processing capacity of your applications since it's faster and requires less additional configuration.
+Open **Nomad → Cluster** in the dashboard. There are two ways to add a node:
 
-To perform vertical scaling, you need to add more resources to your nomploy server, that is, more CPU and RAM. This is done through your VPS provider.
+### 1. One-click cloud provisioning
 
-It's ideal to first check the vertical scaling limit you can handle. If you find it insufficient, you may consider horizontal scaling.
+Use the **Add node** dropdown to provision a fresh cloud VM automatically:
 
-### Horizontal Scaling
+- **Add worker node** — for extra capacity
+- **Add server node** — to grow high availability
 
-Horizontal scaling usually requires more additional configuration and involves adding more servers (VPS).
+This requires the autoscaler to be configured with your cloud provider
+credentials and SSH keys (under **Nomad → Autoscaling**).
 
-If you choose the second option, we will proceed to configure the different servers.
+### 2. Bring your own server
 
-## Requirements for Cluster Setup
+To join a machine you already registered in Nomploy:
 
-1. nomploy server running (Manager).
-2. Have at least one extra server with the same architecture as the nomploy server.
-3. Have a Docker registry.
+1. Go to **Add existing server**
+2. Select an undeployed registered server
+3. Choose its role — **Worker** or **Server**
+4. Select **Join cluster**
 
-## Configuring the Docker Registry
+Nomploy installs Docker, Consul, Nomad and WireGuard on the node and joins it to
+the mesh, streaming the logs live.
 
-To start, we need to configure a Docker registry, as when deploying an application, you need a registry to deploy and download the application image on the other servers.
+<ImageZoom src="/assets/add-node.png" alt="Add a node" width={800} height={630} className="rounded-lg"/>
 
-### External Registry
+Once joined, the node appears in the cluster table.
 
-You can use any external registry of your choice. Here are some popular options:
+<ImageZoom src="/assets/nodes.png" alt="Cluster nodes" width={800} height={630} className="rounded-lg"/>
 
-1. **Docker Hub** - Free tier available, easy to set up
-2. **GitHub Container Registry (ghcr.io)** - Free for public repositories
-3. **DigitalOcean Container Registry** - Simple setup with good integration
-4. **Amazon ECR** - AWS's managed container registry
-5. **Google Container Registry** - Google Cloud's managed registry
-6. **Azure Container Registry** - Microsoft's managed registry
+## Network requirements
 
-Make sure to enter the correct credentials and test the connection before adding the registry to your cluster configuration.
+For a node to join successfully:
 
-Once configured, the Cluster section will be unlocked.
+- **SSH from the control plane** — the control plane must reach the new node on
+  TCP (port 22 or your custom SSH port) to run the installation.
+- **WireGuard tunnel** — the node must reach the servers on **UDP/51820** to form
+  the overlay mesh.
+- **Internal protocols** — Nomad (4646–4648) and Consul (8300–8302, 8500, 8600)
+  travel encrypted **inside** the WireGuard tunnel, so they don't need to be
+  exposed publicly.
 
-## Understanding Docker Swarm
+<Callout type="warn">
+  A freshly-provisioned cloud node often only allows SSH from your own IP, so the
+  control plane's IP is blocked and the join fails with *"Timed out while waiting
+  for handshake"*. Open the firewall to allow inbound `TCP/<ssh port>` and
+  `UDP/51820` from the control plane's IP — or, better, register the node on a
+  **private network** to avoid exposing it publicly.
+</Callout>
 
-We suggest you read this information to better understand how Docker Swarm works and its orchestration: [Docker Swarm documentation](https://docs.docker.com/engine/swarm/) and its architecture: [How Swarm mode works](https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/).
+## Node operations
 
-## Managing Your Cluster
+### Drain (maintenance)
 
-Now you can do two things:
+Select **Drain (maintenance)** from a node's actions to cordon it against new
+workloads and migrate its existing allocations off (5-minute deadline). Use it
+before a reboot or resize, then **Resume (un-drain)** to schedule onto it again.
 
-1. Add workers.
-2. Add managers.
+### Remove a node
 
-Managers have two functionalities:
+**Remove from cluster** drains the node, stops its services, removes its
+WireGuard peer configuration from the remaining members, wipes its Nomad/Consul
+data, and destroys the cloud VM if Nomploy provisioned it.
 
-1. Manage the cluster state.
-2. Schedule the services.
+- You cannot remove the **last** server.
+- Removing a server that would drop you **below 3** requires confirming **Force
+  (drop below 3 servers)**, which sacrifices HA.
 
-Workers have a single purpose, which is to run the containers, acting under the rules created or established by the manager.
+## Cluster DNS
 
-## Adding Nodes
-
-You can click the 'Add Node' button, which will display the instructions you need to follow to add your servers as nodes and join them to the nomploy manager node.
-
-<ImageZoom src="/assets/add-node.png" alt="Add Node" width={800} height={630} className="rounded-lg"/>
-
-Once you follow the instructions, the workers or managers will appear in the table.
-
-<ImageZoom src="/assets/nodes.png" alt="View Nodes" width={800} height={630} className="rounded-lg"/>
+Each server runs a DNS resolver for Consul service discovery
+(`<service>.service.consul`). The dashboard shows a **Cluster DNS** status,
+checking resolver health across servers every 30 seconds. Servers that joined
+before HA DNS support may need `dnsmasq` backfilling, which the interface will
+flag.
 
 <Callout type="info">
-  **Storage Cleanup Note**: Nomploy does not perform automatic cleanup of storage for workers or other associated nodes that are not the Nomploy server. For automatic cleanup, you can add your node as a remote server and configure cleanups, or create a schedule that performs that cleanup. Additionally, you don't need to perform setup when you only add the node as a remote server. For more information, see the [Remote Servers documentation](/docs/core/remote-servers).
+  **Storage cleanup:** Nomploy does not automatically clean up storage on worker
+  nodes. To reclaim space, add the node as a remote server and configure
+  cleanups, or create a schedule that runs them. See the
+  [Remote Servers](/docs/core/remote-servers) documentation.
 </Callout>
