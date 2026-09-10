@@ -4,82 +4,79 @@ description: "Learn how to uninstall Nomploy on your server"
 ---
 
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from "fumadocs-ui/components/callout";
 
-Follow these steps to completely remove Nomploy and its components from your server.
+Follow these steps to completely remove Nomploy and its components (Nomad,
+Consul, Traefik and WireGuard) from your server.
+
+<Callout type="warn">
+  This permanently removes Nomploy, its control-plane services and all of its
+  data. Back up anything you need first.
+</Callout>
 
 <Steps>
 <Step>
-Remove the docker swarm services created by Nomploy:
+Stop and purge the Nomploy Nomad jobs (the panel and any apps you deployed):
 
    ```bash
-   docker service remove nomploy nomploy-traefik nomploy-postgres nomploy-redis
-   docker container remove -f nomploy-traefik
-   ```
- 
-</Step>
- 
-<Step>
- 
-Remove the docker volumes created by Nomploy:
-
-   ```bash
-   docker volume remove -f nomploy nomploy-postgres nomploy-redis
-   ```
- 
-</Step>
-
-<Step>
- 
-Remove the docker network created by Nomploy:
-
-   ```bash
-   docker network remove -f nomploy-network
-   docker network remove -f ingress
-   ```
- 
-</Step>
-
-<Step>
-
-If you were running a Cluster, then for each worker node, remove all it's services and make it leave the swarm:
-
-   ```bash
-   docker service rm $(docker service ls -q)
-   docker system prune -a -f
-   docker swarm leave
+   nomad job stop -purge nomploy 2>/dev/null || true
+   for job in $(nomad job status -short 2>/dev/null | awk 'NR>1 {print $1}'); do
+     nomad job stop -purge "$job" 2>/dev/null || true
+   done
    ```
 </Step>
 
 <Step>
-
-Make the manager node (where Nomploy is installed) leave the swarm (run it on all manager nodes if you had more than one):
+Remove the Traefik container:
 
    ```bash
-   docker swarm leave --force
+   docker rm -f nomploy-traefik 2>/dev/null || true
    ```
 </Step>
 
 <Step>
-
-Docker cleanup to remove leftovers:
+Stop and disable the control-plane services:
 
    ```bash
-   docker container prune --force
-   docker image prune --all --force
-   docker volume prune --all --force
-   docker builder prune --all --force
+   sudo systemctl disable --now nomad consul nomploy-registry-auth dnsmasq wg-quick@wg0 2>/dev/null || true
+   ```
+</Step>
+
+<Step>
+Bring down the WireGuard overlay:
+
+   ```bash
+   sudo wg-quick down wg0 2>/dev/null || true
+   ```
+</Step>
+
+<Step>
+Remove Nomploy's configuration and data directories:
+
+   ```bash
+   sudo rm -rf /etc/nomploy \
+     /etc/nomad.d /opt/nomad \
+     /etc/consul.d /opt/consul \
+     /etc/consul-template.d \
+     /etc/wireguard/wg0.conf /etc/wireguard/hub_priv /etc/wireguard/hub_pub \
+     /etc/systemd/system/nomploy-registry-auth.service \
+     /etc/systemd/system/consul.service.d
+   sudo systemctl daemon-reload
+   ```
+</Step>
+
+<Step>
+Optional: clean up any leftover Docker resources:
+
+   ```bash
    docker system prune --all --volumes --force
    ```
- 
-</Step>
- 
-<Step>
-
-Remove the nomploy files and directories from your server:
-
-   ```bash
-   sudo rm -rf /etc/nomploy
-   ```
- 
 </Step>
 </Steps>
+
+<Callout type="info">
+  **Multi-node clusters:** run the same steps on **every** node. Worker and
+  extra server nodes don't run the `nomploy` panel job, so you can skip step 1
+  there — stopping the services (step 3) and removing the directories (step 5) is
+  enough to detach and clean them.
+</Callout>
