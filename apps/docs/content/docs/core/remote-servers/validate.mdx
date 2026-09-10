@@ -16,12 +16,11 @@ For **Deployment Servers**, Nomploy requires the following 7 components to be pr
 3. **Nixpacks Installed**: Nixpacks must be installed on the remote server.
 4. **Railpack Installed**: Railpack must be installed on the remote server.
 5. **Buildpacks Installed**: Buildpacks must be installed on the remote server.
-6. **Docker Swarm Initialized**: Docker Swarm must be initialized on the remote server.
-7. **Nomploy Network Created**: A Docker network for Nomploy must be created on the remote server.
-8. **Main Directory Created**: A directory must be created on the remote server to store applications.
+6. **Nomploy Network Created**: A Docker network for Nomploy must be created on the remote server.
+7. **Main Directory Created**: A directory must be created on the remote server to store applications.
 
 <Callout type="info">
-  Deployment servers are used to run and host your applications. They require Docker Swarm and network configuration since they need to run containers and manage deployments.
+  Deployment servers are used to run and host your applications. They require Docker and network configuration since they need to run containers and manage deployments.
 </Callout>
 
 ## Build Servers
@@ -36,7 +35,7 @@ For **Build Servers**, Nomploy only validates the following components:
 6. **Main Directory Created**: A directory must be created on the remote server to store applications.
 
 <Callout type="info">
-  Build servers are dedicated to building and compiling applications. They don't require Docker Swarm or network configuration since they only build images and push them to a registry, without running any containers.
+  Build servers are dedicated to building and compiling applications. They don't require network configuration since they only build images and push them to a registry, without running any containers.
 </Callout>
 
 ## Validation Status

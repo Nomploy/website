@@ -46,17 +46,17 @@ If all three containers are running but you still can't access the interface, it
 ### Debugging Process
 
 #### 1. Check Container Logs
-Start by examining the logs of each container:
+Start by examining the logs of each service. Traefik runs as a plain container:
 
 ```bash
-docker service logs nomploy # Nomploy UI
-docker service logs nomploy-postgres # Postgres
-docker logs nomploy-traefik # Traefik
+docker logs nomploy-traefik   # Traefik
 ```
+
+The Nomploy panel and Postgres run as Nomad jobs — view their logs from the Nomad UI at `http://<your-server-ip>:4646` (or from within the Nomploy panel).
 
 #### 2. Common Database Connection Issue
 
-A common case is when the Postgres container starts after the Nomploy container, preventing Nomploy from connecting to the database. You might see logs like this when running `docker service logs nomploy`:
+A common case is when the Postgres container starts after the Nomploy container, preventing Nomploy from connecting to the database. You might see logs like this in the Nomploy panel's logs:
 
 ```ts
 > nomploy@v0.22.3 start /app
@@ -81,11 +81,9 @@ Main Server Error [Error: getaddrinfo ENOTFOUND nomploy-postgres] {
 }
 ```
 
-To fix this, restart the Nomploy service:
+To fix this, restart the Nomploy panel job — from the Nomad UI, or by re-running the install script (it is idempotent):
 ```bash
-docker service scale nomploy=0
-# Then
-docker service scale nomploy=1
+curl -sSL https://nomploy.com/install.sh | sh -s update
 ```
 
 #### 3. Traefik Configuration Issues
@@ -169,142 +167,20 @@ docker restart nomploy-traefik
 You should now be able to access the user interface.
 
 
-## Recreate nomploy containers
+## Recreate the Nomploy services
 
-In the case you want to recreate the nomploy services, you can do the following:
+If the panel, Postgres or Traefik get into a bad state, the safest way to
+recreate them is to **re-run the install script**. It is idempotent — it
+recreates the Nomad jobs, the Traefik container and the supporting services
+without touching your data volumes.
 
 <Callout type='warn'>
-  **Important:** Before recreating services, make sure you have backups of your data. Recreating services will not delete your volumes, but it's always good to have backups.
-</Callout>
-
-### Recreate Postgres Service
-
-Remove and recreate the nomploy-postgres service:
-
-```bash
-docker service rm nomploy-postgres
-
-# Create a new nomploy-postgres service with Docker Secrets
-docker service create \
-  --name nomploy-postgres \
-  --constraint 'node.role==manager' \
-  --network nomploy-network \
-  --env POSTGRES_USER=nomploy \
-  --env POSTGRES_DB=nomploy \
-  --secret source=nomploy_postgres_password,target=/run/secrets/postgres_password \
-  --env POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
-  --mount type=volume,source=nomploy-postgres,target=/var/lib/postgresql/data \
-  postgres:16
-```
-
-<Callout type='info'>
-  **Note:** Using Docker Secrets is the recommended approach for managing sensitive data like passwords. The secret is encrypted and only available to services that have been granted access to it.
-</Callout>
-
-
-### Recreate Traefik Service
-
-Remove the nomploy-traefik service:
-
-```bash
-# If you are using docker standalone traefik
-docker rm -f nomploy-traefik
-
-docker run -d \
-    --name nomploy-traefik \
-    --restart always \
-    -v /etc/nomploy/traefik/traefik.yml:/etc/traefik/traefik.yml \
-    -v /etc/nomploy/traefik/dynamic:/etc/nomploy/traefik/dynamic \
-    -v /var/run/docker.sock:/var/run/docker.sock:ro \
-    -p 80:80/tcp \
-    -p 443:443/tcp \
-    -p 443:443/udp \
-    traefik:v3.6.7
-
-docker network connect nomploy-network nomploy-traefik
-
-# If you are using docker service traefik
-docker service rm nomploy-traefik
-
-# Create a new nomploy-traefik service
-docker service create \
-  --name nomploy-traefik \
-  --constraint 'node.role==manager' \
-  --network nomploy-network \
-  --mount type=bind,source=/etc/nomploy/traefik/traefik.yml,target=/etc/traefik/traefik.yml \
-  --mount type=bind,source=/etc/nomploy/traefik/dynamic,target=/etc/nomploy/traefik/dynamic \
-  --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-  --publish mode=host,published=443,target=443 \
-  --publish mode=host,published=80,target=80 \
-  --publish mode=host,published=443,target=443,protocol=udp \
-  traefik:v3.6.7
-```
-
-### Recreate Nomploy Service
-
-Remove and recreate the nomploy service:
-
-<Callout type='info'>
-  If the `nomploy_auth_secret` secret doesn't exist on your server (installations older than v0.29.3), create it first: `openssl rand -hex 32 | docker secret create nomploy_auth_secret -`
+  **Important:** Recreating the services won't delete your volumes, but always
+  make sure you have backups of your data first.
 </Callout>
 
 ```bash
-docker service rm nomploy
-
-# Create the nomploy service
-docker service create \
-  --name nomploy \
-  --replicas 1 \
-  --network nomploy-network \
-  --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-  --mount type=bind,source=/etc/nomploy,target=/etc/nomploy \
-  --mount type=volume,source=nomploy,target=/root/.docker \
-  --secret source=nomploy_postgres_password,target=/run/secrets/postgres_password \
-  --secret source=nomploy_auth_secret,target=/run/secrets/nomploy_auth_secret \
-  --publish published=3000,target=3000,mode=host \
-  --update-parallelism 1 \
-  --update-order stop-first \
-  --constraint 'node.role == manager' \
-  -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
-  -e BETTER_AUTH_SECRET_FILE=/run/secrets/nomploy_auth_secret \
-  nomploy/nomploy:latest
+curl -sSL https://nomploy.com/install.sh | sh -s update
 ```
 
-**For Proxmox LXC environments**, add the `--endpoint-mode dnsrr` flag to all services:
-
-```bash
-docker service create \
-  --name nomploy \
-  --replicas 1 \
-  --network nomploy-network \
-  --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-  --mount type=bind,source=/etc/nomploy,target=/etc/nomploy \
-  --mount type=volume,source=nomploy,target=/root/.docker \
-  --secret source=nomploy_postgres_password,target=/run/secrets/postgres_password \
-  --secret source=nomploy_auth_secret,target=/run/secrets/nomploy_auth_secret \
-  --publish published=3000,target=3000,mode=host \
-  --update-parallelism 1 \
-  --update-order stop-first \
-  --constraint 'node.role == manager' \
-  --endpoint-mode dnsrr \
-  -e POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password \
-  -e BETTER_AUTH_SECRET_FILE=/run/secrets/nomploy_auth_secret \
-  nomploy/nomploy:latest
-```
-
-
-
-### Final Notes
-
-While the specific issues may vary, the general troubleshooting approach remains similar to what we've described above, and is the general way we always follow when correcting a problem related to the nomploy instance not starting.. If you still can't access the user interface:
-1. Check that all containers are running properly
-2. Review the logs of each container for specific error messages
-3. Verify all configuration files
-4. Make sure to read the Traefik documentation for detailed configuration options: https://doc.traefik.io/traefik/
-
-
-<Callout title="Nomploy Cloud" type="info">
-If you are using Nomploy Cloud, you don't need to worry about this, our team will handle the infrastructure for you.
-
-Start using Nomploy Cloud https://app.nomploy.com/
-</Callout>
+After it finishes, the panel is available again at `http://<your-server-ip>:3000`.

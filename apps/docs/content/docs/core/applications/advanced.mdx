@@ -3,7 +3,7 @@ title: Advanced
 description: Learn how to use advanced features in your application.
 ---
 
-This section is designed for experienced users who need to manage complex configurations and orchestration settings in Nomploy. The **Advanced** tab is located in your **Applications** settings. Here, you can execute custom commands, manage cluster replicas, select Docker registries, and configure Docker Swarm settings.
+This section is designed for experienced users who need to manage complex configurations in Nomploy. The **Advanced** tab is located in your **Applications** settings. Here, you can execute custom commands, manage cluster replicas, and select Docker registries.
 
 ### Run Command
 
@@ -18,86 +18,6 @@ This section is designed for experienced users who need to manage complex config
 
 #### Important Note
 Always click 'Redeploy' after modifying the cluster settings to apply the changes.
-
-### Swarm Settings
-
-Swarm settings allow for detailed configuration of how containers are orchestrated within the Docker Swarm.
-
-#### Health Check
-
-- **Purpose**: Ensures that containers are running smoothly and restarts them if they fail.
-- **Configuration**: Specify parameters like test commands, intervals, timeouts, start periods, and retries.
-
-#### Restart Policy
-
-Defines how containers should be handled if they exit or fail, the configuration is as follows:
-
-- **Condition**: Specifies under what condition a restart should occur.
-- **Delay**: Sets the time delay between restarts.
-- **Max Attempts**: Limits the number of restart attempts.
-- **Window**: Defines the time window used to evaluate the restart policy.
-
-#### Update Config
-
-Manages the deployment and update process of services in the swarm, the configuration is as follows:
-
-
-- **Parallelism**: Number of containers to update simultaneously.
-- **Delay**: Time between updates.
-- **Failure Action**: Action to take if an update fails.
-- **Monitor**: Duration to monitor a container after an update.
-- **Max Failure Ratio**: The fraction of containers that are allowed to fail before the update is considered a failure.
-- **Order**: The order in which containers are stopped and started during an update.
-
-#### Placement
-
-Controls where containers are placed within the swarm based on specific rules and preferences, the configuration is as follows:
-
-- **Constraints**: Conditions that must be met for a container to be placed on a node.
-- **Preferences**: Preferences for placing containers across nodes to spread load evenly.
-
-### Rollback Config
-
-Manages the rollback process for services when updates fail, the configuration is as follows:
-
-- **Parallelism**: Number of containers to rollback simultaneously.
-- **Delay**: Time between rollbacks.
-- **FailureAction**: Action to take if a rollback fails.
-- **Monitor**: Duration to monitor a container after a rollback.
-- **MaxFailureRatio**: The fraction of containers that are allowed to fail before the rollback is considered a failure.
-- **Order**: The order in which containers are stopped and restarted during a rollback.
-
-### Mode
-
-Defines how services are replicated within the swarm, the configuration is as follows:
-
-- **Replicated**: Services are replicated across nodes as specified.
-- **Replicas**: Number of replicas per service.
-- **Global**: A single instance of the service runs on every node.
-- **ReplicatedJob**: Runs a job in a replicated manner.
-- **MaxConcurrent**: Maximum number of jobs running concurrently.
-- **TotalCompletions**: Total number of times the jobs need to complete.
-
-### Network
-
-Configures network settings for the services, the configuration is as follows:
-
-- **Target**: Specifies the network name.
-- **Aliases**: Provides aliases for the network.
-- **DriverOpts**: Network driver options like MTU size and host binding.
-
-### Labels
-
-Assigns metadata to containers to help identify and organize them, the configuration is as follows:
-
-- **Labels**: Key-value pairs assigned to the service. For example:
-1. `com.example.app.name`: "my-app"
-2. `com.example.app.version`: "1.0.0"
-
-
-### Note
-Modifying Swarm Settings requires careful consideration as incorrect configurations can disrupt the entire container orchestration. Always ensure you understand the implications of the changes you are making.
-
 
 ## Build Server
 
@@ -153,7 +73,7 @@ The maximum amount of memory the container can use. If the container tries to us
 - `2147483648` → Limits container to 2 gigabytes
 
 <Callout type="warn">
-  Values with units are not converted. For example, `1024m` is read as `1024` bytes, which is below Docker's minimum (about 6MB), so the deployment fails with a generic Swarm error.
+  Values with units are not converted. For example, `1024m` is read as `1024` bytes, which is below Docker's minimum (about 6MB), so the deployment fails with a generic error.
 </Callout>
 
 #### Memory Reservation
@@ -200,7 +120,7 @@ The maximum number of CPU cores the container can use. This is a hard limit enfo
 - `4000000000` → Limits to 4 full CPU cores
 
 <Callout type="warn">
-  Decimal core values are not converted. For example, `1.5` is read as `1` nanoCPU, which is far below Docker's minimum (0.001 CPU), so the deployment fails with a generic Swarm error.
+  Decimal core values are not converted. For example, `1.5` is read as `1` nanoCPU, which is far below Docker's minimum (0.001 CPU), so the deployment fails with a generic error.
 </Callout>
 
 #### CPU Reservation
