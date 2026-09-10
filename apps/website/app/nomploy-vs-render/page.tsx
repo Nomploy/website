@@ -123,7 +123,7 @@ const integrationRows = [
 	{
 		category: "Notifications and communication",
 		nomploy:
-			"Slack, Telegram, Discord, Lark, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+			"Slack, Mattermost, Telegram, Discord, Lark, Microsoft Teams, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		render: "Slack, Email, Webhook (Pro plan+)",
 	},
 ];
