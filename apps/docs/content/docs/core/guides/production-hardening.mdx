@@ -23,7 +23,7 @@ Nomploy secures the application layer — authentication, authorization, TLS aut
 | API/CLI | Token-based auth scoped to your organization, optional expiration, `Access to API/CLI` permission | Who gets that permission, setting an expiration on every token, not sharing tokens across integrations |
 | Secrets | Secrets Provider integration (Vault, Infisical, AWS SM, Doppler, Azure KV, Scaleway) — values never stored in the Nomploy DB when referenced this way | Operating the external vault, least-privilege vault credentials, not pasting raw secrets into env vars |
 | Reverse proxy / TLS | Traefik auto-config, automatic Let's Encrypt certs, HTTP→HTTPS redirect on Applications | DNS records, custom Traefik middlewares (HSTS, rate limiting), keeping the Traefik dashboard closed |
-| Docker engine | None — Nomploy is a Docker/Swarm consumer, not a daemon hardener | `daemon.json` config, socket exposure, image provenance, host-level container isolation |
+| Docker engine | None — Nomploy is a Docker/Nomad consumer, not a daemon hardener | `daemon.json` config, socket exposure, image provenance, host-level container isolation |
 | Host OS | Automated security check (OS, UFW, SSH, Fail2Ban) on servers added via Remote Servers | Patching, SSH configuration, firewall rules, non-root operator accounts |
 | Database engine | Internal/external credential toggle, connection UI | Network placement (internal-only vs. exposed), engine patching if self-managed |
 | Backups | Orchestrates backup/restore to your S3 destination | Bucket security, encryption at rest, retention policy, testing restores |
