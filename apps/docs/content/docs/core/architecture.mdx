@@ -1,27 +1,74 @@
 ---
 title: 'Architecture of Nomploy'
-description: 'Overview of the core architecture components of Nomploy.'
+description: 'How Nomploy orchestrates deployments with Nomad, Consul, Traefik and WireGuard.'
 ---
 
-Understanding the architecture of Nomploy is crucial for both deploying and scaling applications. Below is a diagram illustrating the core components:
+import { Callout } from "fumadocs-ui/components/callout";
 
-<ImageZoom src="/assets/architecture.png" alt="Architecture Diagram" width={1000} height={600} className="rounded-lg"/>
+Nomploy is a control layer on top of **HashiCorp Nomad and Consul**. It keeps the
+familiar panel, Git integration, domains, backups and monitoring, but uses Nomad
+for orchestration instead of Docker Swarm — giving you HCL jobspecs, native Nomad
+Packs and multi-node scheduling.
 
+## Core components
 
-## Installation Process
+- **Nomad** — orchestrates every workload (applications, databases, services) as a job.
+- **Consul** — service discovery, health checks and configuration (KV); it feeds routing data to Traefik.
+- **Traefik** — the edge router. It builds routes automatically from the Consul Catalog and issues Let's Encrypt TLS certificates.
+- **Postgres + Redis** — store the panel's state and job queues on the control plane.
+- **WireGuard** — an encrypted `10.10.0.0/24` overlay that binds all nodes together.
+- **The panel** — Nomploy itself runs as a self-updating Nomad job.
 
-When Nomploy is installed, it automatically sets up the following components:
+## Control plane vs. workers
 
-1. **Next.js Application**: Serves as the frontend interface. Utilizing Next.js allows for an integrated server-side rendering experience, streamlining the UI and backend into a single cohesive application.
-2. **PostgreSQL Database**: Acts as the primary database for Nomploy, chosen for its robustness and widespread adoption. It stores all the configuration and operational data.
-3. **Traefik**: Used as a reverse proxy and load balancer. Traefik facilitates dynamic routing and service discovery which simplifies the configuration process by allowing declarative setup through the UI.
+The first node is the **hub** (control plane). It runs:
 
-## Purpose and Functionality
+- The Nomploy panel, backed by Postgres and Redis
+- A Traefik instance
+- The Nomad **server** and Consul **server** (the scheduling layer)
+- A Nomad **client**, so the hub can run workloads too
 
-Each component in the Nomploy architecture plays a vital role:
+This node carries the Nomad meta tag `nomploy_control_plane = "true"`, which pins
+the panel to run only there. **Worker nodes** don't have this tag — they run only
+Nomad and Consul clients and execute the workloads scheduled onto them.
 
-- **Next.js**: Provides a scalable and easy-to-manage frontend framework, encapsulating both server and client-side logic in one platform. This simplifies deployment and development workflows.
-- **PostgreSQL**: Delivers reliable and secure data storage capabilities. Its use within Nomploy ensures consistency and high performance for all database operations.
-- **Traefik**: Enhances Docker integration. Its ability to read from and write to Docker configurations declaratively allows Nomploy to automate and streamline network traffic management and service discovery.
+<Callout type='info'>
+  High availability here means the **scheduler / control plane** survives server
+  failures. The panel and its database currently run on a single node.
+</Callout>
 
-This structure ensures that Nomploy is not only efficient in deploying applications but also robust in handling traffic and data at scale.
+## Networking & service discovery
+
+Every node joins the WireGuard mesh, with addresses assigned by role:
+
+- `.1` — hub (control plane)
+- `.1–.10` — servers
+- `.11+` — workers
+
+Nomad and Consul bind to the overlay interface (`wg0`), so all cluster traffic is
+encrypted. Workers peer directly with every server, so scheduling continues even
+if the hub goes down. Each server also runs a DNS resolver for Consul service
+names (`<service>.service.consul`).
+
+## How deployments flow
+
+Workloads become Nomad jobs through three paths:
+
+1. **Applications & databases** render from the panel's settings.
+2. **Docker Compose** files are translated into equivalent Nomad jobspecs.
+3. **Native Nomad HCL** or **Nomad Packs** deploy verbatim.
+
+Traefik picks up each new service from the Consul Catalog and starts routing
+traffic to it, with automatic HTTPS via Let's Encrypt.
+
+## Self-updates
+
+Because the panel is itself a Nomad job, it performs rolling updates with
+`force_pull`, comparing the running image digest against the registry tag to
+detect new versions.
+
+## Scaling out
+
+To add capacity, join more nodes into the WireGuard mesh as servers or workers.
+See [Cluster](/docs/core/cluster) for multi-node setup and
+[Installation](/docs/core/installation) to get started.

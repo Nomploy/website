@@ -3,17 +3,15 @@ title: Installation
 description: "Get Nomploy up and running on your server within minutes with this easy-to-follow installation guide."
 ---
 
-Follow these steps in order to set up Nomploy locally and deploy it to your server, effectively managing Docker containers and applications:
+import { Callout } from "fumadocs-ui/components/callout";
 
-You need to follow this steps in the same order:
-
-1. [Virtual Private Server (VPS)](#virtual-private-server-vps)
+Nomploy runs on your own Linux server. A single command installs everything it
+needs — Docker, Consul, Nomad, the CNI plugins, Traefik, Postgres, Redis and the
+Nomploy panel — and gets you to a running control plane in minutes.
 
 ## Virtual Private Server (VPS)
 
-There are multiple VPS providers to choose from:
-
-We have tested on the following Linux Distros:
+Nomploy installs on a fresh Linux VPS. We have tested the following distributions:
 
 - Ubuntu 24.04 LTS
 - Ubuntu 23.10
@@ -24,8 +22,8 @@ We have tested on the following Linux Distros:
 - Debian 11
 - Debian 10
 - Fedora 40
-- Centos 9
-- Centos 8
+- CentOS 9
+- CentOS 8
 
 ### Providers
 
@@ -42,120 +40,79 @@ We have tested on the following Linux Distros:
 
 ### Requirements
 
-To ensure a smooth experience with Nomploy, your server should have at least 2GB of RAM and 30GB of disk space. This specification helps to handle the resources consumed by Docker during builds and prevents system freezes.
+The first node runs the panel, Postgres, Redis, Traefik **and** the Nomad/Consul
+server, so it needs a little headroom:
 
-import { Callout } from "fumadocs-ui/components/callout";
+- **At least 2 vCPU and 4 GB RAM** for the first (control-plane) node
+- **At least 30 GB disk** so image builds don't freeze the system
+- **Root or `sudo` access** over SSH
+- A **public IP** (a domain is optional but recommended for HTTPS)
 
 <Callout>
-  **Suggestion:** For cost efficiency with reliable service, we recommend
-  Hetzner as the best value-for-money VPS provider.
+  **Suggestion:** For reliable service at a good price, we recommend Hetzner as
+  the best value-for-money VPS provider.
 </Callout>
 
 ### Port Requirements
 
-Before installing Nomploy, ensure the following ports are available on your server:
+Before installing, make sure these ports are free on your server:
 
-- **Port 80**: HTTP traffic (used by Traefik)
-- **Port 443**: HTTPS traffic (used by Traefik)
-- **Port 3000**: Nomploy web interface
+- **Port 80** — HTTP (Traefik, used for Let's Encrypt challenges)
+- **Port 443** — HTTPS (Traefik)
+- **Port 3000** — Nomploy panel
 
 <Callout type='warn'>
-  **Important:** The installation will fail if any of these ports are already in use. Make sure to stop any services using these ports before running the installation script.
+  The installation will fail if any of these ports are already in use. Stop any
+  service using them before running the install script.
 </Callout>
 
-### Docker
+## Install
 
-Nomploy utilizes Docker, so it is essential to have Docker installed on your server. If Docker is not already installed, Nomploy's installation script will install it automatically. Use the following command to install Nomploy:
-
-
-<div className="flex flex-col gap-10 px-4 bg-green-200 dark:bg-[#031F10] text-green-900 dark:text-green-300 rounded-lg">
-
- Nomploy Cloud:  Use Nomploy directly without worrying about maintenance or updates. Enjoy a hassle-free experience with Nomploy Cloud.  <a href="https://app.nomploy.com/register" className="text-green-600 underline">Sign up</a>
-</div>
+Run this on your server:
 
 ```bash
 curl -sSL https://nomploy.com/install.sh | sh
 ```
 
-See [Manual Installation](/docs/core/manual-installation) if you want to customize your Nomploy installation.
+The script installs Docker, Consul, Nomad and the CNI plugins, then starts
+Traefik, Postgres, Redis and the Nomploy panel as Nomad jobs. It is idempotent —
+safe to re-run.
 
+<Callout type='info'>
+  **Private image:** Nomploy is published to `ghcr.io/nomploy/nomploy`. If you
+  use a private image, either make the package public in your GitHub settings or
+  run `docker login ghcr.io` before installing. You can override the image with
+  the `NOMPLOY_IMAGE` environment variable.
+</Callout>
 
-### Advanced Installation Options
+See [Manual Installation](/docs/core/manual-installation) if you want to
+customize your setup.
 
-The installation script automatically detects and installs the latest stable version from GitHub. However, you can customize the installation using environment variables:
+### Installing a specific version
 
-#### Install Specific Versions
-
-**Install Canary Version (Development):**
-```bash
-export NOMPLOY_VERSION=canary && curl -sSL https://nomploy.com/install.sh | sh
-```
-
-**Install Latest Stable:**
-```bash
-export NOMPLOY_VERSION=latest && curl -sSL https://nomploy.com/install.sh | sh
-```
-
-**Install a Specific Version:**
-
-Every [Nomploy release](https://github.com/Nomploy/nomploy/releases) includes its own `install.sh` as a release asset, which installs exactly that version with the setup it expects. Replace the version tag in the URL with the one you want:
+Every [Nomploy release](https://github.com/Nomploy/nomploy/releases) ships its
+own `install.sh` as a release asset, which installs exactly that version with the
+setup it expects. Replace the tag with the one you want:
 
 ```bash
 curl -sL https://github.com/Nomploy/nomploy/releases/download/v0.26.6/install.sh | sh
 ```
 
 <Callout type='info'>
-  Don't use `NOMPLOY_VERSION` to install a specific version — the main script at `nomploy.com/install.sh` always targets the latest release, so its setup may not be compatible with older versions.
-</Callout>
-
-#### Custom Network Configuration
-
-If you need to customize the Docker Swarm network configuration (useful to avoid CIDR conflicts with cloud provider VPCs):
-
-```bash
-export DOCKER_SWARM_INIT_ARGS="--default-addr-pool 172.20.0.0/16 --default-addr-pool-mask-length 24"
-curl -sSL https://nomploy.com/install.sh | sh
-```
-
-#### Manual Advertise Address
-
-If the script cannot detect your server's IP automatically, or you want the Swarm to use a specific interface (e.g. a VPN/WireGuard IP), specify it manually:
-
-```bash
-curl -sSL https://nomploy.com/install.sh | sudo ADVERTISE_ADDR=192.168.1.100 sh
-```
-
-<Callout type='warn'>
-  If you run the installer with `sudo`, don't rely on `export ADVERTISE_ADDR=...` from your user shell — `sudo` resets the environment, so the variable never reaches the script and it falls back to auto-detection. Pass the variable inline as shown above, or use `sudo -E sh` to preserve your environment. The same applies to `NOMPLOY_VERSION`, `DOCKER_SWARM_INIT_ARGS`, and `ENDPOINT_MODE`.
-</Callout>
-
-#### Kernels Without IPVS Support
-
-Docker Swarm's default service discovery requires IPVS support in the kernel. Some minimal or appliance-style distributions (e.g. ZimaOS and other Buildroot-based images) ship kernels without it. On those systems, install with DNSRR endpoint mode:
-
-```bash
-curl -sSL https://nomploy.com/install.sh | sudo ENDPOINT_MODE=dnsrr sh
-```
-
-See [Services Can't Reach Each Other (Missing IPVS Kernel Modules)](/docs/core/troubleshooting/networking#services-cant-reach-each-other-missing-ipvs-kernel-modules) for how to detect this situation and its trade-offs.
-
-### Proxmox LXC Support
-
-<Callout type='info'>
-  The installation script automatically detects Proxmox LXC containers and applies the necessary configurations (`--endpoint-mode dnsrr`) for compatibility.
+  The main script at `nomploy.com/install.sh` always targets the latest release,
+  so use the per-release `install.sh` above to pin an older version.
 </Callout>
 
 ### Updating Nomploy
 
-To update your Nomploy installation to the latest version:
+Because the panel runs as a self-updating Nomad job, you can update in place:
 
 ```bash
 curl -sSL https://nomploy.com/install.sh | sh -s update
 ```
 
-**Update to Specific Version:**
-
-Use the `install.sh` from that version's [GitHub release](https://github.com/Nomploy/nomploy/releases):
+To update to a specific version, use the `install.sh` from that version's
+[GitHub release](https://github.com/Nomploy/nomploy/releases):
 
 ```bash
 curl -sL https://github.com/Nomploy/nomploy/releases/download/v0.26.6/install.sh | sh -s update
@@ -163,48 +120,43 @@ curl -sL https://github.com/Nomploy/nomploy/releases/download/v0.26.6/install.sh
 
 ## Completing the Setup
 
-After running the installation script, Nomploy and its dependencies will be set up on your server. Here's how to finalize the setup and start using Nomploy:
-
 ### Accessing Nomploy
 
-Open your web browser and navigate to `http://your-ip-from-your-vps:3000`. You will be directed to the initial setup page where you can configure the administrative account for Nomploy.
+Once the script finishes, open `http://<your-server-ip>:3000` in your browser.
+You'll land on the initial setup page, where you create your administrator
+account.
 
 <Callout type='warn'>
-    **Important:** Ensure that your server's firewall allows traffic on port
-    3000 to access the Nomploy web interface.
+  **Important:** Ensure your server's firewall allows traffic on port 3000 to
+  reach the Nomploy panel.
 </Callout>
 
 ### Initial Configuration
 
-1. **Create an Admin Account:** Fill in the necessary details to set up your administrator account. This account will be the admin account for Nomploy.
-
-{" "}
+1. **Create an admin account** — fill in the details to set up your administrator
+   account. This is the primary admin account for Nomploy.
 
 <ImageZoom
   src="/assets/images/setup.png"
   width={1300}
   height={650}
-  alt="home og image"
+  alt="Nomploy initial setup"
   className="rounded-lg"
 />
 
 ### Secure Your Installation
-After setting up your admin account, it's crucial to secure your Nomploy installation by enabling HTTPS.
 
-To configure a domain with SSL/TLS certificates for your Nomploy panel, please refer to the [Domains](/docs/core/domains) section where you'll find detailed instructions for different SSL configurations including Let's Encrypt, Cloudflare, and custom certificates.
+After creating your admin account, secure Nomploy by enabling HTTPS. Add a DNS
+**A record** pointing your domain to the server's IP, then configure the domain
+in **Settings → Server / Domains**. Traefik will automatically request a Let's
+Encrypt certificate.
 
-### Disable access via ip:port (Optional but Recommended) 
-To enhance security, it's advisable to restrict access to Nomploy via the server's IP address and port.
+For detailed SSL options (Let's Encrypt, Cloudflare, custom certificates), see
+the [Domains](/docs/core/domains) section.
 
-<Callout type='warn'>
-    **Important:** Before disabling IP:port access, make sure you have configured a domain with HTTPS working properly. Otherwise, you will lose access to your Nomploy installation. See the [Domains](/docs/core/domains) section to set this up first.
-</Callout>
+### Scaling out
 
-Once you have verified that your domain is working correctly, you can disable IP:port access by running this command on the server:
-
-```bash
-docker service update --publish-rm "published=3000,target=3000,mode=host" nomploy
-```
-
-To further secure your installation, consider reading the [Security recommendations](/docs/core/remote-servers/security#security-recommendations) section.
-
+To add capacity, join more nodes into Nomploy's encrypted WireGuard mesh as
+servers or workers, and Nomad schedules workloads across them. See
+[Cluster](/docs/core/cluster) for multi-node setup, and
+[Architecture](/docs/core/architecture) to understand how the pieces fit together.
