@@ -12,7 +12,6 @@ import {
 	Heart,
 	LayoutGrid,
 	MessagesSquare,
-	Rss,
 } from "lucide-react";
 
 export function NavLinks() {
@@ -41,11 +40,6 @@ export function NavLinks() {
 			text: "Github",
 			url: "https://github.com/nomploy/nomploy",
 			icon: Github,
-		},
-		{
-			text: "Blog",
-			url: "https://nomploy.com/blog",
-			icon: Rss,
 		},
 	];
 

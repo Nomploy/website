@@ -167,7 +167,6 @@ function MobileNavigation() {
 								</p>
 								<MobileNavLink href="/templates">Templates</MobileNavLink>
 								<MobileNavLink href="/comparison">Nomploy vs.</MobileNavLink>
-								<MobileNavLink href="/blog">Blog</MobileNavLink>
 								<MobileNavLink href="/#faqs">FAQ</MobileNavLink>
 								<MobileNavLink href="/jobs">Jobs</MobileNavLink>
 								<hr className="m-2 border-border" />
@@ -388,9 +387,6 @@ export function Header() {
 												</ListItem>
 												<ListItem href="/comparison" title="Nomploy vs.">
 													Compare Nomploy to alternatives
-												</ListItem>
-												<ListItem href="/blog" title="Blog">
-													Latest news and updates
 												</ListItem>
 												<ListItem href="/#faqs" title="FAQ">
 													Frequently asked questions

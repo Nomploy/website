@@ -76,7 +76,6 @@ Key facts:
 
 ## Resources
 
-- [Blog](https://nomploy.com/blog): Deployment guides and product updates
 - [Documentation](https://docs.nomploy.com/docs/core): Full technical documentation
 - [Guides: Cloudflare Tunnels](https://docs.nomploy.com/docs/core/guides/cloudflare-tunnels)
 - [Guides: EC2 Setup](https://docs.nomploy.com/docs/core/guides/ec2-instructions)

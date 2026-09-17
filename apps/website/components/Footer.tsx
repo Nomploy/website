@@ -96,7 +96,6 @@ const footerSections = [
 				href: "/nomploy-vs-vercel",
 				label: "Nomploy vs. Vercel",
 			},
-			{ href: "/blog", label: "Blog" },
 			{
 				href: "https://docs.nomploy.com/docs/core",
 				label: "Documentation",
