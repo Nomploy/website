@@ -12,6 +12,17 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=./apps/w
 
 # Deploy only the nomploy app
 
+# NEXT_PUBLIC_* vars are inlined at build time, so they must be set here.
+# Override with --build-arg NEXT_PUBLIC_APP_URL=... if needed.
+ARG NEXT_PUBLIC_APP_URL=https://nomploy.com
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
+# Optional: set GHOST_URL / GHOST_KEY here too if you want the blog baked
+# into the build (the blog is otherwise empty until these are provided).
+ARG GHOST_URL
+ARG GHOST_KEY
+ENV GHOST_URL=$GHOST_URL
+ENV GHOST_KEY=$GHOST_KEY
+
 ENV NODE_ENV=production
 RUN pnpm --filter=./apps/website run build
 RUN pnpm --filter=./apps/website --prod deploy --legacy /prod/website
