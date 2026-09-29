@@ -1,0 +1,8 @@
+# Nomploy documentation (docs.nomploy.com)
+# Point a Nomploy application at this file for autodeploy from GitHub.
+services:
+  docs:
+    image: ghcr.io/nomploy/docs:latest
+    restart: always
+    ports:
+      - "3000"

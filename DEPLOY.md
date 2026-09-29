@@ -38,28 +38,24 @@ Both are Next.js apps that listen on **port 3000**.
 
 ## Step 2 — Run the containers
 
-Example `docker-compose.yml` for the host (put a TLS-terminating proxy in front,
-e.g. Traefik — which Nomploy already runs):
+There is a separate Compose file per app, so each can be its own Nomploy
+application with **autodeploy from GitHub**:
 
-```yaml
-services:
-  website:
-    image: ghcr.io/nomploy/website:latest
-    restart: always
-    environment:
-      SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/XXX/YYY/ZZZ"
-    ports:
-      - "3000:3000"
+- [`docker-compose.website.yml`](docker-compose.website.yml) — the marketing site
+  (set the real `SLACK_WEBHOOK_URL`)
+- [`docker-compose.docs.yml`](docker-compose.docs.yml) — the docs
 
-  docs:
-    image: ghcr.io/nomploy/docs:latest
-    restart: always
-    ports:
-      - "3001:3000"
+In Nomploy, create one application per file (point each at its Compose path in
+this repo) and enable autodeploy so a push to `main` — which rebuilds the GHCR
+image via CI — redeploys the container. Put a TLS-terminating proxy in front
+(Traefik, which Nomploy already runs).
+
+To run them by hand instead:
+
+```bash
+docker compose -f docker-compose.website.yml up -d
+docker compose -f docker-compose.docs.yml up -d
 ```
-
-Or deploy each image through the Nomploy UI as an application and set the env
-there.
 
 ## Step 3 — DNS & TLS
 

@@ -1,0 +1,11 @@
+# Nomploy marketing website (nomploy.com)
+# Point a Nomploy application at this file for autodeploy from GitHub.
+services:
+  website:
+    image: ghcr.io/nomploy/website:latest
+    restart: always
+    environment:
+      # Contact form -> Slack. Replace with your real incoming webhook URL.
+      SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/XXX/YYY/ZZZ"
+    ports:
+      - "3000:3000"
