@@ -37,6 +37,20 @@ export const metadata: Metadata = {
 export default function Layout({ children }: LayoutProps<"/">) {
 	return (
 		<html lang="en" className={inter.className} suppressHydrationWarning>
+			<head>
+				{/* Privacy-friendly analytics by Plausible */}
+				<script
+					defer
+					src="https://plausible.pipoline.com/js/pa-AEDASVCEVtgSEBSKCf2Ls.js"
+				/>
+				<script
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: Plausible init snippet
+					dangerouslySetInnerHTML={{
+						__html:
+							"window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()",
+					}}
+				/>
+			</head>
 			<body className="flex flex-col min-h-screen">
 				<GoogleAnalytics gaId="G-HZ71HG38HN" />
 				<OpenPanelComponent

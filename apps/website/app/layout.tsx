@@ -69,6 +69,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 					defer
 					src="//js-eu1.hs-scripts.com/147033433.js"
 				/>
+				{/* Privacy-friendly analytics by Plausible */}
+				<script
+					defer
+					src="https://plausible.pipoline.com/js/pa-AFG0LoWw-nu59jWdJiGWm.js"
+				/>
+				<script
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: Plausible init snippet
+					dangerouslySetInnerHTML={{
+						__html:
+							"window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()",
+					}}
+				/>
 			</head>
 			<body>
 				<GoogleAnalytics gaId="G-0RTZ5EPB26" />

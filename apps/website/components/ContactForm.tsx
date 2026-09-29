@@ -43,6 +43,7 @@ export function ContactForm({
 }: ContactFormProps) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [submitError, setSubmitError] = useState<string | null>(null);
 	const [formData, setFormData] = useState<ContactFormData>({
 		inquiryType: defaultInquiryType || "",
 		deploymentType: "",
@@ -112,6 +113,7 @@ export function ContactForm({
 		}
 
 		setIsSubmitting(true);
+		setSubmitError(null);
 
 		try {
 			const response = await fetch("/api/contact", {
@@ -146,11 +148,24 @@ export function ContactForm({
 					onSuccess();
 				}
 			} else {
-				throw new Error("Failed to submit form");
+				let message =
+					"Something went wrong sending your message. Please try again.";
+				if (response.status >= 500) {
+					message =
+						"We couldn't send your message right now. Please email us directly at contact@nomploy.com.";
+				} else {
+					try {
+						const data = await response.json();
+						if (data?.error) message = data.error;
+					} catch {}
+				}
+				setSubmitError(message);
 			}
 		} catch (error) {
 			console.error("Error submitting form:", error);
-			alert("There was an error sending your message. Please try again.");
+			setSubmitError(
+				"We couldn't reach the server. Please check your connection and try again, or email us at contact@nomploy.com.",
+			);
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -456,6 +471,15 @@ export function ContactForm({
 					<p className="text-sm text-red-600">{errors.message}</p>
 				)}
 			</div>
+
+			{submitError && (
+				<div
+					role="alert"
+					className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400"
+				>
+					{submitError}
+				</div>
+			)}
 
 			<div className="flex justify-end gap-2">
 				{showCancelButton && onCancel && (
