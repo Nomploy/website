@@ -233,10 +233,10 @@ const faqs = [
 		answer: (
 			<p>
 				Nomploy runs on any Linux server—a VPS from any cloud provider, bare
-				metal, or even a Raspberry Pi for testing. It uses Docker Swarm for
-				container orchestration and Traefik as a reverse proxy, so you get load
-				balancing, SSL, and routing out of the box without managing those layers
-				yourself.
+				metal, or even a Raspberry Pi for testing. It uses Nomad for container
+				orchestration and Traefik (via the Consul Catalog) as a reverse proxy, so
+				you get high-availability load balancing, SSL, and routing out of the box
+				without managing those layers yourself.
 			</p>
 		),
 	},

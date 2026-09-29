@@ -1,7 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
 import {
-	IconActivity,
 	IconCloud,
 	IconDatabase,
 	IconEaseInOut,
@@ -11,7 +10,16 @@ import {
 	IconTerminal2,
 	IconUsers,
 } from "@tabler/icons-react";
-import { Layers, Lock, UnlockIcon } from "lucide-react";
+import {
+	Boxes,
+	Cpu,
+	Layers,
+	LineChart,
+	Network,
+	Repeat,
+	Scaling,
+	UnlockIcon,
+} from "lucide-react";
 
 export function FirstFeaturesSection() {
 	const features = [
@@ -52,10 +60,40 @@ export function FirstFeaturesSection() {
 			icon: <IconTerminal />,
 		},
 		{
-			title: "Docker Swarm Clusters",
+			title: "Multi-node Clusters",
 			description:
-				"Scale your deployments seamlessly with built-in Docker Swarm support for robust, multi-node applications.",
-			icon: <IconUsers />,
+				"Scale across multiple servers with a Nomad + Consul cluster joined over an encrypted WireGuard mesh — no manual orchestration.",
+			icon: <Boxes />,
+		},
+		{
+			title: "Autoscaling",
+			description:
+				"Automatically scale services up and down, and add or drain cluster nodes on demand as load changes.",
+			icon: <Scaling />,
+		},
+		{
+			title: "HA Load Balancing",
+			description:
+				"Highly available ingress with Traefik and the Consul Catalog, automatically routing around failed nodes with Let's Encrypt TLS.",
+			icon: <Network />,
+		},
+		{
+			title: "Monitoring, Alarms & Graphs",
+			description:
+				"Real-time CPU, memory, disk and network graphs across every node, with alerts when your thresholds are crossed.",
+			icon: <LineChart />,
+		},
+		{
+			title: "GPU Scheduling",
+			description:
+				"Schedule GPU workloads across your cluster for AI and ML deployments, powered by Nomad device plugins.",
+			icon: <Cpu />,
+		},
+		{
+			title: "Zero-downtime Deploys",
+			description:
+				"Health-check-gated rollouts shift traffic to a new version only once it reports healthy — no dropped requests.",
+			icon: <Repeat />,
 		},
 		{
 			title: "Open Source Templates",
@@ -64,22 +102,16 @@ export function FirstFeaturesSection() {
 			icon: <IconTemplate />,
 		},
 		{
-			title: "No Vendor Lock-In",
-			description:
-				"Experience complete freedom to modify, scale, and customize Nomploy to suit your specific needs.",
-			icon: <UnlockIcon />,
-		},
-		{
-			title: "Real-time Monitoring & Alerts",
-			description:
-				"Monitor CPU, memory, and network usage in real-time across your deployments for full visibility.",
-			icon: <IconActivity />,
-		},
-		{
 			title: "AI-assisted deployments",
 			description:
 				"Connect AI tools to Nomploy via MCP, or deploy AI-built apps in a governed sandbox with SSO and multitenancy.",
 			icon: <IconTerminal2 />,
+		},
+		{
+			title: "No Vendor Lock-In",
+			description:
+				"Experience complete freedom to modify, scale, and customize Nomploy to suit your specific needs.",
+			icon: <UnlockIcon />,
 		},
 		{
 			title: "Self-hosted & Open Source",
@@ -94,9 +126,9 @@ export function FirstFeaturesSection() {
 				Powerful Deployment Tailored to You
 			</h2>
 			<p className="mt-4 text-center text-lg  tracking-tight text-muted-foreground">
-				Unlock seamless multi-server deployments, advanced user control, and
-				flexible database management—all with Nomploy’s developer-focused
-				features.
+				Autoscaling clusters, highly available load balancing, and real-time
+				monitoring with alerts and graphs—all with Nomploy’s developer-focused,
+				self-hosted platform.
 			</p>
 			<div className="relative z-10 mx-auto mt-10 grid  max-w-7xl grid-cols-1 py-10 max-sm:mx-0 max-sm:w-full max-sm:p-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{features.map((feature, index) => (
@@ -122,9 +154,8 @@ const Feature = ({
 		<div
 			className={cn(
 				"group/feature relative flex  flex-col border-neutral-800 py-10 lg:border-r",
-				(index === 0 || index === 4 || index === 8) &&
-					"dark:border-neutral-800 lg:border-l",
-				(index < 4 || index < 8) && "dark:border-neutral-800 lg:border-b",
+				index % 4 === 0 && "dark:border-neutral-800 lg:border-l",
+				index < 12 && "dark:border-neutral-800 lg:border-b",
 			)}
 		>
 			{index < 4 && (

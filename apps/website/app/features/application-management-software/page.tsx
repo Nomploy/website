@@ -51,7 +51,7 @@ const coreFeatures = [
 		icon: RotateCcw,
 		title: "Rollback in seconds",
 		description:
-			"Recover fast when a release goes wrong. Nomploy supports Docker Swarm automatic rollback when health checks fail, as well as registry-based rollback to any previous deployment version when a Docker registry is configured.",
+			"Recover fast when a release goes wrong. Nomploy supports registry-based rollback to any previous deployment version, plus automatic rollback when a new release fails its health checks.",
 	},
 	{
 		icon: Clock,
@@ -99,7 +99,7 @@ const controlFeatures = [
 		icon: Network,
 		title: "Cluster and scaling settings",
 		description:
-			"Configure replica counts and Docker Swarm settings to scale business applications across nodes without reworking your infrastructure.",
+			"Configure replica counts and autoscaling to scale business applications across nodes without reworking your infrastructure.",
 	},
 	{
 		icon: Terminal,

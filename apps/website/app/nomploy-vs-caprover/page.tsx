@@ -43,7 +43,9 @@ const featureComparisonRows: FeatureRow[] = [
 	{ feature: "Custom domain management", nomploy: true, caprover: true },
 	// Infrastructure
 	{ feature: "Multi-server deployment", nomploy: true, caprover: "limited", section: "Infrastructure" },
-	{ feature: "Docker Swarm clustering", nomploy: true, caprover: true },
+	{ feature: "Multi-node clustering", nomploy: true, caprover: true },
+	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, caprover: false },
+	{ feature: "High-availability load balancing", nomploy: true, caprover: false },
 	{ feature: "Scheduled database backups (S3)", nomploy: true, caprover: false },
 	{ feature: "Back up arbitrary Docker volumes", nomploy: true, caprover: false },
 	// Monitoring & Alerts

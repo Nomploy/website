@@ -42,7 +42,9 @@ const featureComparisonRows: FeatureRow[] = [
 	{ feature: "Custom domain management", nomploy: true, portainer: false },
 	// Infrastructure
 	{ feature: "Multi-server support", nomploy: true, portainer: true, section: "Infrastructure" },
-	{ feature: "Docker Swarm clustering", nomploy: true, portainer: true },
+	{ feature: "Multi-node clustering", nomploy: true, portainer: true },
+	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, portainer: false },
+	{ feature: "High-availability load balancing", nomploy: true, portainer: false },
 	{ feature: "Kubernetes support", nomploy: false, portainer: true },
 	// Configuration & Services
 	{ feature: "Real-time monitoring (CPU, RAM, disk)", nomploy: true, portainer: "limited", section: "Configuration & Services" },
