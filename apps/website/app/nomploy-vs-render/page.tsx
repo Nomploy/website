@@ -25,7 +25,6 @@ const featureComparisonRows = [
 	{ feature: "Self-hostable on your own VPS or server", nomploy: true, render: false },
 	{ feature: "Run on any cloud provider via SSH", nomploy: true, render: false },
 	{ feature: "Docker Compose support", nomploy: true, render: false },
-	{ feature: "Docker Stack support", nomploy: true, render: false },
 	{ feature: "Dockerfile and prebuilt image deploys", nomploy: true, render: true },
 	{ feature: "Nixpacks build support", nomploy: true, render: false },
 	{ feature: "Heroku Buildpacks support", nomploy: true, render: true },
@@ -68,7 +67,7 @@ const whyChooseItems = [
 		icon: ContainerIcon,
 		title: "Keep your Docker Compose workflow",
 		description:
-			"Deploy multi-service applications directly from your existing Docker Compose or Docker Stack files. Render has no native Compose support, so teams lose the same architecture they use locally.",
+			"Deploy multi-service applications directly from your existing Docker Compose files. Render has no native Compose support, so teams lose the same architecture they use locally.",
 	},
 	{
 		icon: Archive,

@@ -26,7 +26,6 @@ const featureComparisonRows = [
 	{ feature: "Run on any cloud provider via SSH", nomploy: true, vercel: false },
 	{ feature: "Deploy Docker images and containers", nomploy: true, vercel: false },
 	{ feature: "Docker Compose support", nomploy: true, vercel: false },
-	{ feature: "Docker Stack support", nomploy: true, vercel: false },
 	{ feature: "Persistent filesystem (Docker volumes)", nomploy: true, vercel: false },
 	{ feature: "Persistent disk shared across services", nomploy: true, vercel: false },
 	{ feature: "Named Docker volume backups to S3", nomploy: true, vercel: false },
@@ -67,7 +66,7 @@ const whyChooseItems = [
 		icon: ContainerLucide,
 		title: "Deploy apps with Docker, Compose, and Stack",
 		description:
-			"Nomploy supports Docker, Docker Compose, and Docker Stack, so your containers run exactly as they do locally—no rewriting for a serverless model. Vercel does not support deploying Docker images or running Docker containers.",
+			"Nomploy supports Docker and Docker Compose, so your containers run exactly as they do locally—no rewriting for a serverless model. Vercel does not support deploying Docker images or running Docker containers.",
 	},
 	{
 		icon: Settings,
