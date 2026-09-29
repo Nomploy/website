@@ -1,14 +1,13 @@
 # Nomploy
 
-> Nomploy is a self-hostable Platform as a Service (PaaS) that simplifies the deployment and management of applications and databases. The core product is open source and free to self-host, making it a compelling alternative to platforms like Heroku, Vercel, and Netlify. It is built on Docker and Traefik, and is available as a self-hosted installation or as a managed cloud product. Enterprise features—including SSO, fine-grained RBAC, audit logs, and white labelling—require a commercial licence. Nomploy is designed for individual developers, small teams, and large enterprises alike.
+> Nomploy is a self-hostable Platform as a Service (PaaS) that simplifies the deployment and management of applications and databases. The core product is open source and free to self-host, making it a compelling alternative to platforms like Heroku, Vercel, and Netlify. It is built on Docker, Nomad and Consul with Traefik for ingress, and is available as a self-hosted installation (a managed cloud is on the roadmap). Enterprise features—including SSO, fine-grained RBAC, audit logs, and white labelling—require a commercial licence. Nomploy is designed for individual developers, small teams, and large enterprises alike.
 
-Nomploy lets teams deploy any application—using Nixpacks, Heroku Buildpacks, or a custom Dockerfile—alongside databases and Docker Compose stacks, across single or multiple servers. It supports Docker Swarm for clustering, real-time monitoring, automated backups, and granular role-based access control. AI-assisted deployments are supported via an MCP (Model Context Protocol) server, enabling AI agents and tools to interact with Nomploy directly.
+Nomploy lets teams deploy any application—using Nixpacks, Heroku Buildpacks, or a custom Dockerfile—alongside databases and Docker Compose stacks, across single or multiple servers. It supports multi-node clustering (Nomad + Consul), autoscaling, high-availability load balancing, real-time monitoring with alerts, automated backups, and granular role-based access control. AI-assisted deployments are supported via an MCP (Model Context Protocol) server, enabling AI agents and tools to interact with Nomploy directly.
 
 Key facts:
-- Core product is open source (GitHub: github.com/nomploy/nomploy) with 26,000+ stars and 200+ contributors; enterprise features require a commercial licence
-- Over 6 million DockerHub downloads
+- Core product is open source (GitHub: github.com/nomploy/nomploy) and free to self-host; enterprise features require a commercial licence
 - Supports MySQL, PostgreSQL, MongoDB, MariaDB, and Redis with built-in backup management
-- Multi-server and Docker Swarm cluster support with zero-configuration setup
+- Multi-node cluster support (Nomad + Consul over a WireGuard mesh) with autoscaling and high-availability load balancing
 - Enterprise features include SSO/SAML (Okta, Azure), fine-grained RBAC, audit logs, and white labelling
 - One-click templates for popular tools including Supabase, Cal.com, and PocketBase
 - Full REST API, CLI access, and Swagger documentation
@@ -28,7 +27,7 @@ Key facts:
 - [Environment Variables](https://docs.nomploy.com/docs/core/variables): Manage environment variables across services
 - [Backups](https://docs.nomploy.com/docs/core/backups): Volume and database backup configuration
 - [Remote Servers](https://docs.nomploy.com/docs/core/remote-servers): Multi-server deployment setup
-- [Cluster (Docker Swarm)](https://docs.nomploy.com/docs/core/cluster): Scale with Docker Swarm
+- [Cluster (Multi-node)](https://docs.nomploy.com/docs/core/cluster): Scale across multiple servers with Nomad + Consul
 - [Auto Deploy](https://docs.nomploy.com/docs/core/auto-deploy): Trigger deployments automatically via webhooks
 - [Schedule Jobs](https://docs.nomploy.com/docs/core/schedule-jobs): Scheduled tasks and cron jobs
 - [AI Assistant](https://docs.nomploy.com/docs/core/ai): AI-assisted deployment and MCP integration
