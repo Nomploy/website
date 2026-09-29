@@ -46,6 +46,8 @@ const featureComparisonRows: FeatureRow[] = [
 	{ feature: "Multi-node clustering", nomploy: true, caprover: true },
 	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, caprover: false },
 	{ feature: "High-availability load balancing", nomploy: true, caprover: false },
+	{ feature: "GPU scheduling", nomploy: true, caprover: false },
+	{ feature: "Zero-downtime deploys", nomploy: true, caprover: true },
 	{ feature: "Scheduled database backups (S3)", nomploy: true, caprover: false },
 	{ feature: "Back up arbitrary Docker volumes", nomploy: true, caprover: false },
 	// Monitoring & Alerts

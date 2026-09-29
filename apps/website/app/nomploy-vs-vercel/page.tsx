@@ -46,6 +46,8 @@ const featureComparisonRows = [
 	{ feature: "Multi-node clustering", nomploy: true, vercel: false },
 	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, vercel: true },
 	{ feature: "High-availability load balancing", nomploy: true, vercel: true },
+	{ feature: "GPU scheduling", nomploy: true, vercel: false },
+	{ feature: "Zero-downtime deploys", nomploy: true, vercel: true },
 	{ feature: "One-command installation", nomploy: true, vercel: false },
 	{ feature: "Scheduled jobs (cron)", nomploy: true, vercel: true },
 	{ feature: "Built-in monitoring metrics (CPU, RAM, Disk)", nomploy: true, vercel: false },

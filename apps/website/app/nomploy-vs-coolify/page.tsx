@@ -34,6 +34,8 @@ const featureComparisonRows = [
 	{ feature: "Multi-node clustering", nomploy: true, coolify: "limited" },
 	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, coolify: false },
 	{ feature: "High-availability load balancing", nomploy: true, coolify: false },
+	{ feature: "GPU scheduling", nomploy: true, coolify: false },
+	{ feature: "Zero-downtime deploys", nomploy: true, coolify: true },
 	{ feature: "Cron jobs inside containers", nomploy: true, coolify: true },
 	{ feature: "Cron jobs on your host machine", nomploy: true, coolify: false },
 	{ feature: "Monitoring metrics (CPU, RAM, Disk)", nomploy: true, coolify: "limited" },

@@ -39,6 +39,8 @@ const featureComparisonRows = [
 	{ feature: "Multi-node clustering", nomploy: true, render: false },
 	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, render: true },
 	{ feature: "High-availability load balancing", nomploy: true, render: true },
+	{ feature: "GPU scheduling", nomploy: true, render: "limited" },
+	{ feature: "Zero-downtime deploys", nomploy: true, render: true },
 	{ feature: "One-command installation", nomploy: true, render: false },
 	{ feature: "Scheduled jobs (cron)", nomploy: true, render: true },
 	{ feature: "Background workers", nomploy: true, render: true },

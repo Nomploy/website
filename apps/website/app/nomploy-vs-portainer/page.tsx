@@ -45,6 +45,8 @@ const featureComparisonRows: FeatureRow[] = [
 	{ feature: "Multi-node clustering", nomploy: true, portainer: true },
 	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, portainer: false },
 	{ feature: "High-availability load balancing", nomploy: true, portainer: false },
+	{ feature: "GPU scheduling", nomploy: true, portainer: false },
+	{ feature: "Zero-downtime deploys", nomploy: true, portainer: false },
 	{ feature: "Kubernetes support", nomploy: false, portainer: true },
 	// Configuration & Services
 	{ feature: "Real-time monitoring (CPU, RAM, disk)", nomploy: true, portainer: "limited", section: "Configuration & Services" },
