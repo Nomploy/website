@@ -7,35 +7,25 @@ import { Grid } from "@/components/stats";
 
 const statsValues = {
 	githubStars: 26000,
-	dockerDownloads: 6500000,
 	contributors: 200,
 };
 
 export function ComparisonStats() {
 	const [githubStars, setGithubStars] = useState(statsValues.githubStars);
-	const [dockerDownloads, setDockerDownloads] = useState(
-		statsValues.dockerDownloads,
-	);
 	const [contributors, setContributors] = useState(
 		statsValues.contributors,
 	);
 
 	useEffect(() => {
 		const fetchStats = async () => {
-			const [starsRes, dockerRes, contribRes] = await Promise.allSettled([
+			const [starsRes, contribRes] = await Promise.allSettled([
 				fetch("/api/github-stars?owner=nomploy&repo=nomploy"),
-				fetch("/api/docker-stats"),
 				fetch("/api/github-contributors"),
 			]);
 
 			if (starsRes.status === "fulfilled" && starsRes.value.ok) {
 				const data = await starsRes.value.json();
 				setGithubStars(data.stargazers_count);
-			}
-
-			if (dockerRes.status === "fulfilled" && dockerRes.value.ok) {
-				const data = await dockerRes.value.json();
-				setDockerDownloads(data.pull_count);
 			}
 
 			if (contribRes.status === "fulfilled" && contribRes.value.ok) {
@@ -60,7 +50,7 @@ export function ComparisonStats() {
 					</p>
 				</div>
 
-				<div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+				<div className="mx-auto mt-16 grid max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2">
 					<div className="relative overflow-hidden rounded-xl border border-border/50 bg-gradient-to-b from-neutral-900 to-neutral-950 p-6 text-center">
 						<Grid size={20} />
 						<p className="relative z-20 text-sm font-medium text-muted-foreground">
@@ -71,18 +61,6 @@ export function ComparisonStats() {
 						</p>
 						<p className="relative z-20 mt-2 text-sm text-muted-foreground">
 							Trusted by developers worldwide
-						</p>
-					</div>
-					<div className="relative overflow-hidden rounded-xl border border-border/50 bg-gradient-to-b from-neutral-900 to-neutral-950 p-6 text-center">
-						<Grid size={20} />
-						<p className="relative z-20 text-sm font-medium text-muted-foreground">
-							DockerHub Downloads
-						</p>
-						<p className="relative z-20 mt-2 text-3xl font-bold">
-							<NumberTicker value={dockerDownloads} />+
-						</p>
-						<p className="relative z-20 mt-2 text-sm text-muted-foreground">
-							Go-to solution for deployments
 						</p>
 					</div>
 					<div className="relative overflow-hidden rounded-xl border border-border/50 bg-gradient-to-b from-neutral-900 to-neutral-950 p-6 text-center">

@@ -7,35 +7,25 @@ import NumberTicker from "./ui/number-ticker";
 
 const defaultStats = {
 	githubStars: 26000,
-	dockerDownloads: 6500000,
 	contributors: 200,
 };
 
 export function StatsSection() {
 	const [githubStars, setGithubStars] = useState(defaultStats.githubStars);
-	const [dockerDownloads, setDockerDownloads] = useState(
-		defaultStats.dockerDownloads,
-	);
 	const [contributors, setContributors] = useState(
 		defaultStats.contributors,
 	);
 
 	useEffect(() => {
 		const fetchStats = async () => {
-			const [starsRes, dockerRes, contribRes] = await Promise.allSettled([
+			const [starsRes, contribRes] = await Promise.allSettled([
 				fetch("/api/github-stars?owner=nomploy&repo=nomploy"),
-				fetch("/api/docker-stats"),
 				fetch("/api/github-contributors"),
 			]);
 
 			if (starsRes.status === "fulfilled" && starsRes.value.ok) {
 				const data = await starsRes.value.json();
 				setGithubStars(data.stargazers_count);
-			}
-
-			if (dockerRes.status === "fulfilled" && dockerRes.value.ok) {
-				const data = await dockerRes.value.json();
-				setDockerDownloads(data.pull_count);
 			}
 
 			if (contribRes.status === "fulfilled" && contribRes.value.ok) {
@@ -58,8 +48,8 @@ export function StatsSection() {
 					Turns out, Nomploy has actually helped a few people—who knew?
 				</p>
 			</div>
-			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-2 lg:grid-cols-3">
-				{getGrid({ githubStars, dockerDownloads, contributors }).map(
+			<div className="mx-auto grid max-w-4xl grid-cols-1 gap-10 sm:grid-cols-2 md:gap-2">
+				{getGrid({ githubStars, contributors }).map(
 					(feature, index) => (
 						<div
 							key={feature.title}
@@ -85,11 +75,9 @@ export function StatsSection() {
 
 function getGrid({
 	githubStars,
-	dockerDownloads,
 	contributors,
 }: {
 	githubStars: number;
-	dockerDownloads: number;
 	contributors: number;
 }) {
 	return [
@@ -104,27 +92,6 @@ function getGrid({
 			component: (
 				<p className="mt-4 whitespace-pre-wrap text-2xl  !font-semibold  tracking-tighter">
 					<NumberTicker value={githubStars} />+
-				</p>
-			),
-		},
-		{
-			title: "DockerHub Downloads",
-			description: `Downloaded over ${Math.floor(dockerDownloads / 1000000)}M times, Nomploy has become a go-to solution for seamless deployments. Discover our presence on DockerHub.`,
-			icon: (
-				<svg
-					stroke="currentColor"
-					fill="currentColor"
-					strokeWidth="0"
-					viewBox="0 0 640 512"
-					xmlns="http://www.w3.org/2000/svg"
-					className="h-6 w-6 fill-white"
-				>
-					<path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z" />
-				</svg>
-			),
-			component: (
-				<p className="mt-4 whitespace-pre-wrap text-2xl  !font-semibold  tracking-tighter">
-					<NumberTicker value={dockerDownloads} />+
 				</p>
 			),
 		},
