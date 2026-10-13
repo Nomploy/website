@@ -1,0 +1,43 @@
+---
+title: Nomad ACL tokens
+description: "Mint, list and revoke scoped Nomad ACL tokens from the panel for direct Nomad API / CLI / Terraform access — without SSHing into a server."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+Nomploy runs Nomad with **ACLs enabled** — the panel drives the cluster with its
+own management token, so you normally never deal with tokens directly. When you
+want to talk to the Nomad **API / CLI / Terraform yourself**, mint a scoped token
+from **Settings → Nomad Tokens** instead of copying the management token off a
+server.
+
+## Mint a token
+
+**Settings → Nomad Tokens → create.** Give it a name and a scope (the ACL policy
+it's bound to), and the panel returns a token **secret**.
+
+<Callout type="warn">
+The secret is shown **once** at creation — copy it then. Treat it like a password;
+anyone with it can act on the cluster within its scope.
+</Callout>
+
+Use it with the Nomad CLI or API pointed at the cluster:
+
+```bash
+export NOMAD_ADDR=https://<your-nomad-endpoint>
+export NOMAD_TOKEN=<the-secret>
+nomad job status
+```
+
+## List & revoke
+
+The page lists the tokens you've minted (name, scope, accessor — never the secret
+again). **Revoke** invalidates a token immediately cluster-wide, so a leaked or
+stale token is killed from the panel without touching the servers.
+
+## Notes
+
+- Scope tokens to the least privilege the task needs; keep the management token
+  for the panel only.
+- Revoking a token takes effect right away — any CLI/API/automation using it stops
+  working on its next call.
