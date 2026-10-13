@@ -1,0 +1,46 @@
+---
+title: Nomad Pack deploy
+description: "Deploy Nomad Packs from a one-click store gallery or any git registry — a variables form, deep-links, and a post-deploy smoke test, no HCL by hand."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+[Nomad Packs](https://developer.hashicorp.com/nomad/tools/nomad-pack) are
+parameterised, reusable job templates. Nomploy can deploy them as a service type —
+either hand-picked from a git registry, or **one-click from a built-in store
+gallery** — so you get databases, tooling and infra without writing HCL.
+
+## Store gallery (one-click)
+
+The pack **store** lists curated packs from
+[`Nomploy/nomad-packs`](https://github.com/Nomploy/nomad-packs) as cards with
+**category, icon, stars and a health signal**. Pick one, fill its variables, and
+deploy — the store deep-links straight into a pre-configured Create Service flow.
+
+## Deploy a pack manually
+
+Create a **Compose** service and choose type **Nomad Pack**. The Deploy Settings
+card (**Nomad Pack**) has:
+
+- **Pack** — the pack name, e.g. `traefik`, `zot`, or `hello_world`.
+- **Custom registry (optional)** — a git URL. Leave blank for the
+  [community registry](https://github.com/hashicorp/nomad-pack-community-registry);
+  set it to `github.com/Nomploy/nomad-packs` (or your own) and it's added before
+  the run.
+- **Variables (HCL)** — pack variables (`count = 2`, `region = "global"`, …),
+  passed as `--var-file`. Leave empty to use the pack's defaults.
+
+Click **Save**, then **Deploy** to run the pack (`nomad-pack run`). Stop / delete
+tear it down (`nomad-pack destroy`). After a deploy, a **smoke test** reports
+whether the pack's allocations came up healthy.
+
+<Callout type="warn">
+Pack and registry values are validated to a safe character set, since they become
+part of the `nomad-pack` command line.
+</Callout>
+
+## Using your own registry
+
+Point **Custom registry** at any git repo that holds packs. Nomploy adds it
+(`nomad-pack registry add`) before running, so private/internal pack libraries
+work the same way as the community one.

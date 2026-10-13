@@ -1,0 +1,74 @@
+---
+title: Self-hosted registry
+description: "Provision an S3/R2-backed zot registry in one click so build-from-source apps run across a multi-node cluster — or bring your own and register it."
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+On a multi-node cluster, a build-from-source app is built on **one** node but may
+be scheduled on **any** node, so the built image has to be pullable from somewhere
+every node can reach. Nomploy gives you two ways to get there: a **one-click
+self-hosted registry**, or **bring your own** and register it.
+
+## Do you even need one?
+
+Only for **build-from-source on a multi-node cluster**. You can skip a registry
+entirely when:
+
+- **Single-node** — build and run on the same box (the local image store is enough).
+- **You only run pre-built images** (templates like `postgres`, `redis`, or
+  `image: ghcr.io/you/app`) — every node pulls from the public source directly.
+
+## One-click self-hosted (zot + S3/R2)
+
+**Settings → Registry → Self-hosted (zot + S3)** provisions an internal
+[zot](https://zotregistry.dev/) OCI registry whose storage is backed by an
+**S3-compatible bucket** (AWS S3, Cloudflare R2, …). Because the blobs live in
+object storage rather than on one node's disk, the registry is stateless and
+every node can pull from it.
+
+It's fronted by Traefik with a **real TLS certificate** issued via **DNS-01**, so
+there's no per-node `insecure-registries` daemon tweak to make — the cluster
+trusts it out of the box. Build-from-source apps then push here on deploy and run
+cluster-wide.
+
+<Callout type="info">
+You provide an S3/R2 bucket + credentials and a hostname (with a DNS provider
+configured for DNS-01). Nomploy provisions zot, wires the cert, and registers the
+registry so builds use it automatically.
+</Callout>
+
+## Bring your own
+
+Any OCI registry works — your own zot, a plain `registry:2`, GHCR, ECR, Docker
+Hub. Run it however you like (a normal Docker service, or the `zot` pack from
+[`Nomploy/nomad-packs`](https://github.com/Nomploy/nomad-packs)) and register it:
+
+**Settings → Registry → Add Registry:**
+
+- **Registry URL** — e.g. `10.10.0.1:5000` or your registry's host
+- **Username / Password** — push credentials (self-hosted registries can be
+  anonymous-pull, so only push needs them)
+- **Image prefix** — e.g. `apps`
+
+Nomploy then pushes to `<registry>/<prefix>/<image>` from the control plane, and
+every node pulls it.
+
+## How the cluster trusts + uses it
+
+Two things every node needs:
+
+1. **Trust (TLS).** A registry with a real HTTPS cert (like the one-click option)
+   needs nothing. A plain **HTTP** registry needs its address in each node's
+   Docker `insecure-registries` (`/etc/docker/daemon.json` + `systemctl reload
+   docker`) — a per-node daemon setting with no per-job workaround.
+2. **Auth (credentials).** Handled for you: **Add Registry** publishes the merged
+   docker auth to **Consul KV**, and consul-template on every node renders it to
+   `/root/.docker/config.json` (refreshed when you change a registry). Private
+   images pull cluster-wide **without any credentials in job specs** — the Nomad
+   equivalent of Swarm's `--with-registry-auth`.
+
+<Callout type="warn">
+Consul KV is plaintext, gated only by Consul ACLs — fine for a single-tenant
+private (WireGuard) cluster; use Vault for a shared/multi-tenant one.
+</Callout>
