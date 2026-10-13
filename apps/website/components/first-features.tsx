@@ -11,6 +11,7 @@ import {
 	IconUsers,
 } from "@tabler/icons-react";
 import {
+	Activity,
 	Boxes,
 	Cpu,
 	Layers,
@@ -18,6 +19,7 @@ import {
 	Network,
 	Repeat,
 	Scaling,
+	ShieldCheck,
 	UnlockIcon,
 } from "lucide-react";
 
@@ -82,6 +84,18 @@ export function FirstFeaturesSection() {
 			description:
 				"Real-time CPU, memory, disk and network graphs across every node, with alerts when your thresholds are crossed.",
 			icon: <LineChart />,
+		},
+		{
+			title: "Built-in Security (CrowdSec)",
+			description:
+				"Detect malicious traffic from your access logs and block offending IPs at every ingress node — fully local, with an anti-lockout allowlist.",
+			icon: <ShieldCheck />,
+		},
+		{
+			title: "OpenTelemetry Pipeline",
+			description:
+				"Ship cluster metrics and logs to any OTLP backend (SigNoz, Grafana, Datadog) with service auto-discovery from the Consul catalog.",
+			icon: <Activity />,
 		},
 		{
 			title: "GPU Scheduling",
