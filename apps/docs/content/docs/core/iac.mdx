@@ -13,9 +13,9 @@ your services **as code** instead of clicking through the UI.
 - **Repo:** [github.com/Nomploy/pulumi-nomploy](https://github.com/Nomploy/pulumi-nomploy)
 
 <Callout type="info">
-It's a TypeScript **dynamic provider** over the REST API — no separate API layer
-and no Go toolchain. Prototype status: resources are complete and type-checked;
-APIs may still change.
+A Pulumi **dynamic provider** over the REST API — no separate API layer and no Go
+toolchain. Available in **TypeScript** (repo root) and **Python** (`python/`).
+Prototype status: resources are complete and type-checked; APIs may still change.
 </Callout>
 
 ## Resources
@@ -77,6 +77,22 @@ new nomploy.Postgres("db", {
   databasePassword: new pulumi.Config().requireSecret("dbPassword"),
   deploy: true,
 });
+```
+
+## Python
+
+The same resources are available in Python (`python/`, snake_case API):
+
+```python
+import pulumi
+import nomploy_pulumi as nomploy
+
+conn = dict(endpoint="https://your-nomploy-instance.com",
+            api_key=pulumi.Config().require_secret("apiKey"))
+
+project = nomploy.Project("web", name="web", **conn)
+nomploy.Application("api", name="api", environment_id=project.environment_id,
+                    docker_image="ghcr.io/you/api:latest", deploy=True, **conn)
 ```
 
 See the repo's README for the full resource reference, the generated typed API
