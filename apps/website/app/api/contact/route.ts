@@ -57,9 +57,7 @@ export async function POST(request: NextRequest) {
 		// Notify the team on Slack (sales and support go to the same channel)
 		const slackSuccess = await notifySlack(body);
 		if (!slackSuccess) {
-			console.error(
-				`Failed to deliver ${body.inquiryType} inquiry to Slack`,
-			);
+			console.error(`Failed to deliver ${body.inquiryType} inquiry to Slack`);
 			return NextResponse.json(
 				{
 					error:

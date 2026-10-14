@@ -4,7 +4,14 @@
 		{
 			"name": "website",
 			"runtimeExecutable": "pnpm",
-			"runtimeArgs": ["--filter=website", "exec", "next", "dev", "--port", "3020"],
+			"runtimeArgs": [
+				"--filter=website",
+				"exec",
+				"next",
+				"dev",
+				"--port",
+				"3020"
+			],
 			"port": 3020
 		},
 		{

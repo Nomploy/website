@@ -3,7 +3,7 @@
  * Converts slash notation (/tag/operation) to dot notation (/tag.operation)
  * so they match our OpenAPI schema paths and display the real API path.
  */
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const API_DOCS_DIR = join(process.cwd(), "content", "docs", "api");

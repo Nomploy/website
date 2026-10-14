@@ -12,9 +12,7 @@ const defaultStats = {
 
 export function StatsSection() {
 	const [githubStars, setGithubStars] = useState(defaultStats.githubStars);
-	const [contributors, setContributors] = useState(
-		defaultStats.contributors,
-	);
+	const [contributors, setContributors] = useState(defaultStats.contributors);
 
 	useEffect(() => {
 		const fetchStats = async () => {
@@ -49,25 +47,23 @@ export function StatsSection() {
 				</p>
 			</div>
 			<div className="mx-auto grid max-w-4xl grid-cols-1 gap-10 sm:grid-cols-2 md:gap-2">
-				{getGrid({ githubStars, contributors }).map(
-					(feature, index) => (
-						<div
-							key={feature.title}
-							className="relative overflow-hidden rounded-3xl bg-gradient-to-b  from-neutral-900 to-neutral-950 p-6"
-						>
-							<Grid size={20} seed={index + 1} />
+				{getGrid({ githubStars, contributors }).map((feature, index) => (
+					<div
+						key={feature.title}
+						className="relative overflow-hidden rounded-3xl bg-gradient-to-b  from-neutral-900 to-neutral-950 p-6"
+					>
+						<Grid size={20} seed={index + 1} />
 
-							<p className="relative z-20 flex flex-row items-center gap-4 text-base font-bold text-white">
-								{feature.title}
-								{feature.icon}
-							</p>
-							<p className="relative z-20 mt-4 text-base font-normal text-neutral-400">
-								{feature.description}
-							</p>
-							{feature.component}
-						</div>
-					),
-				)}
+						<p className="relative z-20 flex flex-row items-center gap-4 text-base font-bold text-white">
+							{feature.title}
+							{feature.icon}
+						</p>
+						<p className="relative z-20 mt-4 text-base font-normal text-neutral-400">
+							{feature.description}
+						</p>
+						{feature.component}
+					</div>
+				))}
 			</div>
 		</div>
 	);

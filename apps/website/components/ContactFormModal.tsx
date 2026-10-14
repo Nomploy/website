@@ -39,7 +39,9 @@ export function ContactFormModal({
 				</DialogHeader>
 				<div className="mt-4">
 					<ContactForm
-						defaultInquiryType={defaultInquiryType}
+						defaultInquiryType={
+							defaultInquiryType === "other" ? "" : defaultInquiryType
+						}
 						onSuccess={handleSuccess}
 						onCancel={() => onOpenChange(false)}
 						showCancelButton={true}
@@ -50,4 +52,3 @@ export function ContactFormModal({
 		</Dialog>
 	);
 }
-

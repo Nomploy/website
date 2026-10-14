@@ -6,9 +6,7 @@ const baseUrl = "https://docs.nomploy.com";
 
 export function GET() {
 	const pages = source.getPages();
-	const docsPages = pages.filter(
-		(page) => !page.url.startsWith("/docs/api/"),
-	);
+	const docsPages = pages.filter((page) => !page.url.startsWith("/docs/api/"));
 
 	const lines = [
 		"# Nomploy Documentation",

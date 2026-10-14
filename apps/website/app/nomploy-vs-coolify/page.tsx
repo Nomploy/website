@@ -1,11 +1,20 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { Check, X, Zap, Cpu, Plug, LayoutDashboard, Bell, Bot } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+	Bell,
+	Bot,
+	Check,
+	Cpu,
+	LayoutDashboard,
+	Plug,
+	X,
+	Zap,
+} from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
 	title: "Nomploy Vs. Coolify Comparison",
@@ -15,9 +24,21 @@ export const metadata: Metadata = {
 
 const featureComparisonRows = [
 	{ feature: "One-command installation", nomploy: true, coolify: true },
-	{ feature: "Installation feedback and progress logs", nomploy: true, coolify: true },
-	{ feature: "Works with firewall and Tailscale out of the box", nomploy: true, coolify: false },
-	{ feature: "Lightweight CPU usage while idle", nomploy: true, coolify: false },
+	{
+		feature: "Installation feedback and progress logs",
+		nomploy: true,
+		coolify: true,
+	},
+	{
+		feature: "Works with firewall and Tailscale out of the box",
+		nomploy: true,
+		coolify: false,
+	},
+	{
+		feature: "Lightweight CPU usage while idle",
+		nomploy: true,
+		coolify: false,
+	},
 	{ feature: "Low memory usage", nomploy: true, coolify: true },
 	{ feature: "Teams and organizations support", nomploy: true, coolify: true },
 	{ feature: "Projects grouping", nomploy: true, coolify: true },
@@ -25,20 +46,44 @@ const featureComparisonRows = [
 	{ feature: "Built with Next.js / TypeScript", nomploy: true, coolify: false },
 	{ feature: "AI-assisted deployments", nomploy: true, coolify: false },
 	{ feature: "Deploy from custom Docker images", nomploy: true, coolify: true },
-	{ feature: "Database deployment (Postgres, MySQL, Redis, etc.)", nomploy: true, coolify: true },
+	{
+		feature: "Database deployment (Postgres, MySQL, Redis, etc.)",
+		nomploy: true,
+		coolify: true,
+	},
 	{ feature: "Scheduled database backups (S3)", nomploy: true, coolify: true },
-	{ feature: "Back up arbitrary Docker volumes, not just databases", nomploy: true, coolify: false },
-	{ feature: "Preview deployments (review apps)", nomploy: true, coolify: true },
+	{
+		feature: "Back up arbitrary Docker volumes, not just databases",
+		nomploy: true,
+		coolify: false,
+	},
+	{
+		feature: "Preview deployments (review apps)",
+		nomploy: true,
+		coolify: true,
+	},
 	{ feature: "API and CLI tools for automation", nomploy: true, coolify: true },
 	{ feature: "Multi-server deployment", nomploy: true, coolify: true },
 	{ feature: "Multi-node clustering", nomploy: true, coolify: "limited" },
-	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, coolify: false },
-	{ feature: "High-availability load balancing", nomploy: true, coolify: false },
+	{
+		feature: "Autoscaling (services & cluster nodes)",
+		nomploy: true,
+		coolify: false,
+	},
+	{
+		feature: "High-availability load balancing",
+		nomploy: true,
+		coolify: false,
+	},
 	{ feature: "GPU scheduling", nomploy: true, coolify: false },
 	{ feature: "Zero-downtime deploys", nomploy: true, coolify: true },
 	{ feature: "Cron jobs inside containers", nomploy: true, coolify: true },
 	{ feature: "Cron jobs on your host machine", nomploy: true, coolify: false },
-	{ feature: "Monitoring metrics (CPU, RAM, Disk)", nomploy: true, coolify: "limited" },
+	{
+		feature: "Monitoring metrics (CPU, RAM, Disk)",
+		nomploy: true,
+		coolify: "limited",
+	},
 	{ feature: "Metrics enabled by default", nomploy: true, coolify: false },
 	{ feature: "Automated alerts from metrics", nomploy: true, coolify: false },
 ];
@@ -90,12 +135,14 @@ const integrationRows = [
 	},
 	{
 		category: "Build and deployment systems",
-		nomploy: "Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+		nomploy:
+			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
 		coolify: "Docker, Docker Compose, Nixpacks",
 	},
 	{
 		category: "Notifications and communication",
-		nomploy: "Slack, Mattermost, Telegram, Discord, Lark, Microsoft Teams, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+		nomploy:
+			"Slack, Mattermost, Telegram, Discord, Lark, Microsoft Teams, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		coolify: "Slack, Discord, Telegram, Email (SMTP), Pushover, Resend, Teams",
 	},
 ];
@@ -177,8 +224,12 @@ export default function NomployVsCoolifyPage() {
 							<thead>
 								<tr className="border-b border-border">
 									<th className="px-4 py-4 text-left font-semibold">Feature</th>
-									<th className="px-4 py-4 text-center font-semibold">Nomploy</th>
-									<th className="px-4 py-4 text-center font-semibold">Coolify</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Nomploy
+									</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Coolify
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -236,7 +287,9 @@ export default function NomployVsCoolifyPage() {
 									<h3 className="text-xl font-semibold text-white">
 										{item.title}
 									</h3>
-									<p className="mt-3 text-muted-foreground">{item.description}</p>
+									<p className="mt-3 text-muted-foreground">
+										{item.description}
+									</p>
 								</div>
 								<div className="flex-1">
 									{index === 0 ? (
@@ -322,17 +375,16 @@ export default function NomployVsCoolifyPage() {
 						<table className="w-full border-collapse">
 							<thead>
 								<tr className="border-b border-border">
-									<th className="px-4 py-4 text-left font-semibold">Category</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Category
+									</th>
 									<th className="px-4 py-4 text-left font-semibold">Nomploy</th>
 									<th className="px-4 py-4 text-left font-semibold">Coolify</th>
 								</tr>
 							</thead>
 							<tbody>
 								{integrationRows.map((row) => (
-									<tr
-										key={row.category}
-										className="border-b border-border/50"
-									>
+									<tr key={row.category} className="border-b border-border/50">
 										<td className="px-4 py-3 font-medium">{row.category}</td>
 										<td className="px-4 py-3 text-sm text-muted-foreground">
 											{row.nomploy}
@@ -369,7 +421,6 @@ export default function NomployVsCoolifyPage() {
 			</section>
 
 			{/* Thousands have chosen Nomploy - Stats */}
-
 
 			{/* Final CTA */}
 			<CallToAction />

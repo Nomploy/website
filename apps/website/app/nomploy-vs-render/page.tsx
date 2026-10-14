@@ -1,19 +1,19 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import { Button } from "@/components/ui/button";
 import {
-	Check,
-	X,
-	Building2,
-	Container as ContainerIcon,
 	Archive,
-	Gauge,
 	Bot,
+	Building2,
+	Check,
+	Container as ContainerIcon,
+	Gauge,
+	X,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
 	title: "Nomploy Vs. Render: Self-Hosted Vs. Managed PaaS",
@@ -22,28 +22,56 @@ export const metadata: Metadata = {
 };
 
 const featureComparisonRows = [
-	{ feature: "Self-hostable on your own VPS or server", nomploy: true, render: false },
-	{ feature: "Run on any cloud provider via SSH", nomploy: true, render: false },
+	{
+		feature: "Self-hostable on your own VPS or server",
+		nomploy: true,
+		render: false,
+	},
+	{
+		feature: "Run on any cloud provider via SSH",
+		nomploy: true,
+		render: false,
+	},
 	{ feature: "Docker Compose support", nomploy: true, render: false },
-	{ feature: "Dockerfile and prebuilt image deploys", nomploy: true, render: true },
+	{
+		feature: "Dockerfile and prebuilt image deploys",
+		nomploy: true,
+		render: true,
+	},
 	{ feature: "Nixpacks build support", nomploy: true, render: false },
 	{ feature: "Heroku Buildpacks support", nomploy: true, render: true },
 	{ feature: "Paketo Buildpacks support", nomploy: true, render: false },
 	{ feature: "Railpack build support", nomploy: true, render: false },
 	{ feature: "Custom build servers", nomploy: true, render: false },
-	{ feature: "Named Docker volume backups to S3", nomploy: true, render: false },
-	{ feature: "Scheduled database backups to S3 (built-in)", nomploy: true, render: false },
+	{
+		feature: "Named Docker volume backups to S3",
+		nomploy: true,
+		render: false,
+	},
+	{
+		feature: "Scheduled database backups to S3 (built-in)",
+		nomploy: true,
+		render: false,
+	},
 	{ feature: "Preview deployments", nomploy: true, render: true },
 	{ feature: "Multi-server deployment", nomploy: true, render: false },
 	{ feature: "Multi-node clustering", nomploy: true, render: false },
-	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, render: true },
+	{
+		feature: "Autoscaling (services & cluster nodes)",
+		nomploy: true,
+		render: true,
+	},
 	{ feature: "High-availability load balancing", nomploy: true, render: true },
 	{ feature: "GPU scheduling", nomploy: true, render: "limited" },
 	{ feature: "Zero-downtime deploys", nomploy: true, render: true },
 	{ feature: "One-command installation", nomploy: true, render: false },
 	{ feature: "Scheduled jobs (cron)", nomploy: true, render: true },
 	{ feature: "Background workers", nomploy: true, render: true },
-	{ feature: "Built-in monitoring metrics (CPU, RAM, Disk)", nomploy: true, render: false },
+	{
+		feature: "Built-in monitoring metrics (CPU, RAM, Disk)",
+		nomploy: true,
+		render: false,
+	},
 	{ feature: "Automated metric alerts", nomploy: true, render: false },
 	{ feature: "Metrics enabled by default", nomploy: true, render: false },
 	{ feature: "AI-assisted deployments", nomploy: true, render: false },
@@ -52,8 +80,16 @@ const featureComparisonRows = [
 	{ feature: "Fine-grained RBAC", nomploy: true, render: false },
 	{ feature: "SSO / SAML", nomploy: true, render: true },
 	{ feature: "Audit logs", nomploy: true, render: true },
-	{ feature: "Predictable per-server platform pricing", nomploy: true, render: false },
-	{ feature: "Persistent disk shared across services", nomploy: true, render: false },
+	{
+		feature: "Predictable per-server platform pricing",
+		nomploy: true,
+		render: false,
+	},
+	{
+		feature: "Persistent disk shared across services",
+		nomploy: true,
+		render: false,
+	},
 ];
 
 const whyChooseItems = [
@@ -90,7 +126,11 @@ const whyChooseItems = [
 ];
 
 const pricingRows = [
-	{ label: "Pricing model", nomploy: "Per server", render: "Workspace plan + per-service compute" },
+	{
+		label: "Pricing model",
+		nomploy: "Per server",
+		render: "Workspace plan + per-service compute",
+	},
 	{
 		label: "Entry price",
 		nomploy: "Free (open source, self-hosted)",
@@ -101,14 +141,26 @@ const pricingRows = [
 		nomploy: "$15/month (Startup, 3 servers)",
 		render: "$25/month workspace + compute per service",
 	},
-	{ label: "Apps per server or plan", nomploy: "Unlimited", render: "No service cap on paid plans" },
-	{ label: "Databases", nomploy: "Unlimited per server", render: "Billed separately per instance" },
+	{
+		label: "Apps per server or plan",
+		nomploy: "Unlimited",
+		render: "No service cap on paid plans",
+	},
+	{
+		label: "Databases",
+		nomploy: "Unlimited per server",
+		render: "Billed separately per instance",
+	},
 	{
 		label: "Bandwidth",
 		nomploy: "Included (your server's allowance)",
 		render: "25 GB included on Pro; metered above that",
 	},
-	{ label: "Infrastructure", nomploy: "Your own servers (any provider)", render: "Render-managed only" },
+	{
+		label: "Infrastructure",
+		nomploy: "Your own servers (any provider)",
+		render: "Render-managed only",
+	},
 ];
 
 const integrationRows = [
@@ -212,8 +264,12 @@ export default function NomployVsRenderPage() {
 							<thead>
 								<tr className="border-b border-border">
 									<th className="px-4 py-4 text-left font-semibold">Feature</th>
-									<th className="px-4 py-4 text-center font-semibold">Nomploy</th>
-									<th className="px-4 py-4 text-center font-semibold">Render</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Nomploy
+									</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Render
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -269,7 +325,9 @@ export default function NomployVsRenderPage() {
 									<h3 className="text-xl font-semibold text-white">
 										{item.title}
 									</h3>
-									<p className="mt-3 text-muted-foreground">{item.description}</p>
+									<p className="mt-3 text-muted-foreground">
+										{item.description}
+									</p>
 								</div>
 								<div className="flex-1">
 									{index === 0 ? (
@@ -338,10 +396,11 @@ export default function NomployVsRenderPage() {
 							Pricing comparison: platform fees vs. per-service compute
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Nomploy Cloud charges per server, not per service, so your platform
-							cost stays flat as your app count grows. Render charges a workspace
-							plan fee plus a separate compute for every service instance, with
-							managed databases, storage, and bandwidth each billed on top.
+							Nomploy Cloud charges per server, not per service, so your
+							platform cost stays flat as your app count grows. Render charges a
+							workspace plan fee plus a separate compute for every service
+							instance, with managed databases, storage, and bandwidth each
+							billed on top.
 						</p>
 					</div>
 
@@ -387,7 +446,9 @@ export default function NomployVsRenderPage() {
 						<table className="w-full border-collapse">
 							<thead>
 								<tr className="border-b border-border">
-									<th className="px-4 py-4 text-left font-semibold">Category</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Category
+									</th>
 									<th className="px-4 py-4 text-left font-semibold">Nomploy</th>
 									<th className="px-4 py-4 text-left font-semibold">Render</th>
 								</tr>
@@ -411,7 +472,6 @@ export default function NomployVsRenderPage() {
 			</section>
 
 			{/* Thousands have chosen Nomploy - Stats */}
-
 
 			{/* Final CTA */}
 			<CallToAction />
