@@ -10,7 +10,7 @@ export default function PrivacyPage() {
 	return (
 		<div className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-4 py-12">
 			<h1 className="mb-6 text-center text-3xl font-bold">
-				 Nomploy Privacy Policy
+				Nomploy Privacy Policy
 			</h1>
 			<p className="text-center text-sm text-muted-foreground">
 				Nomploy.com · Last Updated: September 2026
@@ -48,8 +48,8 @@ export default function PrivacyPage() {
 						</a>{" "}
 						to measure traffic and usage on nomploy.com and docs.nomploy.com.
 						Google Analytics collects cookies, IP addresses, device and browser
-						information and usage statistics (for example, page views and session
-						duration) to generate anonymised reports. Plausible is a
+						information and usage statistics (for example, page views and
+						session duration) to generate anonymised reports. Plausible is a
 						privacy‑friendly, cookieless analytics tool that we self‑host on our
 						own infrastructure; it collects aggregated usage statistics without
 						using cookies or tracking individuals across sites. This data helps
@@ -80,13 +80,15 @@ export default function PrivacyPage() {
 				</div>
 
 				<div className="flex flex-col gap-2">
-					<h3 className="text-xl font-medium">Contact and account information</h3>
+					<h3 className="text-xl font-medium">
+						Contact and account information
+					</h3>
 					<p>
 						If you contact us, request a demo or register for an account, we may
 						collect your name, email address, company name and any message you
-						include. When you sign up for the hosted platform, we collect account
-						details and log‑in credentials as described in our main privacy
-						policy.
+						include. When you sign up for the hosted platform, we collect
+						account details and log‑in credentials as described in our main
+						privacy policy.
 					</p>
 				</div>
 
@@ -108,18 +110,21 @@ export default function PrivacyPage() {
 						Server metrics and deployment data
 					</h3>
 					<p>
-						If you deploy applications or databases through Nomploy, our platform
-						collects server and container metrics (CPU, memory, disk and network
-						usage), environment variables, deployment logs and backup credentials
-						to operate and maintain your deployments. This data is used strictly
-						to provide the service and is retained as configured by you (see
-						Section 5). No PII data is collected through these processes.
+						If you deploy applications or databases through Nomploy, our
+						platform collects server and container metrics (CPU, memory, disk
+						and network usage), environment variables, deployment logs and
+						backup credentials to operate and maintain your deployments. This
+						data is used strictly to provide the service and is retained as
+						configured by you (see Section 5). No PII data is collected through
+						these processes.
 					</p>
 				</div>
 			</section>
 
 			<section className="flex flex-col gap-4">
-				<h2 className="text-2xl font-semibold">2. How We Use the Information</h2>
+				<h2 className="text-2xl font-semibold">
+					2. How We Use the Information
+				</h2>
 				<p>We use the information we collect to:</p>
 				<ul className="list-inside list-disc space-y-1">
 					<li>
@@ -152,12 +157,12 @@ export default function PrivacyPage() {
 				<p>
 					Nomploy uses cookies and similar technologies for two purposes: (1) to
 					manage user sessions (authentication cookies) and (2) to run analytics
-					tools. Google Analytics sets cookies to distinguish
-					individual browsers and report usage statistics. You can opt out of
-					Google Analytics by installing the Google Analytics opt‑out browser
-					add‑on or by adjusting your browser settings to block cookies. If you
-					disable cookies entirely, some features of the site or app may not
-					function properly.
+					tools. Google Analytics sets cookies to distinguish individual
+					browsers and report usage statistics. You can opt out of Google
+					Analytics by installing the Google Analytics opt‑out browser add‑on or
+					by adjusting your browser settings to block cookies. If you disable
+					cookies entirely, some features of the site or app may not function
+					properly.
 				</p>
 			</section>
 
@@ -173,18 +178,18 @@ export default function PrivacyPage() {
 						documentation analytics.
 					</li>
 					<li>
-						<strong>Stripe</strong> – processes payments for our cloud service; we
-						receive customer and subscription IDs only.
+						<strong>Stripe</strong> – processes payments for our cloud service;
+						we receive customer and subscription IDs only.
 					</li>
 					<li>
 						<strong>ProfitWell</strong> – provides subscription and revenue
 						metrics for internal business analysis.
 					</li>
 					<li>
-						<strong>Version‑control providers and storage services</strong> – when
-						you deploy applications, you may authorise us to access code
-						repositories (e.g., GitHub, GitLab) and backup storage (e.g., AWS S3,
-						Backblaze B2, Cloudflare R2); we securely encrypt and store the
+						<strong>Version‑control providers and storage services</strong> –
+						when you deploy applications, you may authorise us to access code
+						repositories (e.g., GitHub, GitLab) and backup storage (e.g., AWS
+						S3, Backblaze B2, Cloudflare R2); we securely encrypt and store the
 						credentials you provide only to deliver the service.
 					</li>
 				</ul>
@@ -221,10 +226,10 @@ export default function PrivacyPage() {
 				<p>
 					We take reasonable technical and organisational measures to protect
 					your data from loss, misuse and unauthorised access. This includes
-					using encryption for data in transit, secure storage of access keys and
-					credentials and limiting employee access to personal data. However, no
-					method of transmission or storage is 100% secure; please use strong
-					passwords and keep your login credentials confidential.
+					using encryption for data in transit, secure storage of access keys
+					and credentials and limiting employee access to personal data.
+					However, no method of transmission or storage is 100% secure; please
+					use strong passwords and keep your login credentials confidential.
 				</p>
 			</section>
 
@@ -243,8 +248,8 @@ export default function PrivacyPage() {
 					data. Nomploy does not sell your personal data.
 				</p>
 				<p>
-					To exercise these rights or opt out of analytics and marketing cookies,
-					please contact us at{" "}
+					To exercise these rights or opt out of analytics and marketing
+					cookies, please contact us at{" "}
 					<a
 						href="mailto:support@nomploy.com"
 						className="text-blue-500 hover:underline"

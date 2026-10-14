@@ -1,19 +1,19 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import { Button } from "@/components/ui/button";
 import {
-	Check,
-	X,
-	Container as ContainerLucide,
-	Settings,
-	HardDrive,
-	Gauge,
 	Bot,
+	Check,
+	Container as ContainerLucide,
+	Gauge,
+	HardDrive,
+	Settings,
+	X,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
 	title: "Nomploy vs. Vercel: Docker-Native vs. Serverless",
@@ -22,15 +22,47 @@ export const metadata: Metadata = {
 };
 
 const featureComparisonRows = [
-	{ feature: "Self-hostable on your own VPS or server", nomploy: true, vercel: false },
-	{ feature: "Run on any cloud provider via SSH", nomploy: true, vercel: false },
-	{ feature: "Deploy Docker images and containers", nomploy: true, vercel: false },
+	{
+		feature: "Self-hostable on your own VPS or server",
+		nomploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Run on any cloud provider via SSH",
+		nomploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Deploy Docker images and containers",
+		nomploy: true,
+		vercel: false,
+	},
 	{ feature: "Docker Compose support", nomploy: true, vercel: false },
-	{ feature: "Persistent filesystem (Docker volumes)", nomploy: true, vercel: false },
-	{ feature: "Persistent disk shared across services", nomploy: true, vercel: false },
-	{ feature: "Named Docker volume backups to S3", nomploy: true, vercel: false },
-	{ feature: "One-click scheduled database backups to S3", nomploy: true, vercel: false },
-	{ feature: "Long-running processes and background workers", nomploy: true, vercel: false },
+	{
+		feature: "Persistent filesystem (Docker volumes)",
+		nomploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Persistent disk shared across services",
+		nomploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Named Docker volume backups to S3",
+		nomploy: true,
+		vercel: false,
+	},
+	{
+		feature: "One-click scheduled database backups to S3",
+		nomploy: true,
+		vercel: false,
+	},
+	{
+		feature: "Long-running processes and background workers",
+		nomploy: true,
+		vercel: false,
+	},
 	{
 		feature: "WebSocket connections without function duration limits",
 		nomploy: true,
@@ -43,13 +75,21 @@ const featureComparisonRows = [
 	{ feature: "Preview deployments", nomploy: true, vercel: true },
 	{ feature: "Multi-server deployment", nomploy: true, vercel: false },
 	{ feature: "Multi-node clustering", nomploy: true, vercel: false },
-	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, vercel: true },
+	{
+		feature: "Autoscaling (services & cluster nodes)",
+		nomploy: true,
+		vercel: true,
+	},
 	{ feature: "High-availability load balancing", nomploy: true, vercel: true },
 	{ feature: "GPU scheduling", nomploy: true, vercel: false },
 	{ feature: "Zero-downtime deploys", nomploy: true, vercel: true },
 	{ feature: "One-command installation", nomploy: true, vercel: false },
 	{ feature: "Scheduled jobs (cron)", nomploy: true, vercel: true },
-	{ feature: "Built-in monitoring metrics (CPU, RAM, Disk)", nomploy: true, vercel: false },
+	{
+		feature: "Built-in monitoring metrics (CPU, RAM, Disk)",
+		nomploy: true,
+		vercel: false,
+	},
 	{ feature: "Automated metric alerts built in", nomploy: true, vercel: true },
 	{ feature: "AI-assisted deployments", nomploy: true, vercel: true },
 	{ feature: "MCP server support", nomploy: true, vercel: true },
@@ -57,7 +97,11 @@ const featureComparisonRows = [
 	{ feature: "Fine-grained RBAC", nomploy: true, vercel: false },
 	{ feature: "SSO / SAML", nomploy: true, vercel: true },
 	{ feature: "Audit logs", nomploy: true, vercel: true },
-	{ feature: "Predictable per-server platform pricing", nomploy: true, vercel: false },
+	{
+		feature: "Predictable per-server platform pricing",
+		nomploy: true,
+		vercel: false,
+	},
 	{ feature: "No per-seat billing", nomploy: true, vercel: false },
 ];
 
@@ -95,7 +139,11 @@ const whyChooseItems = [
 ];
 
 const pricingRows = [
-	{ label: "Pricing model", nomploy: "Per server", vercel: "Per seat + metered usage" },
+	{
+		label: "Pricing model",
+		nomploy: "Per server",
+		vercel: "Per seat + metered usage",
+	},
 	{
 		label: "Entry price",
 		nomploy: "Free (open source, self-hosted)",
@@ -107,13 +155,21 @@ const pricingRows = [
 		vercel: "$20/month per deploying seat",
 	},
 	{ label: "Apps per plan", nomploy: "Unlimited", vercel: "Unlimited on Pro" },
-	{ label: "Databases", nomploy: "Unlimited per server", vercel: "Not included – third-party add-ons" },
+	{
+		label: "Databases",
+		nomploy: "Unlimited per server",
+		vercel: "Not included – third-party add-ons",
+	},
 	{
 		label: "Bandwidth",
 		nomploy: "Included (your server's allowance)",
 		vercel: "1 TB included on Pro; metered above that",
 	},
-	{ label: "Infrastructure", nomploy: "Your own servers (any provider)", vercel: "Vercel-managed only" },
+	{
+		label: "Infrastructure",
+		nomploy: "Your own servers (any provider)",
+		vercel: "Vercel-managed only",
+	},
 ];
 
 const integrationRows = [
@@ -165,9 +221,9 @@ export default function NomployVsVercelPage() {
 								<h3 className="text-xl font-semibold text-white">Nomploy</h3>
 								<p className="mt-3 text-sm text-muted-foreground">
 									Nomploy is built for full-stack, Docker-native deployment on
-									infrastructure you own. Choose Vercel if your app is
-									primarily frontend or serverless and you want a managed
-									platform optimized for that model.
+									infrastructure you own. Choose Vercel if your app is primarily
+									frontend or serverless and you want a managed platform
+									optimized for that model.
 								</p>
 							</div>
 							<div className="rounded-xl border border-border/50 bg-card p-6 text-left">
@@ -217,8 +273,12 @@ export default function NomployVsVercelPage() {
 							<thead>
 								<tr className="border-b border-border">
 									<th className="px-4 py-4 text-left font-semibold">Feature</th>
-									<th className="px-4 py-4 text-center font-semibold">Nomploy</th>
-									<th className="px-4 py-4 text-center font-semibold">Vercel</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Nomploy
+									</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Vercel
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -274,7 +334,9 @@ export default function NomployVsVercelPage() {
 									<h3 className="text-xl font-semibold text-white">
 										{item.title}
 									</h3>
-									<p className="mt-3 text-muted-foreground">{item.description}</p>
+									<p className="mt-3 text-muted-foreground">
+										{item.description}
+									</p>
 								</div>
 								<div className="flex-1">
 									{index === 0 ? (
@@ -394,7 +456,9 @@ export default function NomployVsVercelPage() {
 						<table className="w-full border-collapse">
 							<thead>
 								<tr className="border-b border-border">
-									<th className="px-4 py-4 text-left font-semibold">Category</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Category
+									</th>
 									<th className="px-4 py-4 text-left font-semibold">Nomploy</th>
 									<th className="px-4 py-4 text-left font-semibold">Vercel</th>
 								</tr>
@@ -418,7 +482,6 @@ export default function NomployVsVercelPage() {
 			</section>
 
 			{/* Thousands have chosen Nomploy - Stats */}
-
 
 			{/* Final CTA */}
 			<CallToAction />

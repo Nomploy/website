@@ -8,26 +8,26 @@ import {
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import {
-	Wallet,
-	Unlock,
-	Lock,
-	Settings2,
-	KeyRound,
-	ScrollText,
-	Shield,
-	LifeBuoy,
-	ServerCog,
-	TerminalSquare,
-	MonitorSmartphone,
-	GitBranch,
+	Bot,
 	CheckCircle2,
 	Cloud,
-	Server,
-	Bot,
 	Cpu,
+	GitBranch,
+	KeyRound,
+	LifeBuoy,
+	Lock,
+	MonitorSmartphone,
+	ScrollText,
+	Server,
+	ServerCog,
+	Settings2,
+	Shield,
+	TerminalSquare,
+	Unlock,
+	Wallet,
 } from "lucide-react";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "The Self-Hosted PaaS Built for Developers",
@@ -234,9 +234,9 @@ const faqs = [
 			<p>
 				Nomploy runs on any Linux server—a VPS from any cloud provider, bare
 				metal, or even a Raspberry Pi for testing. It uses Nomad for container
-				orchestration and Traefik (via the Consul Catalog) as a reverse proxy, so
-				you get high-availability load balancing, SSL, and routing out of the box
-				without managing those layers yourself.
+				orchestration and Traefik (via the Consul Catalog) as a reverse proxy,
+				so you get high-availability load balancing, SSL, and routing out of the
+				box without managing those layers yourself.
 			</p>
 		),
 	},
@@ -283,7 +283,11 @@ export default function SelfHostedPaasPage() {
 								className="rounded-full bg-[#5965F2] hover:bg-[#4A55E0]"
 								asChild
 							>
-								<Link href="/contact" aria-label="Contact Us" className="text-white">
+								<Link
+									href="/contact"
+									aria-label="Contact Us"
+									className="text-white"
+								>
 									Contact Us
 								</Link>
 							</Button>
@@ -353,7 +357,9 @@ export default function SelfHostedPaasPage() {
 						</p>
 						<div className="mt-8">
 							<Button className="rounded-full" asChild>
-								<Link href="/enterprise">Learn more about Nomploy Enterprise</Link>
+								<Link href="/enterprise">
+									Learn more about Nomploy Enterprise
+								</Link>
 							</Button>
 						</div>
 					</div>
@@ -427,9 +433,9 @@ export default function SelfHostedPaasPage() {
 							Should you choose Cloud or Self-Hosted?
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Both are great options. Every key feature available in
-							Self-Hosted is also available in Cloud, and vice versa. The choice
-							comes down to how much you want to manage yourself.
+							Both are great options. Every key feature available in Self-Hosted
+							is also available in Cloud, and vice versa. The choice comes down
+							to how much you want to manage yourself.
 						</p>
 					</div>
 					<div className="mx-auto mt-16 grid max-w-5xl gap-8 sm:grid-cols-2">
@@ -524,9 +530,9 @@ export default function SelfHostedPaasPage() {
 						</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
 							Nomploy is free to self-host and takes just a few commands to
-							install. Follow the setup guide, and
-							you&apos;ll have a fully functional open source PaaS running on
-							your own infrastructure in minutes.
+							install. Follow the setup guide, and you&apos;ll have a fully
+							functional open source PaaS running on your own infrastructure in
+							minutes.
 						</p>
 						<div className="mt-10">
 							<Button className="rounded-full" asChild>

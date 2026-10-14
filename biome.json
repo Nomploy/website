@@ -7,12 +7,33 @@
 			".next/**",
 			"drizzle/**",
 			".docker",
-			"dist"
+			"dist",
+			"apps/docs/public/openapi.json"
 		]
 	},
 	"organizeImports": {
 		"enabled": true
 	},
+	"overrides": [
+		{
+			"include": ["apps/docs/scripts/**"],
+			"linter": {
+				"rules": {
+					"complexity": {
+						"useLiteralKeys": "off",
+						"useOptionalChain": "off"
+					},
+					"performance": {
+						"noDelete": "off"
+					},
+					"style": {
+						"useTemplate": "off",
+						"useNodejsImportProtocol": "off"
+					}
+				}
+			}
+		}
+	],
 	"linter": {
 		"rules": {
 			"security": {

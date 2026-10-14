@@ -1,11 +1,11 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { Check, X, Zap, Bell, Users, LayoutDashboard } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Bell, Check, LayoutDashboard, Users, X, Zap } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
 	title: "Nomploy vs. CapRover Comparison | Nomploy",
@@ -24,39 +24,113 @@ interface FeatureRow {
 
 const featureComparisonRows: FeatureRow[] = [
 	// Setup & Installation
-	{ feature: "One-command installation", nomploy: true, caprover: true, section: "Setup & Installation" },
-	{ feature: "Installation feedback and progress logs", nomploy: true, caprover: false },
-	{ feature: "Works with firewall and Tailscale out of the box", nomploy: true, caprover: false },
-	{ feature: "Lightweight CPU usage while idle", nomploy: true, caprover: false },
-	{ feature: "Built with Next.js / TypeScript", nomploy: true, caprover: false },
+	{
+		feature: "One-command installation",
+		nomploy: true,
+		caprover: true,
+		section: "Setup & Installation",
+	},
+	{
+		feature: "Installation feedback and progress logs",
+		nomploy: true,
+		caprover: false,
+	},
+	{
+		feature: "Works with firewall and Tailscale out of the box",
+		nomploy: true,
+		caprover: false,
+	},
+	{
+		feature: "Lightweight CPU usage while idle",
+		nomploy: true,
+		caprover: false,
+	},
+	{
+		feature: "Built with Next.js / TypeScript",
+		nomploy: true,
+		caprover: false,
+	},
 	// Deployment
-	{ feature: "Deploy from GitHub, GitLab, Bitbucket", nomploy: true, caprover: "limited", section: "Deployment" },
+	{
+		feature: "Deploy from GitHub, GitLab, Bitbucket",
+		nomploy: true,
+		caprover: "limited",
+		section: "Deployment",
+	},
 	{ feature: "Auto-deploy on git push", nomploy: true, caprover: true },
 	{ feature: "Docker Compose support", nomploy: true, caprover: "limited" },
-	{ feature: "Deploy from custom Docker images", nomploy: true, caprover: true },
+	{
+		feature: "Deploy from custom Docker images",
+		nomploy: true,
+		caprover: true,
+	},
 	{ feature: "Nixpacks and Buildpack support", nomploy: true, caprover: false },
-	{ feature: "Preview deployments (review apps)", nomploy: true, caprover: false },
+	{
+		feature: "Preview deployments (review apps)",
+		nomploy: true,
+		caprover: false,
+	},
 	{ feature: "One-click app templates", nomploy: true, caprover: true },
 	// Networking & Domains
-	{ feature: "Built-in reverse proxy (Nomploy: Traefik, CapRover: Nginx)", nomploy: true, caprover: true, section: "Networking & Domains" },
+	{
+		feature: "Built-in reverse proxy (Nomploy: Traefik, CapRover: Nginx)",
+		nomploy: true,
+		caprover: true,
+		section: "Networking & Domains",
+	},
 	{ feature: "Automatic SSL via Let's Encrypt", nomploy: true, caprover: true },
 	{ feature: "Custom domain management", nomploy: true, caprover: true },
 	// Infrastructure
-	{ feature: "Multi-server deployment", nomploy: true, caprover: "limited", section: "Infrastructure" },
+	{
+		feature: "Multi-server deployment",
+		nomploy: true,
+		caprover: "limited",
+		section: "Infrastructure",
+	},
 	{ feature: "Multi-node clustering", nomploy: true, caprover: true },
-	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, caprover: false },
-	{ feature: "High-availability load balancing", nomploy: true, caprover: false },
+	{
+		feature: "Autoscaling (services & cluster nodes)",
+		nomploy: true,
+		caprover: false,
+	},
+	{
+		feature: "High-availability load balancing",
+		nomploy: true,
+		caprover: false,
+	},
 	{ feature: "GPU scheduling", nomploy: true, caprover: false },
 	{ feature: "Zero-downtime deploys", nomploy: true, caprover: true },
-	{ feature: "Scheduled database backups (S3)", nomploy: true, caprover: false },
-	{ feature: "Back up arbitrary Docker volumes", nomploy: true, caprover: false },
+	{
+		feature: "Scheduled database backups (S3)",
+		nomploy: true,
+		caprover: false,
+	},
+	{
+		feature: "Back up arbitrary Docker volumes",
+		nomploy: true,
+		caprover: false,
+	},
 	// Monitoring & Alerts
-	{ feature: "Real-time monitoring (CPU, RAM, disk)", nomploy: true, caprover: false, section: "Monitoring & Alerts" },
+	{
+		feature: "Real-time monitoring (CPU, RAM, disk)",
+		nomploy: true,
+		caprover: false,
+		section: "Monitoring & Alerts",
+	},
 	{ feature: "Metrics enabled by default", nomploy: true, caprover: false },
 	{ feature: "Automated alerts from metrics", nomploy: true, caprover: false },
 	// Teams & Access
-	{ feature: "Teams and multi-user support", nomploy: true, caprover: false, section: "Teams & Access" },
-	{ feature: "Role-based access control (RBAC)", nomploy: true, caprover: false },
+	{
+		feature: "Teams and multi-user support",
+		nomploy: true,
+		caprover: false,
+		section: "Teams & Access",
+	},
+	{
+		feature: "Role-based access control (RBAC)",
+		nomploy: true,
+		caprover: false,
+	},
 	{ feature: "Projects grouping", nomploy: true, caprover: false },
 	{ feature: "API and CLI access", nomploy: true, caprover: true },
 	{ feature: "AI-assisted deployments", nomploy: true, caprover: false },
@@ -113,19 +187,23 @@ const integrationRows = [
 	},
 	{
 		category: "Build and deployment systems",
-		nomploy: "Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+		nomploy:
+			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
 		caprover: "Docker, Captain Definition file",
 	},
 	{
 		category: "Notifications and communication",
-		nomploy: "Slack, Mattermost, Telegram, Discord, Lark, Microsoft Teams, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+		nomploy:
+			"Slack, Mattermost, Telegram, Discord, Lark, Microsoft Teams, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		caprover: "None built-in",
 	},
 ];
 
 function FeatureCell({ value }: { value: FeatureValue }) {
-	if (value === true) return <Check className="mx-auto h-5 w-5 text-green-500" />;
-	if (value === "limited") return <span className="text-xs text-amber-500">Limited</span>;
+	if (value === true)
+		return <Check className="mx-auto h-5 w-5 text-green-500" />;
+	if (value === "limited")
+		return <span className="text-xs text-amber-500">Limited</span>;
 	return <X className="mx-auto h-5 w-5 text-muted-foreground/50" />;
 }
 
@@ -168,8 +246,8 @@ export default function NomployVsCapRoverPage() {
 								<h3 className="text-xl font-semibold text-white">CapRover</h3>
 								<p className="mt-3 text-sm text-muted-foreground">
 									For solo developers who want a simple, Heroku-like PaaS with
-									one-click apps and a straightforward captain dashboard
-									that's easy to get started with—choose CapRover.
+									one-click apps and a straightforward captain dashboard that's
+									easy to get started with—choose CapRover.
 								</p>
 							</div>
 						</div>
@@ -205,15 +283,22 @@ export default function NomployVsCapRoverPage() {
 							<thead>
 								<tr className="border-b border-border">
 									<th className="px-4 py-4 text-left font-semibold">Feature</th>
-									<th className="px-4 py-4 text-center font-semibold">Nomploy</th>
-									<th className="px-4 py-4 text-center font-semibold">CapRover</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Nomploy
+									</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										CapRover
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								{featureComparisonRows.map((row) => (
 									<>
 										{row.section && (
-											<tr key={`section-${row.section}`} className="border-b border-border bg-muted/20">
+											<tr
+												key={`section-${row.section}`}
+												className="border-b border-border bg-muted/20"
+											>
 												<td
 													colSpan={3}
 													className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
@@ -266,7 +351,9 @@ export default function NomployVsCapRoverPage() {
 									<h3 className="text-xl font-semibold text-white">
 										{item.title}
 									</h3>
-									<p className="mt-3 text-muted-foreground">{item.description}</p>
+									<p className="mt-3 text-muted-foreground">
+										{item.description}
+									</p>
 								</div>
 								<div className="flex-1">
 									<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
@@ -302,17 +389,18 @@ export default function NomployVsCapRoverPage() {
 						<table className="w-full border-collapse">
 							<thead>
 								<tr className="border-b border-border">
-									<th className="px-4 py-4 text-left font-semibold">Category</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Category
+									</th>
 									<th className="px-4 py-4 text-left font-semibold">Nomploy</th>
-									<th className="px-4 py-4 text-left font-semibold">CapRover</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										CapRover
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								{integrationRows.map((row) => (
-									<tr
-										key={row.category}
-										className="border-b border-border/50"
-									>
+									<tr key={row.category} className="border-b border-border/50">
 										<td className="px-4 py-3 font-medium">{row.category}</td>
 										<td className="px-4 py-3 text-sm text-muted-foreground">
 											{row.nomploy}
@@ -346,7 +434,6 @@ export default function NomployVsCapRoverPage() {
 			</section>
 
 			{/* Stats */}
-
 
 			{/* Final CTA */}
 			<CallToAction />

@@ -1,11 +1,11 @@
-import { Container } from "@/components/Container";
 import { CallToAction } from "@/components/CallToAction";
+import { Container } from "@/components/Container";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { Check, X, Zap, Globe, Bell, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Bell, Check, Globe, Users, X, Zap } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
 	title: "Nomploy vs. Portainer Comparison | Nomploy",
@@ -24,43 +24,125 @@ interface FeatureRow {
 
 const featureComparisonRows: FeatureRow[] = [
 	// Setup & Installation
-	{ feature: "One-command installation", nomploy: true, portainer: true, section: "Setup & Installation" },
-	{ feature: "Installation feedback and progress logs", nomploy: true, portainer: false },
-	{ feature: "Works with firewall and Tailscale out of the box", nomploy: true, portainer: false },
-	{ feature: "Lightweight CPU usage while idle", nomploy: true, portainer: true },
+	{
+		feature: "One-command installation",
+		nomploy: true,
+		portainer: true,
+		section: "Setup & Installation",
+	},
+	{
+		feature: "Installation feedback and progress logs",
+		nomploy: true,
+		portainer: false,
+	},
+	{
+		feature: "Works with firewall and Tailscale out of the box",
+		nomploy: true,
+		portainer: false,
+	},
+	{
+		feature: "Lightweight CPU usage while idle",
+		nomploy: true,
+		portainer: true,
+	},
 	// Deployment
-	{ feature: "Deploy web apps from git repos (GitHub, GitLab, Bitbucket)", nomploy: true, portainer: "limited", section: "Deployment" },
+	{
+		feature: "Deploy web apps from git repos (GitHub, GitLab, Bitbucket)",
+		nomploy: true,
+		portainer: "limited",
+		section: "Deployment",
+	},
 	{ feature: "Auto-deploy on git push", nomploy: true, portainer: "limited" },
 	{ feature: "Docker Compose support", nomploy: true, portainer: true },
-	{ feature: "Deploy from custom Docker images", nomploy: true, portainer: true },
-	{ feature: "Nixpacks and Heroku Buildpack support", nomploy: true, portainer: false },
-	{ feature: "Preview deployments (review apps)", nomploy: true, portainer: false },
-	{ feature: "One-click open source templates", nomploy: true, portainer: true },
+	{
+		feature: "Deploy from custom Docker images",
+		nomploy: true,
+		portainer: true,
+	},
+	{
+		feature: "Nixpacks and Heroku Buildpack support",
+		nomploy: true,
+		portainer: false,
+	},
+	{
+		feature: "Preview deployments (review apps)",
+		nomploy: true,
+		portainer: false,
+	},
+	{
+		feature: "One-click open source templates",
+		nomploy: true,
+		portainer: true,
+	},
 	// Networking & Domains
-	{ feature: "Built-in reverse proxy (Traefik)", nomploy: true, portainer: false, section: "Networking & Domains" },
-	{ feature: "Automatic SSL / encrypt cert via Let's Encrypt", nomploy: true, portainer: false },
+	{
+		feature: "Built-in reverse proxy (Traefik)",
+		nomploy: true,
+		portainer: false,
+		section: "Networking & Domains",
+	},
+	{
+		feature: "Automatic SSL / encrypt cert via Let's Encrypt",
+		nomploy: true,
+		portainer: false,
+	},
 	{ feature: "Custom domain management", nomploy: true, portainer: false },
 	// Infrastructure
-	{ feature: "Multi-server support", nomploy: true, portainer: true, section: "Infrastructure" },
+	{
+		feature: "Multi-server support",
+		nomploy: true,
+		portainer: true,
+		section: "Infrastructure",
+	},
 	{ feature: "Multi-node clustering", nomploy: true, portainer: true },
-	{ feature: "Autoscaling (services & cluster nodes)", nomploy: true, portainer: false },
-	{ feature: "High-availability load balancing", nomploy: true, portainer: false },
+	{
+		feature: "Autoscaling (services & cluster nodes)",
+		nomploy: true,
+		portainer: false,
+	},
+	{
+		feature: "High-availability load balancing",
+		nomploy: true,
+		portainer: false,
+	},
 	{ feature: "GPU scheduling", nomploy: true, portainer: false },
 	{ feature: "Zero-downtime deploys", nomploy: true, portainer: false },
 	{ feature: "Kubernetes support", nomploy: false, portainer: true },
 	// Configuration & Services
-	{ feature: "Real-time monitoring (CPU, RAM, disk)", nomploy: true, portainer: "limited", section: "Configuration & Services" },
+	{
+		feature: "Real-time monitoring (CPU, RAM, disk)",
+		nomploy: true,
+		portainer: "limited",
+		section: "Configuration & Services",
+	},
 	{ feature: "Metrics enabled by default", nomploy: true, portainer: false },
 	{ feature: "Automated alerts from metrics", nomploy: true, portainer: false },
-	{ feature: "Application and container log viewer", nomploy: true, portainer: true },
+	{
+		feature: "Application and container log viewer",
+		nomploy: true,
+		portainer: true,
+	},
 	// Teams & Access
-	{ feature: "Teams and multi-user support", nomploy: true, portainer: true, section: "Teams & Access" },
-	{ feature: "Role-based access control (RBAC)", nomploy: true, portainer: true },
+	{
+		feature: "Teams and multi-user support",
+		nomploy: true,
+		portainer: true,
+		section: "Teams & Access",
+	},
+	{
+		feature: "Role-based access control (RBAC)",
+		nomploy: true,
+		portainer: true,
+	},
 	{ feature: "Projects grouping", nomploy: true, portainer: false },
 	{ feature: "API and CLI access", nomploy: true, portainer: true },
 	{ feature: "AI-assisted deployments", nomploy: true, portainer: false },
 	{ feature: "Free community edition", nomploy: true, portainer: true },
-	{ feature: "Full-featured without a paid plan", nomploy: true, portainer: false },
+	{
+		feature: "Full-featured without a paid plan",
+		nomploy: true,
+		portainer: false,
+	},
 ];
 
 const whyChooseItems = [
@@ -114,19 +196,23 @@ const integrationRows = [
 	},
 	{
 		category: "Build and deployment systems",
-		nomploy: "Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
+		nomploy:
+			"Docker, Docker Compose, Nixpacks, Heroku Buildpacks, Paketo Buildpacks, Railpack",
 		portainer: "Docker, Docker Compose",
 	},
 	{
 		category: "Notifications and communication",
-		nomploy: "Slack, Mattermost, Telegram, Discord, Lark, Microsoft Teams, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
+		nomploy:
+			"Slack, Mattermost, Telegram, Discord, Lark, Microsoft Teams, Email (SMTP), Resend, Gotify, Ntfy, Pushover, Webhook",
 		portainer: "Slack, Microsoft Teams, Email (SMTP), Webhook",
 	},
 ];
 
 function FeatureCell({ value }: { value: FeatureValue }) {
-	if (value === true) return <Check className="mx-auto h-5 w-5 text-green-500" />;
-	if (value === "limited") return <span className="text-xs text-amber-500">Limited</span>;
+	if (value === true)
+		return <Check className="mx-auto h-5 w-5 text-green-500" />;
+	if (value === "limited")
+		return <span className="text-xs text-amber-500">Limited</span>;
 	return <X className="mx-auto h-5 w-5 text-muted-foreground/50" />;
 }
 
@@ -151,16 +237,18 @@ export default function NomployVsPortainerPage() {
 						</h1>
 						<p className="mt-6 text-lg text-muted-foreground">
 							Both tools help you manage containers on your own server. But they
-							solve very different problems—here's what that means for your setup.
+							solve very different problems—here's what that means for your
+							setup.
 						</p>
 
 						<div className="mt-16 grid gap-8 sm:grid-cols-2">
 							<div className="rounded-xl border border-border/50 bg-card p-6 text-left">
 								<h3 className="text-xl font-semibold text-white">Nomploy</h3>
 								<p className="mt-3 text-sm text-muted-foreground">
-									For scaling teams that want to self-host web apps and databases
-									with a polished UI, automated deployments from git repos,
-									multi-server support, a built-in reverse proxy, and SSL.
+									For scaling teams that want to self-host web apps and
+									databases with a polished UI, automated deployments from git
+									repos, multi-server support, a built-in reverse proxy, and
+									SSL.
 								</p>
 							</div>
 							<div className="rounded-xl border border-border/50 bg-card p-6 text-left">
@@ -205,15 +293,22 @@ export default function NomployVsPortainerPage() {
 							<thead>
 								<tr className="border-b border-border">
 									<th className="px-4 py-4 text-left font-semibold">Feature</th>
-									<th className="px-4 py-4 text-center font-semibold">Nomploy</th>
-									<th className="px-4 py-4 text-center font-semibold">Portainer</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Nomploy
+									</th>
+									<th className="px-4 py-4 text-center font-semibold">
+										Portainer
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								{featureComparisonRows.map((row) => (
 									<>
 										{row.section && (
-											<tr key={`section-${row.section}`} className="border-b border-border bg-muted/20">
+											<tr
+												key={`section-${row.section}`}
+												className="border-b border-border bg-muted/20"
+											>
 												<td
 													colSpan={3}
 													className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
@@ -266,7 +361,9 @@ export default function NomployVsPortainerPage() {
 									<h3 className="text-xl font-semibold text-white">
 										{item.title}
 									</h3>
-									<p className="mt-3 text-muted-foreground">{item.description}</p>
+									<p className="mt-3 text-muted-foreground">
+										{item.description}
+									</p>
 								</div>
 								<div className="flex-1">
 									<div className="relative aspect-video overflow-hidden rounded-xl border border-border/50">
@@ -293,7 +390,11 @@ export default function NomployVsPortainerPage() {
 							Deploy AI tools in a secure environment
 						</h2>
 						<p className="mt-6 text-lg text-muted-foreground">
-							Create sandboxes with Nomploy that combine multitenancy, SSO, audit logs, and IP allowlisting in a single setup. Every deployment is logged, access is tied to your identity provider, workspaces are kept separate, and non-technical users can go from code to a running app without an engineer involved.
+							Create sandboxes with Nomploy that combine multitenancy, SSO,
+							audit logs, and IP allowlisting in a single setup. Every
+							deployment is logged, access is tied to your identity provider,
+							workspaces are kept separate, and non-technical users can go from
+							code to a running app without an engineer involved.
 						</p>
 					</div>
 					<div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-xl border border-border/50 shadow-2xl">
@@ -327,17 +428,18 @@ export default function NomployVsPortainerPage() {
 						<table className="w-full border-collapse">
 							<thead>
 								<tr className="border-b border-border">
-									<th className="px-4 py-4 text-left font-semibold">Category</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Category
+									</th>
 									<th className="px-4 py-4 text-left font-semibold">Nomploy</th>
-									<th className="px-4 py-4 text-left font-semibold">Portainer</th>
+									<th className="px-4 py-4 text-left font-semibold">
+										Portainer
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								{integrationRows.map((row) => (
-									<tr
-										key={row.category}
-										className="border-b border-border/50"
-									>
+									<tr key={row.category} className="border-b border-border/50">
 										<td className="px-4 py-3 font-medium">{row.category}</td>
 										<td className="px-4 py-3 text-sm text-muted-foreground">
 											{row.nomploy}
@@ -364,16 +466,15 @@ export default function NomployVsPortainerPage() {
 							Whether you're a startup founder deploying your first web app on a
 							cheap VPS or a growing team managing multiple services across
 							servers, Nomploy's flexible, polished platform makes self-hosting
-							accessible to everyone—from beginners and non-technical users who've
-							never touched a bash script to engineers who want full control over
-							their config, containers, and workflow.
+							accessible to everyone—from beginners and non-technical users
+							who've never touched a bash script to engineers who want full
+							control over their config, containers, and workflow.
 						</p>
 					</div>
 				</Container>
 			</section>
 
 			{/* Stats */}
-
 
 			{/* Final CTA */}
 			<CallToAction />

@@ -6,13 +6,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
-import {
-	Github,
-	Globe,
-	Heart,
-	LayoutGrid,
-	MessagesSquare,
-} from "lucide-react";
+import { Github, Globe, Heart, LayoutGrid, MessagesSquare } from "lucide-react";
 
 export function NavLinks() {
 	const links = [

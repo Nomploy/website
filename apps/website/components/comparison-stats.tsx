@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Container } from "@/components/Container";
-import NumberTicker from "@/components/ui/number-ticker";
 import { Grid } from "@/components/stats";
+import NumberTicker from "@/components/ui/number-ticker";
+import { useEffect, useState } from "react";
 
 const statsValues = {
 	githubStars: 26000,
@@ -12,9 +12,7 @@ const statsValues = {
 
 export function ComparisonStats() {
 	const [githubStars, setGithubStars] = useState(statsValues.githubStars);
-	const [contributors, setContributors] = useState(
-		statsValues.contributors,
-	);
+	const [contributors, setContributors] = useState(statsValues.contributors);
 
 	useEffect(() => {
 		const fetchStats = async () => {

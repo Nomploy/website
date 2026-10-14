@@ -10,7 +10,10 @@ try {
 
 	let unwrapped = false;
 	// If the spec is nested (e.g. result.data.json from a migrated/source API), use the inner spec
-	if (openapi.result?.data?.json && typeof openapi.result.data.json === "object") {
+	if (
+		openapi.result?.data?.json &&
+		typeof openapi.result.data.json === "object"
+	) {
 		openapi = openapi.result.data.json;
 		unwrapped = true;
 		console.log("✓ Unwrapped nested OpenAPI spec (result.data.json)");
@@ -114,7 +117,9 @@ try {
 	}
 	if (removed > 0) {
 		writeFileSync(openapiPath, JSON.stringify(openapi, null, 2));
-		console.log(`✓ Removed ${removed} slash path alias(es), keeping dot paths only`);
+		console.log(
+			`✓ Removed ${removed} slash path alias(es), keeping dot paths only`,
+		);
 	}
 
 	if (!(unwrapped || fixed > 0 || securityFixed) && removed === 0) {

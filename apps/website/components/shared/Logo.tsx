@@ -21,7 +21,12 @@ export function Logo(props: React.ComponentPropsWithoutRef<"svg">) {
 					<stop offset="1" stopColor="#0EA5E9" />
 				</linearGradient>
 			</defs>
-			<rect width="512" height="512" rx="116" fill="url(#nomploy-logo-gradient)" />
+			<rect
+				width="512"
+				height="512"
+				rx="116"
+				fill="url(#nomploy-logo-gradient)"
+			/>
 			<path
 				fill="#ffffff"
 				d="M140 140 H196 V372 H140 Z M316 140 H372 V372 H316 Z M140 140 H240 L372 372 H272 Z"

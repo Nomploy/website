@@ -6,6 +6,9 @@ export default function robots(): MetadataRoute.Robots {
 			userAgent: "*",
 			allow: "/",
 		},
-		sitemap: ["https://nomploy.com/sitemap.xml", "https://nomploy.com/llms.txt"],
+		sitemap: [
+			"https://nomploy.com/sitemap.xml",
+			"https://nomploy.com/llms.txt",
+		],
 	};
 }
