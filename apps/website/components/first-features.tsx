@@ -14,6 +14,7 @@ import {
 	Activity,
 	Boxes,
 	Cpu,
+	FileCode,
 	Layers,
 	LineChart,
 	Network,
@@ -96,6 +97,12 @@ export function FirstFeaturesSection() {
 			description:
 				"Ship cluster metrics and logs to any OTLP backend (SigNoz, Grafana, Datadog) with service auto-discovery from the Consul catalog.",
 			icon: <Activity />,
+		},
+		{
+			title: "Infrastructure as Code",
+			description:
+				"Manage your services as code with the Pulumi provider — declare projects, apps, databases and domains and deploy them over the REST API.",
+			icon: <FileCode />,
 		},
 		{
 			title: "GPU Scheduling",
